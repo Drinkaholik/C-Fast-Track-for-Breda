@@ -18,6 +18,9 @@ namespace Tmpl8
 
     Line lines[13];
 
+    int xOffset = 100;
+	int yOffset = 0;
+
 
     // -----------------------------------------------------------
     // Initialize the application
@@ -54,7 +57,7 @@ namespace Tmpl8
         // More syntactically concise for loop
         for (Line i : lines)
         {
-            screen->Line(i.x1, i.y1, i.x2, i.y2, i.colour);
+            DrawThickLine(i.x1 + xOffset, i.y1 + yOffset, i.x2 + xOffset, i.y2 + yOffset, i.colour, 50, 50);
         }
 
         
@@ -114,5 +117,21 @@ namespace Tmpl8
         //rotatingGun.Draw(screen, 100 + x, 100);
         //if (++frame == 36) frame = 0;
     }
+
+
+    void Game::DrawThickLine(int x1, int y1, int x2, int y2, int colour, int xWidth, int yWidth)
+    {
+
+		for (int i = 0; i < xWidth; i++)
+        {
+            for (int j = 0; j < yWidth; j++)
+            {
+                screen->Line(x1 + i, y1 + j, x2 + i, y2 + j, colour);
+            }
+        }
+    }
+
+
+
 
 };

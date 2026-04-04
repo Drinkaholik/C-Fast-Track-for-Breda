@@ -7,16 +7,38 @@
 namespace Tmpl8
 {
 
-    struct Line
+    int ColorArray[27]
     {
-        int x1;
-        int y1;
-        int x2;
-        int y2;
-        int colour;
+        0xff0000,
+        0xff0000,
+        0xff0000,
+        0xff0000,
+        0xff0000,
+        0xff0000,
+        0xff0000,
+        0xff0000,
+        0xff0000,
+        0x00ff00,
+        0x00ff00,
+        0x00ff00,
+        0x00ff00,
+        0x00ff00,
+        0x00ff00,
+        0x00ff00,
+        0x00ff00,
+        0x00ff00,
+        0x0000ff,
+        0x0000ff,
+        0x0000ff,
+        0x0000ff,
+        0x0000ff,
+        0x0000ff,
+        0x0000ff,
+        0x0000ff,
+        0x0000ff,
     };
 
-    Line lines[13];
+    int loop;
 
 
     // -----------------------------------------------------------
@@ -24,39 +46,18 @@ namespace Tmpl8
     // -----------------------------------------------------------
     void Game::Init()
     {
-        // Letter C
-        lines[0] = { 80, 180, 0, 240, 0xff0000 };
-        lines[1] = { 0, 240, 80, 300, 0xff0000 };
-
-        // Letter 0
-        lines[2] = { 240, 180, 160, 180, 0x00ff00 };
-        lines[3] = { 160, 180, 160, 300, 0x00ff00 };
-        lines[4] = { 160, 300, 240, 300, 0x00ff00 };
-        lines[5] = { 240, 300, 240, 180, 0x00ff00 };
-
-        // Letter D
-        lines[6] = { 320, 180, 320, 300, 0x0000ff };
-        lines[7] = { 320, 300, 400, 240, 0x0000ff };
-        lines[8] = { 400, 240, 320, 180, 0x0000ff };
-
-        // Letter E
-        lines[9] = { 480, 180, 480, 300, 0xffff00 };
-        lines[10] = { 480, 180, 560, 180, 0xffff00 };
-        lines[11] = { 480, 240, 560, 240, 0xffff00 };
-        lines[12] = { 480, 300, 560, 300, 0xffff00 };
-
-
-        /*for (int i = 0; i < 13; i++)
+       
+        for (int i = 0; i < 400; i++)
         {
-            screen->Line(lines[i].x1, lines[i].y1, lines[i].x2, lines[i].y2, lines[i].colour);
-        }*/
-
-        // More syntactically concise for loop
-        for (Line i : lines)
-        {
-            screen->Line(i.x1, i.y1, i.x2, i.y2, i.colour);
+            for (int j = 0; j < 400; j++)
+            {
+                loop++;
+                if (loop > 26)
+                    loop = 0;
+                screen->Plot(i, j, ColorArray[loop]);
+            }
+            
         }
-
         
 
 
@@ -101,11 +102,12 @@ namespace Tmpl8
         {
             std::cout << "D" << std::endl;
         }
-
+        x++;
         // clear the graphics window
         //screen->Clear(0);
         // print something in the graphics window
-        //screen->Print("hello world", 50, 50, 0xffffff);
+        //screen->Print("hello world", 50+x, 50+x, 0xffffff);
+        
         // print something to the text window
         // printf("this goes to the console window.\n");
         // draw a sprite

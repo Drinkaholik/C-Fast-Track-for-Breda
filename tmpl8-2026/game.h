@@ -21,7 +21,6 @@ public:
     bool GetKey(SDL_Scancode key) const { return held.test(key); } // returns true if the key is currently held down
     bool GetKeyPressed(SDL_Scancode key) const { return pressed.test(key); } // returns true if the key was pressed since the last Tick
     bool GetKeyReleased(SDL_Scancode key) const { return released.test(key); } // returns true if the key was released since the last Tick
-	void DrawThickLine(int x1, int y1, int x2, int y2, int colour, int xWidth, int yWidth); // Uses screen->Line to draw a thicker line
 private:
 	Surface* screen;
     std::bitset<SDL_NUM_SCANCODES> keys; // store key states here

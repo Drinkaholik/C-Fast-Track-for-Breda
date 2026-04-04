@@ -1,0 +1,8 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/" />
+  <Project Path="Getting Started/Getting Started.vcxproj" Id="abeab449-3759-4925-9033-cfa1be2c65be" />
+</Solution>

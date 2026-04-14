@@ -1,3 +1,0 @@
-﻿  main.cpp
-C:\Main\Gamedev\C++ Projects\C++ Fast Track for Games Programming\Getting Started\main.cpp(6,6): warning C4326: return type of 'main' should be 'int' instead of 'void'
-  Getting Started.vcxproj -> C:\Main\Gamedev\C++ Projects\C++ Fast Track for Games Programming\x64\Debug\Getting Started.exe

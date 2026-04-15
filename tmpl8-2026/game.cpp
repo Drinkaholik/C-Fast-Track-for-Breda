@@ -14,10 +14,35 @@ namespace Tmpl8
     // Sprites
     Sprite tankSprite(new Surface("assets/ctankbase.tga"), 16);
     Sprite ballSprite(new Surface("assets/ball.png"), 1);
-    Sprite* sprite = &ballSprite;
     
-    int spritePos[2];
-    int spriteSize[2];
+    struct GameObject
+    {
+        // Members
+        Sprite* sprite;
+        int x;
+        int y;
+        int width;
+        int height;
+        
+
+        // Constructors
+        GameObject(Sprite* spr) : 
+            sprite(spr), x(0), y(0), width(sprite->GetWidth()), height(sprite->GetHeight())
+        {
+        };
+
+        // Constructor overload, to spawn at specific pos
+        GameObject(Sprite* spr, int xPos, int yPos) :
+            sprite(spr), x(xPos), y(yPos), width(sprite->GetWidth()), height(sprite->GetHeight())
+        {
+        };
+    };
+    
+    GameObject ball(&ballSprite);
+    GameObject tank(&tankSprite);
+    
+    
+
 
 
     // -----------------------------------------------------------
@@ -26,10 +51,6 @@ namespace Tmpl8
     void Game::Init()
     {
         
-        spritePos[]{
-            sprite->GetWidth();
-            
-        }
         
 
 
@@ -58,7 +79,7 @@ namespace Tmpl8
         screen->Line(0, 0, screenHeight, screenWidth, 0xFFFFFF);
         
 
-        sprite->Draw(screen, 0, 0);
+        tank.sprite->Draw(screen, 0, 0);
 
         ShowFPS(400, 400, deltaTime);
 
@@ -68,7 +89,6 @@ namespace Tmpl8
     {
         float FPS = (1 / deltaTime) * 1000; // Why mult by 1000 specifically? Idk, but that gives the number that most closely matches whats im shown by the sprite rotation
         screen->Print(std::to_string(FPS).c_str(), xPos, yPos, 0xFFFFFF);
-        std::cout << "hh";
     }
 
 

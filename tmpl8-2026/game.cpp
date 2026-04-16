@@ -3,60 +3,15 @@
 
 #include <cstdio> //printf
 #include <iostream>
-#include <string>
 
 namespace Tmpl8
 {
-    // Screen dimensions
-    int screenWidth = 512;
-    int screenHeight = 800;
-
-    // Sprites
-    Sprite tankSprite(new Surface("assets/ctankbase.tga"), 16);
-    Sprite ballSprite(new Surface("assets/ball.png"), 1);
-    
-    struct GameObject
-    {
-        // Members
-        Sprite* sprite;
-        int x;
-        int y;
-        int width;
-        int height;
-        
-
-        // Constructors
-        GameObject(Sprite* spr) : 
-            sprite(spr), x(0), y(0), width(sprite->GetWidth()), height(sprite->GetHeight())
-        {
-        };
-
-        // Constructor overload, to spawn at specific pos
-        GameObject(Sprite* spr, int xPos, int yPos) :
-            sprite(spr), x(xPos), y(yPos), width(sprite->GetWidth()), height(sprite->GetHeight())
-        {
-        };
-    };
-    
-    GameObject ball(&ballSprite);
-    GameObject tank(&tankSprite);
-    
-    
-
-
-
     // -----------------------------------------------------------
     // Initialize the application
     // -----------------------------------------------------------
     void Game::Init()
     {
-        
-        
-
-
-
     }
-
 
     // -----------------------------------------------------------
     // Close down application
@@ -65,32 +20,46 @@ namespace Tmpl8
     {
     }
 
-
-    int frame;
-    int count;
+    static Sprite rotatingGun(new Surface("assets/aagun.tga"), 36);
+    static int frame = 0;
 
     // -----------------------------------------------------------
     // Main application tick function
     // -----------------------------------------------------------
     void Game::Tick(float deltaTime)
     {
+        // Update key states
+        pressed = keys & ~held; // keys that are currently down but were not down in the previous tick
+        released = ~keys & held; // keys that were down in the previous tick but are not down now
+        held = keys; // update prevKeys for the next tick
+
+        // Handle input.
+        if (GetKey(SDL_SCANCODE_W))
+        {
+            std::cout << "W" << std::endl;
+        }
+        if (GetKey(SDL_SCANCODE_A))
+        {
+            std::cout << "A" << std::endl;
+        }
+        if (GetKey(SDL_SCANCODE_S))
+        {
+            std::cout << "S" << std::endl;
+        }
+        if (GetKey(SDL_SCANCODE_D))
+        {
+            std::cout << "D" << std::endl;
+        }
+
+        // clear the graphics window
         screen->Clear(0);
-
-        screen->Line(0, 0, screenHeight, screenWidth, 0xFFFFFF);
-        
-
-        tank.sprite->Draw(screen, 0, 0);
-
-        ShowFPS(400, 400, deltaTime);
-
+        // print something in the graphics window
+        screen->Print("hello world", 2, 2, 0xffffff);
+        // print something to the text window
+        // printf("this goes to the console window.\n");
+        // draw a sprite
+        rotatingGun.SetFrame(frame);
+        rotatingGun.Draw(screen, 100, 100);
+        if (++frame == 36) frame = 0;
     }
-
-    void Game::ShowFPS(int xPos, int yPos, float deltaTime)
-    {
-        float FPS = (1 / deltaTime) * 1000; // Why mult by 1000 specifically? Idk, but that gives the number that most closely matches whats im shown by the sprite rotation
-        screen->Print(std::to_string(FPS).c_str(), xPos, yPos, 0xFFFFFF);
-    }
-
-
-
 };

@@ -2,7 +2,7 @@
 
 
 
-class GameObject()
+class GameObject
 {
 
 

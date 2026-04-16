@@ -4,6 +4,16 @@
 #include <cstdio> //printf
 #include <iostream>
 #include <cmath>
+#include <algorithm>
+
+
+// Source - https://stackoverflow.com/a/4609795
+    // Posted by user79758, modified by community. See post 'Timeline' for change history
+    // Retrieved 2026-04-16, License - CC BY-SA 4.0
+
+template <typename T> int sgn(T val) {
+    return (T(0) < val) - (val < T(0));
+}
 
 namespace Tmpl8
 {
@@ -26,6 +36,27 @@ namespace Tmpl8
     Sprite tank(new Surface("assets/aagun.tga"), 36);
   
 
+    // Move vars
+    int upMove;
+    int downMove;
+
+    int leftMove;
+    int rightMove;
+
+    int xMove;
+    int yMove;
+
+    float xVel;
+    float yVel;
+
+    float accel = 0.1;
+    float decel = 0.01;
+    float maxSpeed = 1;
+
+    float xPos = 0;
+    float yPos = 0;
+
+
     // -----------------------------------------------------------
     // Main application tick function
     // -----------------------------------------------------------
@@ -37,29 +68,11 @@ namespace Tmpl8
         // clear the graphics window
         screen->Clear(0);
 
-        screen->Sprite::Draw(tank, xPos, yPos);
-
-
-        
+        tank.Draw(screen, xPos, yPos);
     }
 
-    int upMove;
-    int downMove;
+    
 
-    int leftMove;
-    int rightMove;
-
-    int xMove;
-    int yMove;
-
-    float xAccel;
-    float yAccel;
-
-    float accel = 0.5;
-    float maxSpeed = 2;
-
-    int xPos = 0;
-    int yPos = 0;
     
 
     void Game::PlayerMove()
@@ -70,8 +83,8 @@ namespace Tmpl8
         held = keys; // update prevKeys for the next tick
 
         upMove = (GetKey(SDL_SCANCODE_W)) ? 1 : 0;
-        downMove = (GetKey(SDL_SCANCODE_A)) ? 1 : 0;
-        leftMove = (GetKey(SDL_SCANCODE_S)) ? 1 : 0;
+        downMove = (GetKey(SDL_SCANCODE_S)) ? 1 : 0;
+        leftMove = (GetKey(SDL_SCANCODE_A)) ? 1 : 0;
         rightMove = (GetKey(SDL_SCANCODE_D)) ? 1 : 0;
         
 
@@ -79,21 +92,53 @@ namespace Tmpl8
         yMove = upMove - downMove;
 
 
-        if (std::abs(xAccel) > maxSpeed)
+        // X-axis movement //
+        if (xMove != 0) // accelerate
         {
-            xAccel += accel * xMove;
-        };
-
-        if (std::abs(yAccel) > maxSpeed)
+            xVel += accel * xMove;
+        }
+        else // decel
         {
-            yAccel += accel * yMove;
-        };
+            xVel -= decel * sgn(xVel);
 
-        xPos += xAccel;
-        yPos += yAccel;
+            if (std::abs(xVel) < 0.01f) // prevent overshoot
+            {
+                xVel = 0;
+            }
+        }
+
+        // Y-axis movement //
+        if (yMove != 0) // accel
+        {
+            yVel += accel * -yMove;
+
+           
+        }
+        else // decel
+        {
+            yVel -= decel * sgn(yVel); 
+
+            if (std::abs(yVel) < 0.01f) // prevent overshoot
+            {
+                yVel = 0;
+            }
+        }
+
+        xVel = std::clamp(xVel, -maxSpeed, maxSpeed); // Clamp
+        yVel = std::clamp(yVel, -maxSpeed, maxSpeed); // Clamp
+
+
+        xPos += xVel;
+        yPos += yVel;
+
+        xPos = std::clamp(xPos, 0.0f, 800.0f - tank.GetWidth());
+        yPos = std::clamp(yPos, 0.0f, 510.0f - tank.GetHeight());
     }
 
 
 
 
 };
+
+
+

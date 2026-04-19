@@ -122,15 +122,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\game.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="..\gameObject.cpp" />
+    <ClCompile Include="..\player.cpp" />
+    <ClCompile Include="..\utils.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\game.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="..\gameObject.h" />
+    <ClInclude Include="..\player.h" />
+    <ClInclude Include="..\utils.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
   </ItemGroup>

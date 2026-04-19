@@ -1,5 +1,7 @@
 #include "game.h"
 #include "surface.h"
+#include "utils.h" // sign
+#include "gameObject.h"
 
 #include <cstdio> //printf
 #include <iostream>
@@ -7,17 +9,11 @@
 #include <algorithm>
 
 
-// Source - https://stackoverflow.com/a/4609795
-    // Posted by user79758, modified by community. See post 'Timeline' for change history
-    // Retrieved 2026-04-16, License - CC BY-SA 4.0
-
-template <typename T> int sgn(T val) {
-    return (T(0) < val) - (val < T(0));
-}
 
 namespace Tmpl8
 {
 
+    
 
     // -----------------------------------------------------------
     // Initialize the application
@@ -99,7 +95,7 @@ namespace Tmpl8
         }
         else // decel
         {
-            xVel -= decel * sgn(xVel);
+            xVel -= decel * utils::sign(xVel);
 
             if (std::abs(xVel) < 0.01f) // prevent overshoot
             {
@@ -116,7 +112,7 @@ namespace Tmpl8
         }
         else // decel
         {
-            yVel -= decel * sgn(yVel); 
+            yVel -= decel * utils::sign(yVel); 
 
             if (std::abs(yVel) < 0.01f) // prevent overshoot
             {

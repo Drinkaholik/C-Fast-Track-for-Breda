@@ -8,12 +8,13 @@
       <Filter>template code</Filter>
     </ClCompile>
     <ClCompile Include="..\game.cpp" />
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="..\gameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="..\player.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="..\utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -23,12 +24,13 @@
       <Filter>template code</Filter>
     </ClInclude>
     <ClInclude Include="..\game.h" />
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="..\gameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="..\player.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="..\utils.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

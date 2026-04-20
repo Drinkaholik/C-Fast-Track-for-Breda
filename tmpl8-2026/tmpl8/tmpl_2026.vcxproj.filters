@@ -15,6 +15,7 @@
       <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\utils.cpp" />
+    <ClCompile Include="..\locator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -31,6 +32,7 @@
       <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\utils.h" />
+    <ClInclude Include="..\locator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

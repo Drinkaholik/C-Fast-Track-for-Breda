@@ -36,6 +36,7 @@ typedef unsigned int uint;
 
 namespace Tmpl8 {
 
+
 template <typename T>
 constexpr T Min(T a, T b) { return (a > b) ? b : a; }
 

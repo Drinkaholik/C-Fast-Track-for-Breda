@@ -43,13 +43,13 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>C:\Main\Github Repositories\C-Fast-Track-for-Breda\tmpl8-2026;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>C:\Main\Github Repositories\C-Fast-Track-for-Breda\tmpl8-2026;$(IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)</OutDir>
     <IntDir>$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_debug</TargetName>
@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="..\game.cpp" />
     <ClCompile Include="..\gameObject.cpp" />
+    <ClCompile Include="..\locator.cpp" />
     <ClCompile Include="..\player.cpp" />
     <ClCompile Include="..\utils.cpp" />
     <ClCompile Include="surface.cpp" />
@@ -131,6 +132,7 @@
   <ItemGroup>
     <ClInclude Include="..\game.h" />
     <ClInclude Include="..\gameObject.h" />
+    <ClInclude Include="..\locator.h" />
     <ClInclude Include="..\player.h" />
     <ClInclude Include="..\utils.h" />
     <ClInclude Include="surface.h" />

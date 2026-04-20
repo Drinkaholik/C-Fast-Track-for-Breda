@@ -11,30 +11,33 @@ class GameObject
 {
 public:
 
+	Surface* surface;
 	Sprite* sprite;
 
 	struct Transform
 	{
-		float x;
-		float y;
+		float x, y;
 
 	} transform;
 
 
 	// Constructor
-	GameObject(Sprite spr, float xPos, float yPos)
+	GameObject(Surface* screen, Sprite* spr, float xPos, float yPos) 
+		: surface(screen), sprite(spr)
 	{
-		sprite = &spr;
 		transform.x = xPos;
 		transform.y = yPos;
 	};
 
 
-	virtual void Tick(); // Runtime logic
+	virtual void Tick(); // Per-frame logic
 
-	void Draw(); // Draw sprite
+
+
+	void Draw(float x, float y); // Draw sprite
 
 
 
 
 };
+

@@ -1,10 +1,17 @@
 #include "gameObject.h"
 #include "game.h"
+#include "locator.h"
 
 
-void GameObject::Draw()
+
+void GameObject::Tick()
 {
-	//sprite->Draw(Game::screen, transform.x, transform.y);
+	Draw(transform.x, transform.y);
+}
+
+void GameObject::Draw(float x, float y)
+{
+	sprite->Draw(surface, x, y);
 
 };
 

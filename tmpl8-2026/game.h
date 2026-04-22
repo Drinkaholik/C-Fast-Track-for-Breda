@@ -26,17 +26,16 @@ public:
 
 	// Custom
 	Surface* screen;
-	std::string name = "howdy";
+	void UpdateKeys();
 	
-	std::bitset<SDL_NUM_SCANCODES> keys; // store key states here
-	std::bitset<SDL_NUM_SCANCODES> held; // store key states from the previous tick here
-	std::bitset<SDL_NUM_SCANCODES> pressed; // store key press events here (set to true on key down, reset to false after processing in Tick)
-	std::bitset<SDL_NUM_SCANCODES> released; // store key release events here (set to true on key up, reset to false after processing in Tick)
 
 
 private:
     
-	
+	std::bitset<SDL_NUM_SCANCODES> keys; // store key states here
+	std::bitset<SDL_NUM_SCANCODES> held; // store key states from the previous tick here
+	std::bitset<SDL_NUM_SCANCODES> pressed; // store key press events here (set to true on key down, reset to false after processing in Tick)
+	std::bitset<SDL_NUM_SCANCODES> released; // store key release events here (set to true on key up, reset to false after processing in Tick)
 
 };
 

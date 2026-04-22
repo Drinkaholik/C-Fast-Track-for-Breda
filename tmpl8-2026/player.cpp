@@ -20,6 +20,10 @@ void Player::Tick()
 void Player::PlayerMove()
 {
 
+
+    // Update key states
+    Locator::g->UpdateKeys();
+
     int upMove = (Locator::g->GetKey(SDL_SCANCODE_W)) ? 1 : 0;
     int downMove = (Locator::g->GetKey(SDL_SCANCODE_S)) ? 1 : 0;
     int leftMove = (Locator::g->GetKey(SDL_SCANCODE_A)) ? 1 : 0;
@@ -28,9 +32,6 @@ void Player::PlayerMove()
 
     int xInput = rightMove - leftMove;
     int yInput = upMove - downMove;
-
-    std::cout << std::to_string(xInput);
-    std::cout << std::to_string(yInput);
 
     // X-axis movement //
     if (xInput != 0) // accel

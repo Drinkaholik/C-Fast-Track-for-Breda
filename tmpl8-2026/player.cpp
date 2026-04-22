@@ -6,14 +6,14 @@
 
 #include <cmath>
 #include <algorithm>
+#include <iostream>
+#include <string>
 
 
 void Player::Tick()
 {
     GameObject::Tick();
     PlayerMove();
-   
-
 };
 
 
@@ -28,6 +28,9 @@ void Player::PlayerMove()
 
     int xInput = rightMove - leftMove;
     int yInput = upMove - downMove;
+
+    std::cout << std::to_string(xInput);
+    std::cout << std::to_string(yInput);
 
     // X-axis movement //
     if (xInput != 0) // accel
@@ -59,9 +62,11 @@ void Player::PlayerMove()
         }
     }
 
-    xVel = std::clamp(xVel, -maxSpeed, maxSpeed); // Clamp
-    yVel = std::clamp(yVel, -maxSpeed, maxSpeed); // Clamp
+    // Clamp velocity
+    xVel = std::clamp(xVel, -maxSpeed, maxSpeed); 
+    yVel = std::clamp(yVel, -maxSpeed, maxSpeed); 
 
+    // Update position
     float* xPos = &GameObject::transform.x;
     float* yPos = &GameObject::transform.y;
 

@@ -9,16 +9,24 @@ using namespace Tmpl8;
 
 class GameObject
 {
-public:
+
+
+private:
 
 	Surface* surface;
-	Sprite* sprite;
+	
+	void Draw(float x, float y); // Draw sprite
 
 	struct Transform
 	{
 		float x, y;
+	};
 
-	} transform;
+
+public:
+
+	Sprite* sprite;
+	Transform transform;
 
 
 	// Constructor
@@ -31,10 +39,6 @@ public:
 
 
 	virtual void Tick(); // Per-frame logic
-
-
-
-	void Draw(float x, float y); // Draw sprite
 
 
 

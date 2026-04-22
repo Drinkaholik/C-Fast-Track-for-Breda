@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <vector>
 
-
+using namespace std;
 
 namespace Tmpl8
 {
@@ -19,10 +19,12 @@ namespace Tmpl8
     Sprite ball(new Surface("assets/ball.png"), 1);
 
     // GameObjects
-    std::unique_ptr<GameObject> oPlayer;
-    std::unique_ptr<GameObject> oBall;
+    shared_ptr<GameObject> oPlayer;
+    shared_ptr<GameObject> oBall;
 
-    std::vector<std::unique_ptr<GameObject>> spawnedObjects;
+    vector<shared_ptr<GameObject>> spawnedObjects;
+
+    vector<int> exampleVector (5, 20);
 
     // -----------------------------------------------------------
     // Initialize the application
@@ -31,8 +33,8 @@ namespace Tmpl8
     {
 
         // Instantiate gameobjects
-        oPlayer = std::make_unique<Player>(screen, &tank, 0, 0);
-        oBall = std::make_unique<GameObject>(screen, &ball, 200, 200);
+        oPlayer = make_shared<Player>(screen, &tank, 0, 0);
+        oBall = make_shared<GameObject>(screen, &ball, 200, 200);
 
         spawnedObjects.push_back(oPlayer);
         spawnedObjects.push_back(oBall);

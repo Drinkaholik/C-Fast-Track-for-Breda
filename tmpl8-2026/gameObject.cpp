@@ -1,6 +1,6 @@
 #include "gameObject.h"
 #include "game.h"
-#include "locator.h"
+#include "central.h"
 
 
 
@@ -11,7 +11,8 @@ void GameObject::Tick()
 
 void GameObject::Draw(float x, float y)
 {
-	sprite->Draw(surface, x, y);
+	// Draw from centre rather than top left
+	sprite->Draw(surface, x - sprite->GetWidth()/2, y - sprite->GetHeight() / 2);
 
 };
 

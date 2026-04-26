@@ -14,7 +14,7 @@
 //#define ADVANCEDGL
 
 #include "game.h"
-#include "locator.h"
+#include "central.h"
 
 #include <fcntl.h>
 #include <io.h>
@@ -302,6 +302,7 @@ void swap()
 
 int main( int argc, char **argv ) 
 {  
+	SDL_SetHintWithPriority(SDL_HINT_RENDER_VSYNC, "0", SDL_HINT_OVERRIDE);
 #ifdef _MSC_VER
     if (!redirectIO())
         return 1;
@@ -331,7 +332,7 @@ int main( int argc, char **argv )
 #endif
 	int exitapp = 0;
 	game = new Game();
-	Locator::g = game;
+	Central::game = game;
 	game->SetTarget( surface );
 	timer t;
 	t.reset();
@@ -369,7 +370,7 @@ int main( int argc, char **argv )
 		// calculate frame time and pass it to game->Tick
 		float elapsedTime = t.elapsed();
 		t.reset();
-
+		Central::deltaTime = elapsedTime / 10;
 		game->Tick( elapsedTime );
 		// event loop
 		SDL_Event event;

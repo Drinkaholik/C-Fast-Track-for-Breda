@@ -131,7 +131,7 @@
   <ItemGroup>
     <ClInclude Include="..\game.h" />
     <ClInclude Include="..\gameObject.h" />
-    <ClInclude Include="..\locator.h" />
+    <ClInclude Include="..\central.h" />
     <ClInclude Include="..\player.h" />
     <ClInclude Include="..\utils.h" />
     <ClInclude Include="surface.h" />

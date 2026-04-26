@@ -10,12 +10,12 @@
 
 #include <cstdlib>
 #include <cstdio>
-#include "locator.h"
+#include "central.h"
 
-constexpr int ScreenWidth = Locator::screenWidth;
-constexpr int ScreenHeight = Locator::screenHeight;
+constexpr int ScreenWidth = Central::screenWidth;
+constexpr int ScreenHeight = Central::screenHeight;
 // #define FULLSCREEN
-// #define ADVANCEDGL	// faster if your system supports it. Switches SDL2's texture buffer out for OpenGL texture buffer with mappings to CPU Memory. 
+//#define ADVANCEDGL	// faster if your system supports it. Switches SDL2's texture buffer out for OpenGL texture buffer with mappings to CPU Memory. 
 
 static const char* TemplateVersion = "Template_v2019.08";
 

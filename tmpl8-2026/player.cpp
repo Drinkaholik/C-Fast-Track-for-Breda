@@ -1,6 +1,6 @@
 #include "player.h"
 
-#include "locator.h"
+#include "central.h"
 #include "utils.h"
 #include "game.h"
 
@@ -20,14 +20,13 @@ void Player::Tick()
 void Player::PlayerMove()
 {
 
-
     // Update key states
-    Locator::g->UpdateKeys();
+    Central::game->UpdateKeys();
 
-    int upMove = (Locator::g->GetKey(SDL_SCANCODE_W)) ? 1 : 0;
-    int downMove = (Locator::g->GetKey(SDL_SCANCODE_S)) ? 1 : 0;
-    int leftMove = (Locator::g->GetKey(SDL_SCANCODE_A)) ? 1 : 0;
-    int rightMove = (Locator::g->GetKey(SDL_SCANCODE_D)) ? 1 : 0;
+    int upMove = (Central::game->GetKey(SDL_SCANCODE_W)) ? 1 : 0;
+    int downMove = (Central::game->GetKey(SDL_SCANCODE_S)) ? 1 : 0;
+    int leftMove = (Central::game->GetKey(SDL_SCANCODE_A)) ? 1 : 0;
+    int rightMove = (Central::game->GetKey(SDL_SCANCODE_D)) ? 1 : 0;
 
 
     int xInput = rightMove - leftMove;
@@ -71,11 +70,15 @@ void Player::PlayerMove()
     float& xPos = GameObject::x;
     float& yPos = GameObject::y;
 
-    xPos += xVel;
-    yPos += yVel;
+    float& dt = Central::deltaTime;
 
-    xPos = std::clamp(xPos, 0.0f, (float)Locator::screenWidth - GameObject::sprite->GetWidth());
-    yPos = std::clamp(yPos, 0.0f, (float)Locator::screenHeight - GameObject::sprite->GetHeight());
+    xPos += xVel * dt;
+    yPos += yVel * dt;
+
+    std::cout << std::to_string(dt) << std::endl;
+
+    xPos = std::clamp(xPos, (float)width/2, (float)Central::screenWidth - width/2);
+    yPos = std::clamp(yPos, (float)height/2, (float)Central::screenHeight - height/2);
 
 
 };

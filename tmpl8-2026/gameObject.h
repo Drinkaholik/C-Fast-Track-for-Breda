@@ -26,13 +26,29 @@ public:
 	// Position
 	float x, y;
 
+	// Sprite size
+	int width, height;
+
+	// Rect
+	struct Rect
+	{
+		int x1, y1, x2, y2;
+	} rect;
+
 	Sprite* sprite;
 
 
 	// Constructor
 	GameObject(Surface* screen, Sprite* spr, float xPos, float yPos) 
-		: surface(screen), sprite(spr), x(xPos), y(yPos)
+		: surface(screen), sprite(spr), x(xPos), y(yPos) 
+		//width(sprite->GetWidth()), height(sprite->GetHeight())
 	{
+		width = sprite->GetWidth();
+		height = sprite->GetHeight();
+		rect.x1 = x;
+		rect.y1 = y;
+		rect.x2 = x + width;
+		rect.y2 = y + height;
 	};
 
 

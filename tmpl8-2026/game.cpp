@@ -45,7 +45,7 @@ namespace Tmpl8
     // -----------------------------------------------------------
     // Close down application
     // -----------------------------------------------------------
-    void Game::Shutdown()
+    void Game::Shutdown() // when do i actually need this? filesaving?
     {
     }
 

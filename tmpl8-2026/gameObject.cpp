@@ -6,7 +6,7 @@
 
 void GameObject::Tick()
 {
-	Draw(transform.x, transform.y);
+	Draw(x, y);
 }
 
 void GameObject::Draw(float x, float y)

@@ -68,14 +68,14 @@ void Player::PlayerMove()
     yVel = std::clamp(yVel, -maxSpeed, maxSpeed); 
 
     // Update position
-    float* xPos = &GameObject::transform.x;
-    float* yPos = &GameObject::transform.y;
+    float& xPos = GameObject::x;
+    float& yPos = GameObject::y;
 
-    *xPos += xVel;
-    *yPos += yVel;
+    xPos += xVel;
+    yPos += yVel;
 
-    *xPos = std::clamp(*xPos, 0.0f, 800.0f - GameObject::sprite->GetWidth());
-    *yPos = std::clamp(*yPos, 0.0f, 510.0f - GameObject::sprite->GetHeight());
+    xPos = std::clamp(xPos, 0.0f, (float)Locator::screenWidth - GameObject::sprite->GetWidth());
+    yPos = std::clamp(yPos, 0.0f, (float)Locator::screenHeight - GameObject::sprite->GetHeight());
 
 
 };

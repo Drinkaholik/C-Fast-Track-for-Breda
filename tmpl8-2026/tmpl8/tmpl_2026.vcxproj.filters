@@ -15,7 +15,6 @@
       <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\utils.cpp" />
-    <ClCompile Include="..\locator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">

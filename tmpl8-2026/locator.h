@@ -17,5 +17,8 @@ public:
 	// Inline lets me include the definition in the header, so even though its technically defined
 	// in every file that includes this header, the compiler knows they all refer to the same instance
 	
+	inline static const int screenWidth = 100;
+	inline static const int screenHeight = 100;
+
 };
 

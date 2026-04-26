@@ -17,24 +17,22 @@ private:
 	
 	void Draw(float x, float y); // Draw sprite
 
-	struct Transform
-	{
-		float x, y;
-	};
+	
+	
 
 
 public:
 
+	// Position
+	float x, y;
+
 	Sprite* sprite;
-	Transform transform;
 
 
 	// Constructor
 	GameObject(Surface* screen, Sprite* spr, float xPos, float yPos) 
-		: surface(screen), sprite(spr)
+		: surface(screen), sprite(spr), x(xPos), y(yPos)
 	{
-		transform.x = xPos;
-		transform.y = yPos;
 	};
 
 

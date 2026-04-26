@@ -30,6 +30,11 @@ private:
 
     void PlayerMove();
 
+    void Test()
+    {
+        xVel++;
+    }
+
 };
 
 

@@ -123,7 +123,6 @@
   <ItemGroup>
     <ClCompile Include="..\game.cpp" />
     <ClCompile Include="..\gameObject.cpp" />
-    <ClCompile Include="..\locator.cpp" />
     <ClCompile Include="..\player.cpp" />
     <ClCompile Include="..\utils.cpp" />
     <ClCompile Include="surface.cpp" />

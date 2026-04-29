@@ -125,6 +125,7 @@
     <ClCompile Include="..\gameObject.cpp" />
     <ClCompile Include="..\player.cpp" />
     <ClCompile Include="..\utils.cpp" />
+    <ClCompile Include="particleEmitter.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
   </ItemGroup>
@@ -134,6 +135,8 @@
     <ClInclude Include="..\central.h" />
     <ClInclude Include="..\player.h" />
     <ClInclude Include="..\utils.h" />
+    <ClInclude Include="components.h" />
+    <ClInclude Include="particleEmitter.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
   </ItemGroup>

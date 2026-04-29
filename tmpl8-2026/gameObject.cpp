@@ -6,7 +6,11 @@
 
 void GameObject::Tick()
 {
-	Draw(x, y);
+	if (sprite != nullptr)
+	{
+		Draw(x, y);
+	}
+	
 }
 
 void GameObject::Draw(float x, float y)

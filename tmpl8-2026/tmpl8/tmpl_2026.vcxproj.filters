@@ -2,48 +2,70 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="surface.cpp">
-      <Filter>template code</Filter>
+      <Filter>Template</Filter>
     </ClCompile>
     <ClCompile Include="template.cpp">
-      <Filter>template code</Filter>
+      <Filter>Template</Filter>
     </ClCompile>
-    <ClCompile Include="..\game.cpp" />
     <ClCompile Include="..\gameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\player.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\utils.cpp" />
+    <ClCompile Include="..\game.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\utils.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="particleEmitter.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
-      <Filter>template code</Filter>
+      <Filter>Template</Filter>
     </ClInclude>
     <ClInclude Include="template.h">
-      <Filter>template code</Filter>
+      <Filter>Template</Filter>
     </ClInclude>
-    <ClInclude Include="..\game.h" />
     <ClInclude Include="..\gameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\player.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\utils.h" />
-    <ClInclude Include="..\locator.h" />
+    <ClInclude Include="..\central.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\game.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="particleEmitter.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="components.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="template code">
-      <UniqueIdentifier>{bf32dd6e-4be7-4889-8ac6-49e7ee163c40}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects">
       <UniqueIdentifier>{6e811246-41c6-4cdb-b034-08475de22efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{8e20f31f-2432-48e6-97f6-49f5d1420be1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Template">
+      <UniqueIdentifier>{bf32dd6e-4be7-4889-8ac6-49e7ee163c40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="_readme.txt">
-      <Filter>template code</Filter>
+      <Filter>Template</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

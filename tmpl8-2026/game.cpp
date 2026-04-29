@@ -59,14 +59,17 @@ namespace Tmpl8
     {
         screen->Clear(0); // clear the graphics window
 
-        for (int i = 0; i < spawnedObjects.size(); i++)
+       
+        for (shared_ptr<GameObject> go : spawnedObjects)
         {
-            spawnedObjects[i]->Tick();
+            go->Tick();
         }
         
         ShowFPS(10, 10, deltaTime);
 
         screen->Bar(100, 100, 300, 120, 0xFFFFFF);
+
+        screen->Plot(300, 300, 0xFF0000);
 
     }
   
@@ -97,6 +100,8 @@ namespace Tmpl8
 
         screen->Print(std::to_string(smoothedFPS).c_str(), xPos, yPos, 0xFFFFFF);
     }
+
+    
 
 
 

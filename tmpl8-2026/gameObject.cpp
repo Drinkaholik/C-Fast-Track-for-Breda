@@ -6,24 +6,15 @@
 
 void GameObject::Tick()
 {
-	if (sprite != nullptr)
+	if (spriteRenderer != nullptr)
 	{
-		Draw(x, y);
+		spriteRenderer->Draw();
 	}
 
 	DrawOrigin();
 	
 }
 
-void GameObject::Draw(float x, float y)
-{
-	// Draw from centre rather than top left
-	sprite->Draw(surface, 
-		x - sprite->GetWidth() / 2, 
-		y - sprite->GetHeight() / 2
-	);
-
-};
 
 void GameObject::DrawOrigin()
 {

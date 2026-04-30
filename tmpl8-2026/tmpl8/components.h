@@ -9,7 +9,14 @@ struct Collider
 
 	int width, height;
 
-	void DrawCollider();
+	void draw_collider();
+
+	void move_and_collide();
+
+	// Check if current object would collide with another object at X position
+	bool collide_at(float x, float y, GameObject go); // Check against single object, faster
+	bool collide_at(float x, float y, GameObject go[]); // Check against array
+
 
 
 	// Structors
@@ -38,7 +45,7 @@ struct SpriteRenderer
 
 
 	//Structors
-	SpriteRenderer(Surface* screen, Sprite* spr) : screen(screen), sprite(spr)
+	SpriteRenderer(Sprite* spr) : screen(screen), sprite(spr)
 	{
 		width = sprite->GetWidth();
 		height = sprite->GetHeight();

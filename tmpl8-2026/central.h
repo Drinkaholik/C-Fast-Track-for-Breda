@@ -11,16 +11,14 @@ class Central
 
 public:
 
-	inline static Game* game = nullptr; 
-	inline static Surface* surface = nullptr;
+	static Game* game; 
+	static Surface* surface;
 
-	// Inline lets me include the definition in the header, so even though its technically defined
-	// in every file that includes this header, the compiler knows they all refer to the same instance
 	
-	inline static const int screenWidth = 500;
-	inline static const int screenHeight = 500;
+	static const int screenWidth = 500;
+	static const int screenHeight = 500;
 
-	inline static float deltaTime = 0;
+	static float deltaTime;
 
 };
 

@@ -125,6 +125,7 @@
     <ClCompile Include="..\gameObject.cpp" />
     <ClCompile Include="..\player.cpp" />
     <ClCompile Include="..\utils.cpp" />
+    <ClCompile Include="central.cpp" />
     <ClCompile Include="components.cpp" />
     <ClCompile Include="particleEmitter.cpp" />
     <ClCompile Include="surface.cpp" />

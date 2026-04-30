@@ -25,6 +25,9 @@
     <ClCompile Include="components.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="central.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">

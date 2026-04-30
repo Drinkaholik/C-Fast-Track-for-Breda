@@ -15,7 +15,7 @@ namespace utils
 	};
 
 
-	bool collide_at(float x, float y, GameObject go[]);
+	
 
 
 };

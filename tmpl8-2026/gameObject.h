@@ -2,11 +2,10 @@
 
 #include "game.h"
 #include "surface.h"
+#include "components.h"
 
-// Has a world-space position and a sprite
-
-using namespace Tmpl8;
-using namespace std;
+// Has a world-space position
+// Can hold pointers to components like colliders and spriterenderers
 
 
 class GameObject
@@ -17,56 +16,41 @@ public:
 	// Position
 	float x, y;
 
-	// Sprite size
-	int width, height;
-
-	// Rect
-	struct Rect
-	{
-		float x1, y1, x2, y2;
-	} rect;
-
-	Sprite* sprite;
+	std::unique_ptr<SpriteRenderer> spriteRenderer;
+	std::unique_ptr<Collider> collider;
 
 
-	void move_and_collide();
 
-
-	void updateRect()
-	{
-		rect.x1 = x - width / 2;
-		rect.y1 = y - height / 2;
-		rect.x2 = x + width / 2;
-		rect.y2 = y + height / 2;
-	}
 
 
 	virtual void Tick(); // Per-frame logic
 
 
-	// Constructor
-	// Spriteless:
-	GameObject(Surface* screen, float xPos, float yPos);
+	// Structors //
+	// Basic:
+	GameObject(float xPos, float yPos); // What is a collider-less, sprite-less go even good for?
+
+	// With collider:
+	GameObject(float xPos, float yPos, int height, int width)
+		: x(xPos), y(yPos)
+	{
+		collider = std::make_unique<Collider>(width, height);
+	}
 
 	// With sprite:
-	GameObject(Surface* screen, Sprite* spr, float xPos, float yPos)
-		: surface(screen), sprite(spr), x(xPos), y(yPos)
-		
+	GameObject(float xPos, float yPos, Sprite* spr)
+		: x(xPos), y(yPos)
 	{
-		width = sprite->GetWidth(); 
-		height = sprite->GetHeight();
-		updateRect();
+		spriteRenderer = std::make_unique<SpriteRenderer>(spr);
 	};
 
+	~GameObject();
 
-protected:
-	Surface* surface; // Points to main surface that's held by game.h, defined in constructor
 
 private:
 
 	void DrawOrigin(); // To test whether origin is correctly at centre of sprite, instead of top-left
 
-	void Draw(float x, float y); // Draw sprite
 
 
 };

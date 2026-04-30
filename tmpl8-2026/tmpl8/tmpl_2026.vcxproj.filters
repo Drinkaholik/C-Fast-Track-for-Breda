@@ -22,6 +22,9 @@
     <ClCompile Include="particleEmitter.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="components.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">

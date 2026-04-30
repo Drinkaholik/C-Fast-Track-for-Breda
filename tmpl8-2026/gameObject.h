@@ -45,13 +45,15 @@ public:
 
 
 	// Constructor
+	// Spriteless:
+	GameObject(Surface* screen, float xPos, float yPos);
 
-	// With sprite
+	// With sprite:
 	GameObject(Surface* screen, Sprite* spr, float xPos, float yPos)
 		: surface(screen), sprite(spr), x(xPos), y(yPos)
-		//width(sprite->GetWidth()), height(sprite->GetHeight())
+		
 	{
-		width = sprite->GetWidth();
+		width = sprite->GetWidth(); 
 		height = sprite->GetHeight();
 		updateRect();
 	};
@@ -62,7 +64,7 @@ protected:
 
 private:
 
-	
+	void DrawOrigin(); // To test whether origin is correctly at centre of sprite, instead of top-left
 
 	void Draw(float x, float y); // Draw sprite
 

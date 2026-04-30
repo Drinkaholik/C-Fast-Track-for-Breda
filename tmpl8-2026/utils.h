@@ -1,5 +1,7 @@
 #pragma once
 
+#include "gameObject.h"
+
 // Global functions for use
 namespace utils
 {
@@ -13,7 +15,7 @@ namespace utils
 	};
 
 
-	
+	bool collide_at(float x, float y, GameObject go[]);
 
 
 };

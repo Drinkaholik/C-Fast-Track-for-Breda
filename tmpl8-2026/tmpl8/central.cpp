@@ -3,8 +3,8 @@
 
 
 
-Central::game = nullptr;
-Central::surface = nullptr;
+//Central::game = nullptr;
+//Central::surface = nullptr;
 
 
 

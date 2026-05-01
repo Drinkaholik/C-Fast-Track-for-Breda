@@ -16,8 +16,7 @@ public:
 	// Position
 	float x, y;
 
-	std::unique_ptr<SpriteRenderer> spriteRenderer;
-	std::unique_ptr<Collider> collider;
+	
 
 
 

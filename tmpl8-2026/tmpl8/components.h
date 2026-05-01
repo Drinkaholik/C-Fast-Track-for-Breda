@@ -1,9 +1,17 @@
 #pragma once
 
 #include "template.h"
+#include "gameObject.h"
+
+struct Component
+{
+	GameObject* owner;
+
+};
+
 
 // Simple bounding box collider
-struct Collider
+struct Collider : public Component
 {
 	float x1, y1; // Needed?
 
@@ -34,7 +42,7 @@ struct Collider
 };
 
 
-struct SpriteRenderer
+struct SpriteRenderer : public Component
 {
 	Surface* screen; // Points to main surface that's held by game.h, defined in constructor
 	Sprite* sprite;

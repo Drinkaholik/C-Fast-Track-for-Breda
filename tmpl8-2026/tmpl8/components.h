@@ -3,10 +3,11 @@
 #include "template.h"
 #include "gameObject.h"
 
-struct Component
+struct Component // Abstract struct
 {
 	GameObject* owner;
 
+	virtual ~Component();
 };
 
 

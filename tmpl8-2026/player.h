@@ -1,19 +1,13 @@
 #pragma once
 
-#include "gameObject.h"
+#include "baseComponents.h"
 
 
 
-class Player : public GameObject
+class Player : public Component, public IUpdateable
 {
 public:
-	void Tick(); 
-
-    // Constructor
-    Player(Surface* screen, Sprite* spr, float xPos, float yPos)
-        : GameObject(screen, spr, xPos, yPos)
-    {
-    };
+	void Tick() override; 
 
 
 private:
@@ -30,10 +24,6 @@ private:
 
     void PlayerMove();
 
-    void Test()
-    {
-        xVel++;
-    }
 
 };
 

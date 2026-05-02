@@ -9,10 +9,11 @@
 #include <iostream>
 #include <string>
 
+using namespace std;
+
 
 void Player::Tick()
 {
-    GameObject::Tick();
     PlayerMove();
 };
 
@@ -20,13 +21,15 @@ void Player::Tick()
 void Player::PlayerMove()
 {
 
-    // Update key states
-    Central::game->UpdateKeys();
+    Game* game = Central::game; // Cache pointer
 
-    int upMove = (Central::game->GetKey(SDL_SCANCODE_W)) ? 1 : 0;
-    int downMove = (Central::game->GetKey(SDL_SCANCODE_S)) ? 1 : 0;
-    int leftMove = (Central::game->GetKey(SDL_SCANCODE_A)) ? 1 : 0;
-    int rightMove = (Central::game->GetKey(SDL_SCANCODE_D)) ? 1 : 0;
+    // Update key states
+    game->UpdateKeys();
+
+    int upMove = (game->GetKey(SDL_SCANCODE_W)) ? 1 : 0;
+    int downMove = (game->GetKey(SDL_SCANCODE_S)) ? 1 : 0;
+    int leftMove = (game->GetKey(SDL_SCANCODE_A)) ? 1 : 0;
+    int rightMove = (game->GetKey(SDL_SCANCODE_D)) ? 1 : 0;
 
 
     int xInput = rightMove - leftMove;
@@ -67,8 +70,8 @@ void Player::PlayerMove()
     yVel = std::clamp(yVel, -maxSpeed, maxSpeed); 
 
     // Update position
-    float& xPos = GameObject::x;
-    float& yPos = GameObject::y;
+    float& xPos = gameObject->x;
+    float& yPos = gameObject->y;
 
     float& dt = Central::deltaTime;
 
@@ -77,8 +80,10 @@ void Player::PlayerMove()
 
     std::cout << std::to_string(dt) << std::endl;
 
-    xPos = std::clamp(xPos, (float)width/2, (float)Central::screenWidth - width/2);
-    yPos = std::clamp(yPos, (float)height/2, (float)Central::screenHeight - height/2);
+    // Position clamp doesnt work with component setup, since it relies on width/height values that might not exist
+    // Ig thats the responsibility of the collider. 
+   /* xPos = clamp(xPos, (float)width/2, (float)Central::screenWidth - width/2);
+    yPos = clamp(yPos, (float)height/2, (float)Central::screenHeight - height/2);*/
 
 
 };

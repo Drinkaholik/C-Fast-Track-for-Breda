@@ -1,8 +1,11 @@
 #pragma once
 
-#include "game.h"
-#include "surface.h"
-#include "components.h"
+//#include "baseComponents.h"
+
+#include <vector>
+#include <memory>
+
+struct Component;
 
 // Has a world-space position
 // Can hold pointers to components like colliders and spriterenderers
@@ -17,35 +20,26 @@ public:
 	// Position
 	float x, y;
 
-	template <typename T> T* GetComponent()
-	{
-		for (unique_ptr<Component> c : components)
-		{
-			if c is T return c;
-		}
-		return nullptr;
-	}
+	bool debug; // Whether to draw origin, collider rect, etc
 
-	
 
+	template <typename T, typename... Args> T& AddComponent(Args&&... args);
+
+	template <typename T> T* GetComponent();
 
 	virtual void Tick(); // Per-frame logic
 
 
-	// Structors //
-	// Basic:
+	// Constructor
 	GameObject(float xPos, float yPos); // What is a collider-less, sprite-less go even good for?
 
-	
-
-	~GameObject();
 
 
 private:
 
 	vector<unique_ptr<Component>> components;
 
-	void DrawOrigin(); // To test whether origin is correctly at centre of sprite, instead of top-left
+	void DrawOrigin(bool debug); // To test whether origin is correctly at centre of sprite, instead of top-left
 
 
 

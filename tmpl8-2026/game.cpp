@@ -33,8 +33,8 @@ namespace Tmpl8
     {
 
         // Instantiate gameobjects
-        oPlayer = make_shared<Player>(screen, &tank, 0, 0);
-        oBall = make_shared<GameObject>(screen, &ball, 200, 200);
+        oPlayer = make_shared<GameObject>(0, 0);
+        oBall = make_shared<GameObject>(200, 200);
 
         spawnedObjects.push_back(oPlayer);
         spawnedObjects.push_back(oBall);

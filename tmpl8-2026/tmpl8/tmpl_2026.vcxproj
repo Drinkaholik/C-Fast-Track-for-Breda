@@ -126,7 +126,7 @@
     <ClCompile Include="..\player.cpp" />
     <ClCompile Include="..\utils.cpp" />
     <ClCompile Include="central.cpp" />
-    <ClCompile Include="components.cpp" />
+    <ClCompile Include="baseComponents.cpp" />
     <ClCompile Include="particleEmitter.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
@@ -137,7 +137,7 @@
     <ClInclude Include="..\central.h" />
     <ClInclude Include="..\player.h" />
     <ClInclude Include="..\utils.h" />
-    <ClInclude Include="components.h" />
+    <ClInclude Include="baseComponents.h" />
     <ClInclude Include="particleEmitter.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />

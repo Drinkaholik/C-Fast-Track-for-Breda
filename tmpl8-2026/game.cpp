@@ -18,8 +18,8 @@ using namespace std;
 namespace Tmpl8
 {
     // Sprites
-    Sprite tank(new Surface("assets/aagun.tga"), 36);
-    Sprite ball(new Surface("assets/ball.png"), 1);
+    Sprite sTank(new Surface("assets/aagun.tga"), 36);
+    Sprite sBall(new Surface("assets/ball.png"), 1);
 
 
     // GameObjects
@@ -36,16 +36,24 @@ namespace Tmpl8
     void Game::Init()
     {
 
-        // Instantiate gameobjects
-        oPlayer = make_shared<GameObject>(0.0f, 0.0f);
-        oPlayer->AddComponent<SpriteRenderer>(&tank);
+#pragma region Instantiate GameObjects // Why dont they indent????
+        // Player
+        oPlayer = make_shared<GameObject>(0.0f, 0.0f, true);
         oPlayer->AddComponent<Player>();
+        oPlayer->AddComponent<SpriteRenderer>(&sTank);
+        oPlayer->AddComponent<Collider>(&sTank);
+        
 
-        oBall = make_shared<GameObject>(200.0f, 200.0f);
 
-        spawnedObjects.push_back(oPlayer);
+        oBall = make_shared<GameObject>(200.0f, 200.0f, true);
+        oBall->AddComponent<SpriteRenderer>(&sBall);
+        oBall->AddComponent<Collider>(&sBall);
+
+        // Render order is determined by the order they're pushed
         spawnedObjects.push_back(oBall);
-
+        spawnedObjects.push_back(oPlayer);
+        
+#pragma endregion
         
     }
 

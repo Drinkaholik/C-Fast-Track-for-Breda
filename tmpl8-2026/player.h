@@ -4,7 +4,7 @@
 
 
 
-class Player : public Component, public IUpdateable
+class Player : public Component
 {
 public:
 	void Tick() override; 

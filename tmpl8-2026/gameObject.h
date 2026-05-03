@@ -32,7 +32,6 @@ public:
 		return ref;
 	}
 
-
 	template <typename T> T* GetComponent()
 	{
 		for (const auto& component : components) // Loops through components list by reference
@@ -47,8 +46,8 @@ public:
 	virtual void Tick(); // Per-frame logic
 
 
-	// Constructor
-	GameObject(float xSpawn, float ySpawn); // What is a collider-less, sprite-less go even good for?
+	// Constructors
+	GameObject(float xSpawn, float ySpawn);
 
 	GameObject(float xSpawn, float ySpawn, bool debug);
 
@@ -58,7 +57,7 @@ private:
 
 	std::vector<std::unique_ptr<Component>> components;
 
-	void DrawOrigin(bool debug); // To test whether origin is correctly at centre of sprite, instead of top-left
+	void DrawOrigin(); // To test whether origin is correctly at centre of sprite, instead of top-left
 
 
 

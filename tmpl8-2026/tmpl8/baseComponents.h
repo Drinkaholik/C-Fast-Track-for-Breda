@@ -9,21 +9,15 @@ struct Component // Abstract struct
 {
 	GameObject* gameObject;
 
+	virtual void Tick();
+
 	virtual ~Component() = 0;
 };
 
-struct IUpdateable
-{
-	// Do I need this? Im doing it because not every component will need an update loop
-	// But it also means I need to cast every component to an IUpdateable in the gameobject Tick function
-	virtual void Tick() = 0;
-
-	virtual ~IUpdateable() = 0;
-};
 
 
 // Simple bounding box collider
-struct Collider : public Component, public IUpdateable
+struct Collider : public Component
 {
 	float x1, y1; // xMin, yMin
 	float x2, y2; // xMax, yMax
@@ -60,7 +54,7 @@ struct Collider : public Component, public IUpdateable
 };
 
 
-struct SpriteRenderer : public Component, public IUpdateable
+struct SpriteRenderer : public Component
 {
 	Surface* screen; // Caches Central::surface - does that actually provide performance benefits? both are pointers
 	Sprite* sprite;

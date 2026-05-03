@@ -3,23 +3,30 @@
 #include "gameObject.h"
 
 
-#pragma region Abstract classes 
+
 
 Component::~Component() = default;
-IUpdateable::~IUpdateable() = default;
 
-#pragma endregion
+// leaving it empty, but not gonna make it pure virtual cos not every component will need an update loop
+void Component::Tick()
+{
+};
 
 
+
+
+
+
+// Collider //
 #pragma region Collider
 
-// Constructor
+// Constructors
 Collider::Collider(Sprite* sprite)
 {
 	width = sprite->GetWidth();
 	height = sprite->GetHeight();
 
-	UpdateRect();
+	//UpdateRect(); // Cant be here because GameObject only gets set after constructor runs
 }
 
 Collider::Collider(int width, int height)
@@ -29,6 +36,13 @@ Collider::Collider(int width, int height)
 };
 
 Collider::~Collider() = default;
+
+
+void Collider::Tick()
+{
+	UpdateRect();
+	DrawCollider(gameObject->debug);
+}
 
 void Collider::UpdateRect()
 {
@@ -40,19 +54,20 @@ void Collider::UpdateRect()
 
 void Collider::DrawCollider(bool debug)
 {
-	if (!gameObject->debug) return;
+	if (!debug) return;
 	Central::surface->Box(x1, y1, x2, y2, 0xFF0000);
 };
 
-void Collider::Tick()
-{
-	UpdateRect();
-}
+
 
 #pragma endregion
 
-#pragma region SpriteRenderer
 
+
+
+
+// SpriteRenderer //
+#pragma region SpriteRenderer
 
 SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
 {
@@ -70,12 +85,11 @@ void SpriteRenderer::Draw(float x, float y)
 		x - sprite->GetWidth() / 2,
 		y - sprite->GetHeight() / 2
 	);
-
 }
 
 void SpriteRenderer::Tick()
 {
-
+	Draw(gameObject->x, gameObject->y);
 }
 
 #pragma endregion

@@ -52,6 +52,38 @@ void Collider::UpdateRect()
 	y2 = gameObject->y + height / 2;
 }
 
+
+bool Collider::CollideAt(float x, float y, GameObject* go)
+{
+	Collider* col = go->GetComponent<Collider>();
+	if (col == nullptr) return false;
+
+	// Cache references
+	float& xPos = gameObject->x;
+	float& yPos = gameObject->y;
+
+	float originalX = xPos;
+	float originalY = yPos;
+
+	// Move this gameObject to position
+	xPos = x;
+	yPos = y;
+	UpdateRect();
+
+	bool xCollision = (x1 > col->x1 && x1 < col->x2);
+	bool yCollision = (y1 > col->y1 && y1 < col->y2);
+
+	// Move back
+	xPos = originalX;
+	yPos = originalY;
+	UpdateRect();
+
+	if (xCollision && yCollision) return true;
+	else return false;
+
+};
+
+
 void Collider::DrawCollider(bool debug)
 {
 	if (!debug) return;

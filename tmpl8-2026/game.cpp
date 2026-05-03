@@ -1,7 +1,6 @@
 #include "game.h"
 
 #include "central.h"
-//#include "surface.h"
 #include "utils.h" // sign
 #include "gameObject.h"
 #include "player.h"
@@ -74,7 +73,7 @@ namespace Tmpl8
     {
         screen->Clear(0); // clear the graphics window
 
-       
+        // Drive gameObject update loop
         for (shared_ptr<GameObject> go : spawnedObjects)
         {
             go->Tick();
@@ -97,7 +96,7 @@ namespace Tmpl8
     };
 
     float smoothedFPS = 1;
-    float smoothing = 400; // Higher means smoother FPS, but less precise
+    float smoothing = 100; // Higher means smoother FPS, but less precise
 
     void Game::ShowFPS(int xPos, int yPos, float deltaTime)
     {
@@ -108,7 +107,7 @@ namespace Tmpl8
 
         // Higher value as the gap between realFPS and smoothedFPS increases,
         // stops it from taking ages to catch up
-        float dynamicSmoothing = abs(1 - (realFPS / smoothedFPS)) / smoothing;
+        float dynamicSmoothing = (abs(1 - realFPS / smoothedFPS)) / smoothing;
 
         smoothedFPS = lerp(smoothedFPS, realFPS, dynamicSmoothing);
 

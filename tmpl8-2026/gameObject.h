@@ -21,7 +21,9 @@ public:
 
 	bool debug = false; // Whether to draw origin, collider rect, etc
 
-	// Turns out that termplate functions need to always be defined in the header??
+
+
+	// Turns out that template functions need to always be defined in the header??
 	// Variadic template, still don't understand everything about it
 	template <typename T, typename... Args>
 	T& AddComponent(Args&&... args) {

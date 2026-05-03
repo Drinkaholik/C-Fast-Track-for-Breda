@@ -1,12 +1,11 @@
 #include "baseComponents.h"
+#include "central.h"
 #include "gameObject.h"
 
 
 #pragma region Abstract classes 
 
 Component::~Component() = default;
-
-
 IUpdateable::~IUpdateable() = default;
 
 #pragma endregion
@@ -28,6 +27,8 @@ Collider::Collider(int width, int height)
 {
 	UpdateRect();
 };
+
+Collider::~Collider() = default;
 
 void Collider::UpdateRect()
 {
@@ -57,9 +58,10 @@ SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
 {
 	width = sprite->GetWidth();
 	height = sprite->GetHeight();
-	
+	screen = Central::surface;
 };
 
+SpriteRenderer::~SpriteRenderer() = default;
 
 void SpriteRenderer::Draw(float x, float y)
 {
@@ -68,6 +70,11 @@ void SpriteRenderer::Draw(float x, float y)
 		x - sprite->GetWidth() / 2,
 		y - sprite->GetHeight() / 2
 	);
+
+}
+
+void SpriteRenderer::Tick()
+{
 
 }
 

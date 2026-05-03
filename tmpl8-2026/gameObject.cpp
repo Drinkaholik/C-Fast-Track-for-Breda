@@ -1,6 +1,19 @@
 #include "gameObject.h"
 #include "central.h"
+#include "baseComponents.h"
 
+using namespace std;
+
+
+GameObject::GameObject(float xSpawn, float ySpawn)
+	: x(xSpawn), y(ySpawn)
+{
+};
+
+GameObject::GameObject(float xSpawn, float ySpawn, bool debug)
+	: x(xSpawn), y(ySpawn), debug(debug)
+{
+};
 
 
 void GameObject::Tick()
@@ -13,25 +26,9 @@ void GameObject::Tick()
 }
 
 
-template <typename T, typename... Args>
-T& addComponent(Args&&... args) {
-	auto comp = std::make_unique<T>(std::forward<Args>(args)...);
-	comp->owner = this;
-	T& ref = *comp;
-	//components.push_back(std::move(comp));
-	return ref;
-}
 
 
-template <typename T> T* GameObject::GetComponent()
-{
-	for (const auto& component : components) // Loops through components list by reference
-	{
-		T* ptr = dynamic_cast<T*>(component.get());
-		if (ptr) return ptr;
-	}
-	return nullptr;
-}
+
 
 
 void GameObject::DrawOrigin(bool debug)

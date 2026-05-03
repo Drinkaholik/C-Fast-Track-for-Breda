@@ -3,8 +3,10 @@
 
 
 
-//Central::game = nullptr;
-//Central::surface = nullptr;
+Game* Central::game = nullptr;
+Surface* Central::surface = nullptr;
+
+float Central::deltaTime = 0;
 
 
 

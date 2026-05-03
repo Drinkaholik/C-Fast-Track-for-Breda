@@ -1,8 +1,9 @@
 #pragma once
 
 #include "template.h"
-#include "gameObject.h"
 #include <span>
+
+class GameObject; // Forward declaration to prevent circular dependancy
 
 struct Component // Abstract struct
 {
@@ -15,7 +16,7 @@ struct IUpdateable
 {
 	// Do I need this? Im doing it because not every component will need an update loop
 	// But it also means I need to cast every component to an IUpdateable in the gameobject Tick function
-	virtual void Tick();
+	virtual void Tick() = 0;
 
 	virtual ~IUpdateable() = 0;
 };
@@ -38,11 +39,11 @@ struct Collider : public Component, public IUpdateable
 
 	// Check if current object would collide with another object at X position
 	bool CollideAt(float x, float y, GameObject go); // Check against single object, faster
-	//bool CollideAt(float x, float y, std::span<GameObject> go); // Check against array
+	bool CollideAt(float x, float y, std::span<GameObject> go); // Check against array
 
 	// Same as CollideAt, but returns collision instance
 	GameObject InstancePlace(float x, float y, GameObject go);
-	//GameObject InstancePlace(float x, float y, std::span<GameObject> go[]);
+	GameObject InstancePlace(float x, float y, std::span<GameObject> go[]);
 
 
 	void MoveAndCollide(float x, float y);
@@ -52,7 +53,9 @@ struct Collider : public Component, public IUpdateable
 	// Structors
 	Collider(Sprite* sprite); // Initialize thru sprite size
 
-	Collider(int width, int height); //Initialize with manual size
+	Collider(int width, int height); // Initialize with manual size
+
+	~Collider() override;
 
 };
 
@@ -71,5 +74,7 @@ struct SpriteRenderer : public Component, public IUpdateable
 
 	//Structors
 	SpriteRenderer(Sprite* spr);
+
+	~SpriteRenderer() override;
 
 };

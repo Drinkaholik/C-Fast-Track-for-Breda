@@ -1,8 +1,11 @@
 #include "game.h"
-#include "surface.h"
+
+#include "central.h"
+//#include "surface.h"
 #include "utils.h" // sign
 #include "gameObject.h"
 #include "player.h"
+
 
 #include <cstdio> //printf
 #include <iostream>
@@ -17,6 +20,7 @@ namespace Tmpl8
     // Sprites
     Sprite tank(new Surface("assets/aagun.tga"), 36);
     Sprite ball(new Surface("assets/ball.png"), 1);
+
 
     // GameObjects
     shared_ptr<GameObject> oPlayer;
@@ -33,8 +37,11 @@ namespace Tmpl8
     {
 
         // Instantiate gameobjects
-        oPlayer = make_shared<GameObject>(0, 0);
-        oBall = make_shared<GameObject>(200, 200);
+        oPlayer = make_shared<GameObject>(0.0f, 0.0f);
+        oPlayer->AddComponent<SpriteRenderer>(&tank);
+        oPlayer->AddComponent<Player>();
+
+        oBall = make_shared<GameObject>(200.0f, 200.0f);
 
         spawnedObjects.push_back(oPlayer);
         spawnedObjects.push_back(oBall);
@@ -93,12 +100,12 @@ namespace Tmpl8
 
         // Higher value as the gap between realFPS and smoothedFPS increases,
         // stops it from taking ages to catch up
-        float dynamicSmoothing = std::abs(1 - (realFPS / smoothedFPS)) / smoothing;
+        float dynamicSmoothing = abs(1 - (realFPS / smoothedFPS)) / smoothing;
 
-        smoothedFPS = std::lerp(smoothedFPS, realFPS, dynamicSmoothing);
+        smoothedFPS = lerp(smoothedFPS, realFPS, dynamicSmoothing);
 
 
-        screen->Print(std::to_string(smoothedFPS).c_str(), xPos, yPos, 0xFFFFFF);
+        screen->Print(to_string(smoothedFPS).c_str(), xPos, yPos, 0xFFFFFF);
     }
 
     

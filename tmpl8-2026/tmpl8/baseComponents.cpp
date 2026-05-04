@@ -57,8 +57,8 @@ void Collider::UpdateRect(float x, float y)
 
 bool Collider::CollideAt(float x, float y, GameObject* go)
 {
-	Collider* col = go->GetComponent<Collider>();
-	if (col == nullptr) return false;
+	const Collider* col = go->GetComponent<Collider>();
+	if (!col) return false;
 
 	// Cache pos
 	float originalX = gameObject->x;
@@ -67,8 +67,20 @@ bool Collider::CollideAt(float x, float y, GameObject* go)
 	// Move rect to check position
 	UpdateRect(x, y);
 
-	bool xCollision = (x1 > col->x1 && x1 < col->x2);
-	bool yCollision = (y1 > col->y1 && y1 < col->y2);
+	const float colX1 = col->x1; // Apparently passing by value is more efficient here? 
+	const float colX2 = col->x2; // Pointer / reference uses 8 bits whereas float uses 4
+	const float colY1 = col->y1; // Is this more efficient than just directly accessing them
+	const float colY2 = col->y2; // in the collision checks below?
+
+
+	bool x1Collision = (x1 > colX1 && x1 < colX2);
+	bool x2Collision = (x2 > colX1 && x2 < colX2);
+
+	bool y1Collision = (y1 > colY1 && y1 < colY2);
+	bool y2Collision = (y2 > colY1 && y2 < colY2);
+
+	bool xCollision = x1Collision || x2Collision;
+	bool yCollision = y1Collision || y2Collision;
 
 	// Move rect back
 	UpdateRect(originalX, originalY);
@@ -78,6 +90,7 @@ bool Collider::CollideAt(float x, float y, GameObject* go)
 };
 
 
+// V1: (wouldn't work)
 // I want pixel-perfect collisions each time
 // First check for collision at full distance
 // Then check 1 pixel away
@@ -85,49 +98,101 @@ bool Collider::CollideAt(float x, float y, GameObject* go)
 // Then keep halving until checked distance is within 1 px
 // Then move to directly next to that pixel
 
+// V2:
+// If the distance is lower than collider width / height, check it directly
+// If its higher, sweep toward there in increments equal to the width / height
+// If there is a collision, sweep backwards by half width/height
+// Then sweep either forward or backwards by a quarter, and from there go 1 pixel at a time until 0 px from the collider
+
 void Collider::MoveAndCollide(float xDistance, float yDistance, span<GameObject> gameObjects)
 {
 	float& x = gameObject->x;
 	float& y = gameObject->y;
 
+	float targetX = x + xDistance;
+	float targetY = y + yDistance;
+
 	bool xCollide = false;
 	bool yCollide = false;
 
-	// Check x
-	for (GameObject go : gameObjects)
+	
+	for (int i = 0; i < gameObjects.size(); i++) // Insanely nested
 	{
-		// Phase 1 - check max distance
-		
-		// There has to be a better way to do this
-		xCollide = CollideAt(x + xDistance, y, &go);
-		
-		if (!xCollide) continue;
+		// Check x
+		GameObject* go = &gameObjects[i];
 
-		xCollide = CollideAt(roundf(x) + 1, y, &go);
+		// Immediately check targetX if its within collider
+		if (abs(xDistance) < width)
+			xCollide = CollideAt(targetX, y, go);
 
-		if (!xCollide) continue;
+		else // Otherwise begin sweep
+		{
+			int iterations = (abs(xDistance) / width); // Number of times to sweep. Int cast truncates so no problemo
+
+			for (int j = 0; j < iterations; j++)
+			{
+				// Exit j loop if no collision occurs
+				int checkLoc = x + (width * j);
+				xCollide = CollideAt(checkLoc, y, go);
+				if (!xCollide)
+				{
+					break;
+				}
+
+				else // If collision occurs, begin half, quarter, pixel sweep
+				{
+					checkLoc = checkLoc - width / 2; // Move back by half
+					xCollide = CollideAt(checkLoc, y, go);
+
+					if (!xCollide) // Otherwise, start moving forward
+					{
+						checkLoc = checkLoc + width / 4; // Move forward by quarter
+						xCollide = CollideAt(checkLoc, y, go);
+
+						if (!xCollide)
+						{
+							int i = 0;
+							while (!xCollide)
+							{
+								i++;
+								checkLoc = checkLoc + i;
+								xCollide = CollideAt(checkLoc, y, go);
+							}
+						}
+					}
+
+					else // If there's still a collision, keep moving back
+					{
+						checkLoc = checkLoc - width / 4; // Move back by quarter
+						xCollide = CollideAt(checkLoc, y, go);
+
+					}
+
+				}
+
+
+
+
+			}
+		}
+		
+		
+		
 	}
 
-	// Check y
-	for (GameObject go : gameObjects)
+	if (!xCollide) x = targetX;
+	
+	if (!yCollide) y = targetY;
+
+	// Need to do a struct + constructor to declare a local function grrrr
+	struct Sweep
 	{
-		// Phase 1 - check max distance
-		yCollide = (CollideAt(x, y + yDistance, &go));
+		Sweep(float xCheck, float yCheck, float distance, int size)
+		{
 
-		if (!yCollide) return;
-
-
-
-	}
+		}
+	};
 	
-
-
-	// X check
-	
-
-	// Y check
-
-	// Make sure to move x and y separately
 
 }
 

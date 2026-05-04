@@ -25,6 +25,10 @@ public:
 
 	// Turns out that template functions need to always be defined in the header??
 	// Variadic template, still don't understand everything about it
+	// For this I need to learn about:
+	// 1. Perfect forwarding
+	// 2. How recursion relates to variadic templates
+	// 3. How the placement of ellipses and brackets changes the behaviour
 	template <typename T, typename... Args>
 	T& AddComponent(Args&&... args) {
 		auto comp = make_unique<T>(forward<Args>(args)...);

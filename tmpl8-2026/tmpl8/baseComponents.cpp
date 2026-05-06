@@ -3,6 +3,8 @@
 #include "gameObject.h"
 
 #include <math.h>
+#include <iostream>
+#include <string>
 
 
 using namespace std;
@@ -104,10 +106,11 @@ bool Collider::CollideAt(float x, float y, GameObject* go)
 // If there is a collision, sweep backwards by half width/height
 // Then sweep either forward or backwards by a quarter, and from there go 1 pixel at a time until 0 px from the collider
 
-void Collider::MoveAndCollide(float xDistance, float yDistance, span<GameObject> gameObjects)
+void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<GameObject>> gameObjects)
 {
 	float& x = gameObject->x;
 	float& y = gameObject->y;
+	
 
 	float targetX = x + xDistance;
 	float targetY = y + yDistance;
@@ -115,86 +118,331 @@ void Collider::MoveAndCollide(float xDistance, float yDistance, span<GameObject>
 	bool xCollide = false;
 	bool yCollide = false;
 
-	
+	bool xTest = false;
+	bool yTest = false;
+
+	// Check for collisions against every collider in scene
 	for (int i = 0; i < gameObjects.size(); i++) // Insanely nested
 	{
-		// Check x
-		GameObject* go = &gameObjects[i];
+		GameObject* go = gameObjects[i].get();
 
-		// Immediately check targetX if its within collider
+		xTest = CollideAt(targetX, y, go);
+		yTest = CollideAt(x, targetY, go);
+
+		// Check X ////////////////////////////////////////////
+
 		if (abs(xDistance) < width)
-			xCollide = CollideAt(targetX, y, go);
-
-		else // Otherwise begin sweep
 		{
-			int iterations = (abs(xDistance) / width); // Number of times to sweep. Int cast truncates so no problemo
+			xCollide = CollideAt(targetX, y, go);
+			continue; // Used to reduce nesting
+		}
 
-			for (int j = 0; j < iterations; j++)
+
+		// Otherwise begin sweep
+		int iterations = (abs(xDistance) / width); // Number of times to sweep. Int cast truncates so no problemo
+
+		for (int j = 0; j < iterations; j++)
+		{
+			// Exit j loop if no collision occurs
+			int checkLoc = x + (width * j);
+			xCollide = CollideAt(checkLoc, y, go);
+			if (!xCollide)
 			{
-				// Exit j loop if no collision occurs
-				int checkLoc = x + (width * j);
+				break; //!! Sweep will end here for most gameObjects in array !!// 
+			}
+
+
+
+			// If a collision occurs, find the pixel-perfect distance from the rect:
+
+			checkLoc = checkLoc - width / 2; // Move back by half
+			xCollide = CollideAt(checkLoc, y, go);
+
+
+			if (!xCollide) // If no collision, move forward by quarter
+			{
+				checkLoc = checkLoc + width / 4;
 				xCollide = CollideAt(checkLoc, y, go);
+
+
 				if (!xCollide)
 				{
+					int i = 0;
+					while (!xCollide) // Move forward pixel-by-pixel until collision occurs
+					{
+						i++;
+						checkLoc = checkLoc + i;
+						xCollide = CollideAt(checkLoc, y, go);
+					}
+					targetX = checkLoc - 1;
 					break;
 				}
 
-				else // If collision occurs, begin half, quarter, pixel sweep
+				else
 				{
-					checkLoc = checkLoc - width / 2; // Move back by half
-					xCollide = CollideAt(checkLoc, y, go);
-
-					if (!xCollide) // Otherwise, start moving forward
+					int i = 0;
+					while (xCollide) // Move backwards pixel-by-pixel until collision stops
 					{
-						checkLoc = checkLoc + width / 4; // Move forward by quarter
+						i--;
+						checkLoc = checkLoc + i;
 						xCollide = CollideAt(checkLoc, y, go);
-
-						if (!xCollide)
-						{
-							int i = 0;
-							while (!xCollide)
-							{
-								i++;
-								checkLoc = checkLoc + i;
-								xCollide = CollideAt(checkLoc, y, go);
-							}
-						}
 					}
+					targetX = checkLoc;
+					break;
+				}
+			}
 
-					else // If there's still a collision, keep moving back
+			else // If there's still a collision, keep moving back
+			{
+				checkLoc = checkLoc - width / 4; // Move back by quarter
+				xCollide = CollideAt(checkLoc, y, go);
+
+				if (xCollide)
+				{
+					int i = 0;
+					while (xCollide) // Move backwards pixel-by-pixel until collision stops
 					{
-						checkLoc = checkLoc - width / 4; // Move back by quarter
+						i--;
+						checkLoc = checkLoc + i;
 						xCollide = CollideAt(checkLoc, y, go);
-
 					}
-
+					targetX = checkLoc;
+					break;
 				}
 
+				else
+				{
+					int i = 0;
+					while (!xCollide) // Move forward pixel-by-pixel until collision occurs
+					{
+						i++;
+						checkLoc = checkLoc + i;
+						xCollide = CollideAt(checkLoc, y, go);
+					}
+					targetX = checkLoc - 1;
+					break;
 
-
-
+				}
 			}
+
 		}
-		
-		
-		
+
+		// Check Y ////////////////////////////////////////////
+
+		if (abs(yDistance) < height)
+		{
+			yCollide = CollideAt(x, targetY, go);
+			continue; // Used to reduce nesting
+		}
+
+
+		// Otherwise begin sweep
+		iterations = (abs(yDistance) / height); // Number of times to sweep. Int cast truncates so no problemo
+
+		for (int j = 0; j < iterations; j++)
+		{
+			// Exit j loop if no collision occurs
+			int checkLoc =y + (height * j);
+			xCollide = CollideAt(x, checkLoc, go);
+			if (!yCollide)
+			{
+				break; //!! Sweep will end here for most gameObjects in array !!// 
+			}
+
+
+
+			// If a collision occurs, find the pixel-perfect distance from the rect:
+
+			checkLoc = checkLoc - height / 2; // Move back by half
+			yCollide = CollideAt(x, checkLoc, go);
+
+
+			if (!yCollide) // If no collision, move forward by quarter
+			{
+				checkLoc = checkLoc + height / 4;
+				yCollide = CollideAt(x, checkLoc, go);
+
+
+				if (!yCollide)
+				{
+					int i = 0;
+					while (!yCollide) // Move forward pixel-by-pixel until collision occurs
+					{
+						i++;
+						checkLoc = checkLoc + i;
+						yCollide = CollideAt(x, checkLoc, go);
+					}
+					targetY = checkLoc - 1;
+					break;
+				}
+
+				else
+				{
+					int i = 0;
+					while (yCollide) // Move backwards pixel-by-pixel until collision stops
+					{
+						i--;
+						checkLoc = checkLoc + i;
+						yCollide = CollideAt(x, checkLoc, go);
+					}
+					targetY = checkLoc;
+					break;
+				}
+			}
+
+			else // If there's still a collision, keep moving back
+			{
+				checkLoc = checkLoc - height / 4; // Move back by quarter
+				yCollide = CollideAt(x, checkLoc, go);
+
+				if (yCollide)
+				{
+					int i = 0;
+					while (yCollide) // Move backwards pixel-by-pixel until collision stops
+					{
+						i--;
+						checkLoc = checkLoc + i;
+						yCollide = CollideAt(x, checkLoc, go);
+					}
+					targetY = checkLoc;
+					break;
+				}
+
+				else
+				{
+					int i = 0;
+					while (!yCollide) // Move forward pixel-by-pixel until collision occurs
+					{
+						i++;
+						checkLoc = checkLoc + i;
+						yCollide = CollideAt(x, checkLoc, go);
+					}
+					targetY = checkLoc - 1;
+					break;
+
+				}
+			}
+
+		}
+
+
 	}
 
+	cout << "xCollide" << to_string(xTest) << endl;
+	cout << "yCollide" << to_string(yTest) << endl;
+
 	if (!xCollide) x = targetX;
-	
+
 	if (!yCollide) y = targetY;
 
 	// Need to do a struct + constructor to declare a local function grrrr
-	struct Sweep
-	{
-		Sweep(float xCheck, float yCheck, float distance, int size)
-		{
 
-		}
-	};
 	
 
 }
+
+
+	
+//	
+//bool Collider::Sweep(GameObject* go, float& targetX, float& targetY, float distance, int colliderLength)
+//{
+//	// Immediately check targetX if its within collider
+//
+//	bool collisionAxis = false;
+//
+//	if (abs(distance) < colliderLength)
+//	{
+//		collisionAxis = CollideAt(targetX, targetY, go);
+//		return collisionAxis; // Used to reduce nesting
+//	}
+//
+//
+//	// Otherwise begin sweep
+//	int iterations = (abs(distance) / colliderLength); // Number of times to sweep. Int cast truncates so no problemo
+//
+//	for (int j = 0; j < iterations; j++)
+//	{
+//		// Exit j loop if no collision occurs
+//		int checkX = targetX + (colliderLength * j);
+//		collisionAxis = CollideAt(checkX, y, go);
+//		if (!collisionAxis)
+//		{
+//			break; //!! Sweep will end here for most gameObjects in array !!// 
+//		}
+//
+//
+//
+//		// If a collision occurs, find the pixel-perfect distance from the rect:
+//
+//		checkX = checkX - colliderLength / 2; // Move back by half
+//		collisionAxis = CollideAt(checkX, y, go);
+//
+//
+//		if (!collisionAxis) // If no collision, move forward by quarter
+//		{
+//			checkX = checkX + colliderLength / 4;
+//			collisionAxis = CollideAt(checkX, y, go);
+//
+//
+//			if (!collisionAxis)
+//			{
+//				int i = 0;
+//				while (!collisionAxis) // Move forward pixel-by-pixel until collision occurs
+//				{
+//					i++;
+//					checkX = checkX + i;
+//					collisionAxis = CollideAt(checkX, y, go);
+//				}
+//				targetX = checkX - 1;
+//			}
+//
+//			else
+//			{
+//				int i = 0;
+//				while (collisionAxis) // Move backwards pixel-by-pixel until collision stops
+//				{
+//					i--;
+//					checkX = checkX + i;
+//					collisionAxis = CollideAt(checkX, y, go);
+//				}
+//				targetX = checkX;
+//			}
+//		}
+//
+//		else // If there's still a collision, keep moving back
+//		{
+//			checkX = checkX - colliderLength / 4; // Move back by quarter
+//			collisionAxis = CollideAt(checkX, y, go);
+//
+//			if (collisionAxis)
+//			{
+//				int i = 0;
+//				while (collisionAxis) // Move backwards pixel-by-pixel until collision stops
+//				{
+//					i--;
+//					checkX = checkX + i;
+//					collisionAxis = CollideAt(checkX, y, go);
+//				}
+//				targetX = checkX;
+//			}
+//
+//			else
+//			{
+//				int i = 0;
+//				while (!collisionAxis) // Move forward pixel-by-pixel until collision occurs
+//				{
+//					i++;
+//					checkX = checkX + i;
+//					collisionAxis = CollideAt(checkX, y, go);
+//				}
+//				targetX = checkX - 1;
+//
+//			}
+//		}
+//
+//	}
+//}
+//
 
 
 void Collider::DrawCollider(bool debug)
@@ -240,7 +488,7 @@ void SpriteRenderer::Draw(float x, float y)
 		y - height / 2
 	);
 
-	// Draw from centre rather than top left
+	// Draw from centre rather than top left - causes write error
 	/*sprite->DrawScaled(
 		x - width / 2,
 		y - height / 2,

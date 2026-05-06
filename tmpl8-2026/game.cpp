@@ -25,8 +25,6 @@ namespace Tmpl8
     shared_ptr<GameObject> oPlayer;
     shared_ptr<GameObject> oBall;
 
-    vector<shared_ptr<GameObject>> spawnedObjects;
-
     vector<int> exampleVector (5, 20);
 
     // -----------------------------------------------------------
@@ -38,9 +36,9 @@ namespace Tmpl8
 #pragma region Instantiate GameObjects // Why dont they indent????
         // Player
         oPlayer = make_shared<GameObject>(0.0f, 0.0f, true);
-        oPlayer->AddComponent<Player>();
         oPlayer->AddComponent<SpriteRenderer>(&sTank);
         oPlayer->AddComponent<Collider>(&sTank);
+        oPlayer->AddComponent<Player>(oPlayer->GetComponent<Collider>());
         
 
 
@@ -49,8 +47,8 @@ namespace Tmpl8
         oBall->AddComponent<Collider>(&sBall);
 
         // Render order is determined by the order they're pushed
-        spawnedObjects.push_back(oBall);
-        spawnedObjects.push_back(oPlayer);
+        Central::spawnedObjects.push_back(oBall);
+        Central::spawnedObjects.push_back(oPlayer);
         
 #pragma endregion
         
@@ -74,7 +72,7 @@ namespace Tmpl8
         screen->Clear(0); // clear the graphics window
 
         // Drive gameObject update loop
-        for (shared_ptr<GameObject> go : spawnedObjects)
+        for (shared_ptr<GameObject> go : Central::spawnedObjects)
         {
             go->Tick();
         }

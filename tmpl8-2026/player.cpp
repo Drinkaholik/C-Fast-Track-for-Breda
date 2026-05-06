@@ -12,6 +12,8 @@
 using namespace std;
 
 
+Player::Player(Collider* col) : collider(col) {};
+
 void Player::Tick()
 {
     PlayerMove();
@@ -75,10 +77,13 @@ void Player::PlayerMove()
 
     float& dt = Central::deltaTime;
 
-    xPos += xVel * dt;
+    collider->MoveAndCollide(xVel * dt, yVel * dt, Central::spawnedObjects);
+
+
+   /* xPos += xVel * dt;
     yPos += yVel * dt;
 
-    std::cout << std::to_string(dt) << std::endl;
+    std::cout << std::to_string(dt) << std::endl;*/
 
     // Position clamp doesnt work with component setup, since it relies on width/height values that might not exist
     // Ig thats the responsibility of the collider. 

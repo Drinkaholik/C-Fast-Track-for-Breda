@@ -40,7 +40,9 @@ struct Collider : public Component
 	GameObject InstancePlace(float x, float y, std::span<GameObject> gameObjects);
 
 	// Move gameObject by nDistance, if it would not collide
-	void MoveAndCollide(float xDistance, float yDistance, std::span<GameObject> gameObjects);
+	void MoveAndCollide(float xDistance, float yDistance, std::span<std::shared_ptr<GameObject>> gameObjects);
+
+	bool Sweep(GameObject* go, float& targetX, float& targetY, float distance, int axisLength);
 
 
 	void Tick() override;

@@ -9,6 +9,8 @@ class Player : public Component
 public:
 	void Tick() override; 
 
+    Player(Collider* col);
+
 
 private:
 
@@ -20,6 +22,8 @@ private:
     float accel = 0.1;
     float decel = 0.01;
     float maxSpeed = 1;
+
+    Collider* collider;
 
 
     void PlayerMove();

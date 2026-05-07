@@ -1,4 +1,4 @@
-#include "player.h"
+#include "playerMove.h"
 
 #include "central.h"
 #include "utils.h"
@@ -16,11 +16,11 @@ PlayerMove::PlayerMove(Collider* col) : collider(col) {};
 
 void PlayerMove::Tick()
 {
-    PlayerMove();
+    Move();
 };
 
 
-void PlayerMove::PlayerMove()
+void PlayerMove::Move()
 {
 
     Game& game = *Central::game; // Cache pointer as ref
@@ -79,11 +79,6 @@ void PlayerMove::PlayerMove()
 
     collider->MoveAndCollide(xVel * dt, yVel * dt, Central::spawnedObjects);
 
-
-   /* xPos += xVel * dt;
-    yPos += yVel * dt;
-
-    std::cout << std::to_string(dt) << std::endl;*/
 
     // Position clamp doesnt work with component setup, since it relies on width/height values that might not exist
     // Ig thats the responsibility of the collider. 

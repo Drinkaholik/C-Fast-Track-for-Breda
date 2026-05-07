@@ -126,7 +126,7 @@ void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<
 
 			if (xCollide)
 			{
-				targetX = (x + (j - 1) * xMoveSign);
+				targetX = (x + (j) * xMoveSign);
 				break;
 			}
 		}
@@ -137,7 +137,7 @@ void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<
 
 			if (yCollide)
 			{
-				targetY = (y + (j - 1) * yMoveSign);
+				targetY = (y + (j) * yMoveSign);
 				break;
 			}
 		}

@@ -3,7 +3,7 @@
 #include "central.h"
 #include "utils.h" // sign
 #include "gameObject.h"
-#include "player.h"
+#include "playerMove.h"
 
 
 #include <cstdio> //printf

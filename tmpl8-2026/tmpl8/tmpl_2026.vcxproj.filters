@@ -10,7 +10,7 @@
     <ClCompile Include="..\gameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\player.cpp">
+    <ClCompile Include="..\playerMove.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="..\game.cpp">
@@ -22,12 +22,10 @@
     <ClCompile Include="particleEmitter.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="components.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="central.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="baseComponents.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -39,7 +37,7 @@
     <ClInclude Include="..\gameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\player.h">
+    <ClInclude Include="..\playerMove.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="..\central.h">
@@ -54,9 +52,7 @@
     <ClInclude Include="particleEmitter.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="components.h">
-      <Filter>GameObjects</Filter>
-    </ClInclude>
+    <ClInclude Include="baseComponents.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

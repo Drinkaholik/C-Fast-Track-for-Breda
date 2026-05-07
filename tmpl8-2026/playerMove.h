@@ -4,12 +4,12 @@
 
 
 
-class Player : public Component
+class Move : public Component
 {
 public:
 	void Tick() override; 
 
-    Player(Collider* col);
+    Move(Collider* col);
 
 
 private:
@@ -19,14 +19,14 @@ private:
     float yVel = 0;
 
     // Movement values
-    float accel = 0.1;
-    float decel = 0.01;
-    float maxSpeed = 1;
+    float accel = 0.01;
+    float decel = 0.001;
+    float maxSpeed = 2;
 
     Collider* collider;
 
 
-    void PlayerMove();
+    void Move();
 
 
 };

@@ -12,26 +12,26 @@
 using namespace std;
 
 
-Player::Player(Collider* col) : collider(col) {};
+PlayerMove::PlayerMove(Collider* col) : collider(col) {};
 
-void Player::Tick()
+void PlayerMove::Tick()
 {
     PlayerMove();
 };
 
 
-void Player::PlayerMove()
+void PlayerMove::PlayerMove()
 {
 
-    Game* game = Central::game; // Cache pointer
+    Game& game = *Central::game; // Cache pointer as ref
 
     // Update key states
-    game->UpdateKeys();
+    game.UpdateKeys();
 
-    int upMove = (game->GetKey(SDL_SCANCODE_W)) ? 1 : 0;
-    int downMove = (game->GetKey(SDL_SCANCODE_S)) ? 1 : 0;
-    int leftMove = (game->GetKey(SDL_SCANCODE_A)) ? 1 : 0;
-    int rightMove = (game->GetKey(SDL_SCANCODE_D)) ? 1 : 0;
+    int upMove = (game.GetKey(SDL_SCANCODE_W)) ? 1 : 0;
+    int downMove = (game.GetKey(SDL_SCANCODE_S)) ? 1 : 0;
+    int leftMove = (game.GetKey(SDL_SCANCODE_A)) ? 1 : 0;
+    int rightMove = (game.GetKey(SDL_SCANCODE_D)) ? 1 : 0;
 
 
     int xInput = rightMove - leftMove;

@@ -38,7 +38,7 @@ namespace Tmpl8
         oPlayer = make_shared<GameObject>(0.0f, 0.0f, true);
         oPlayer->AddComponent<SpriteRenderer>(&sTank);
         oPlayer->AddComponent<Collider>(&sTank);
-        oPlayer->AddComponent<Player>(oPlayer->GetComponent<Collider>());
+        oPlayer->AddComponent<PlayerMove>(oPlayer->GetComponent<Collider>());
         
 
 

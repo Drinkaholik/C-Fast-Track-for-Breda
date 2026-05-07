@@ -51,10 +51,10 @@ void Collider::Tick()
 
 void Collider::UpdateRect(float x, float y)
 {
-	x1 = x - width / 2;
-	y1 = y - height / 2;
-	x2 = x + width / 2;
-	y2 = y + height / 2;
+	x1 = round(x - width / 2);
+	y1 = round(y - height / 2);
+	x2 = round(x + width / 2);
+	y2 = round(y + height / 2);
 }
 
 
@@ -93,15 +93,8 @@ bool Collider::CollideAt(float x, float y, GameObject* go)
 };
 
 
-// V1: (wouldn't work)
-// I want pixel-perfect collisions each time
-// First check for collision at full distance
-// Then check 1 pixel away
-// Then check half distance
-// Then keep halving until checked distance is within 1 px
-// Then move to directly next to that pixel
 
-// V2:
+// More efficient (probably) way:
 // If the distance is lower than collider width / height, check it directly
 // If its higher, sweep toward there in increments equal to the width / height
 // If there is a collision, sweep backwards by half width/height
@@ -127,10 +120,9 @@ void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<
 	{
 		GameObject* go = gameObjects[i].get();
 
-
 		for (int j = 0; j < abs(xDistance); j++)
 		{
-			xCollide = CollideAt(x + (j * xMoveSign), y, go);
+			xCollide = CollideAt(x + (j + 1 * xMoveSign), y, go);
 
 			if (xCollide)
 			{
@@ -141,7 +133,7 @@ void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<
 
 		for (int j = 0; j < abs(yDistance); j++)
 		{
-			yCollide = CollideAt(x, y + (j * yMoveSign), go);
+			yCollide = CollideAt(x, y + (j + 1 * yMoveSign), go);
 
 			if (yCollide)
 			{
@@ -149,18 +141,11 @@ void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<
 				break;
 			}
 		}
-
-
 	}
 
 	x = targetX;
 
 	y = targetY;
-
-	// Need to do a struct + constructor to declare a local function grrrr
-
-	
-
 }
 
 
@@ -261,7 +246,6 @@ void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<
 //
 //			}
 //		}
-//
 //	}
 //}
 //

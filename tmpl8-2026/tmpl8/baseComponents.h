@@ -19,8 +19,8 @@ struct Component // Abstract struct
 // Simple bounding box collider
 struct Collider : public Component
 {
-	float x1, y1; // xMin, yMin
-	float x2, y2; // xMax, yMax
+	int x1, y1; // xMin, yMin
+	int x2, y2; // xMax, yMax
 
 	int width, height;
 

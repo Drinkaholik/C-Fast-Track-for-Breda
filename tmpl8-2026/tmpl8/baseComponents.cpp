@@ -38,7 +38,7 @@ Collider::Collider(int width, int height)
 {
 };
 
-Collider::~Collider() = default;
+//Collider::~Collider() = default;
 
 
 void Collider::Tick()
@@ -282,7 +282,7 @@ SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
 //
 //}
 
-SpriteRenderer::~SpriteRenderer() = default;
+//SpriteRenderer::~SpriteRenderer() = default;
 
 void SpriteRenderer::Draw(float x, float y)
 {

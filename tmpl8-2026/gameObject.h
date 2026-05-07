@@ -1,7 +1,5 @@
 #pragma once
 
-//#include "baseComponents.h"
-
 #include <vector>
 #include <memory>
 
@@ -15,12 +13,11 @@ class GameObject
 {
 
 public:
-
+	
 	// Position
 	float x, y;
 
 	bool debug = false; // Whether to draw origin, collider rect, etc
-
 
 
 	// Turns out that template functions need to always be defined in the header??

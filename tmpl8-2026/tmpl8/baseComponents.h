@@ -52,7 +52,7 @@ struct Collider : public Component
 
 	Collider(int width, int height); // Initialize with manual size
 
-	~Collider() override;
+	//~Collider() override;
 
 };
 
@@ -75,6 +75,6 @@ struct SpriteRenderer : public Component
 	SpriteRenderer(Sprite* spr);
 	/*SpriteRenderer(Sprite* spr, float xScale, float yScale);*/
 
-	~SpriteRenderer() override;
+	//~SpriteRenderer() override;
 
 };

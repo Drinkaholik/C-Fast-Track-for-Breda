@@ -44,25 +44,27 @@ namespace Tmpl8
        /* bool test = oPlayer->RemoveComponent<SpriteRenderer>();
         cout << to_string(test);*/
         
+        int scrWidth = Central::screenWidth;
+        int scrHeight = Central::screenHeight;
 
 
-        oBall = make_shared<GameObject>(200.0f, 200.0f, true);
+        oBall = make_shared<GameObject>(scrWidth * 0.75, scrHeight * 0.45, true);
         oBall->AddComponent<SpriteRenderer>(&sBall);
         oBall->AddComponent<Collider>(&sBall);
-        oBall->AddComponent<GravBody>(1, oBall->GetComponent<Collider>());
+        oBall->AddComponent<GravBody>(1.0f, 0.0f, -1.0f, oBall->GetComponent<Collider>());
 
-        oBall2 = make_shared<GameObject>(100.0f, 100.0f, true);
+        oBall2 = make_shared<GameObject>(scrWidth * 0.25, scrHeight * 0.55, true);
         oBall2->AddComponent<SpriteRenderer>(&sBall2);
         oBall2->AddComponent<Collider>(&sBall2);
-        oBall2->AddComponent<GravBody>(1, oBall2->GetComponent<Collider>());
+        oBall2->AddComponent<GravBody>(1.0f, 0.0f, 1.0f, oBall2->GetComponent<Collider>());
 
         // Render order is determined by the order they're pushed
         Central::spawnedObjects.push_back(oBall);
         Central::spawnedObjects.push_back(oBall2);
         Central::spawnedObjects.push_back(oPlayer);
-
-       Central::gravBodies.push_back(oBall);
-       Central::gravBodies.push_back(oBall2);
+        
+        Central::gravBodies.push_back(oBall);
+        Central::gravBodies.push_back(oBall2);
         
 
         

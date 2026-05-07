@@ -15,16 +15,17 @@ public:
 
 	void Tick() override;
 
-	GravBody(int m, Collider* collider);
+	GravBody(float m, Collider* collider);
 
-	GravBody(int m, float xVel, float yVel, Collider* collider);
+	GravBody(float m, float xVel, float yVel, Collider* collider);
 
 private:
 
+	float xVel, yVel = 0.0f;
+
 	Collider* collider;
 
-	void Gravity(GameObject* body);
-
+	void GravMove(GameObject* body);
 
 };
 

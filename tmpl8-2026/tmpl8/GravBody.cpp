@@ -11,8 +11,12 @@
 using namespace std;
 
 
-GravBody::GravBody(int m, Collider* collider) : mass(m), collider(collider)
+GravBody::GravBody(float m, Collider* collider) : mass(m), collider(collider)
 {
+};
+
+GravBody::GravBody(float m, float xVel, float yVel, Collider* collider)
+	: mass(m), xVel(xVel), yVel(yVel), collider(collider) {
 };
 
 
@@ -22,14 +26,14 @@ void GravBody::Tick()
 
 	for (const auto& body : Central::gravBodies)
 	{
-		Gravity(body.get());
+		GravMove(body.get());
 	}
 	
 }
 
 
 // Moves self based on gravitational attraction of other bodies
-void GravBody::Gravity(GameObject* body)
+void GravBody::GravMove(GameObject* body)
 {
 	if (body == this->gameObject) return;
 
@@ -52,14 +56,13 @@ void GravBody::Gravity(GameObject* body)
 	float xForce = (mass * gravBody->mass) / xDistance;
 	float yForce = (mass * gravBody->mass) / yDistance;
 
-	// how do I decompose the force into its constituent x and y?
+	xVel -= xForce * Central::deltaTime;
+	yVel -= yForce * Central::deltaTime;
 
-	//x -= xForce * Central::deltaTime;
-	//y -= yForce * Central::deltaTime;
-	cout << "Position: " << to_string(x) << " , " << to_string(y) << endl
-		<< "Force: " << to_string(xForce) << to_string(yForce) << endl;
 
-	collider->MoveAndCollide(xForce, yForce, Central::spawnedObjects);
+	cout << "Force: " << to_string(xForce) << " , " << to_string(yForce) << endl;
+
+	collider->MoveAndCollide(xVel, yVel, Central::spawnedObjects);
 
 
 }

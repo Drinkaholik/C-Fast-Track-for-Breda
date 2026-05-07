@@ -1,6 +1,5 @@
 #pragma once
 
-#include "gameObject.h"
 
 // Global functions for use
 namespace utils
@@ -13,10 +12,6 @@ namespace utils
 	{
 		return (T(0) < value) - (value < T(0)); // Uses bools being 1 or 0 to return the sign of the value
 	};
-
-
-	
-
 
 };
 

@@ -7,7 +7,7 @@ class GameObject; // Forward declaration to prevent circular dependancy
 
 struct Component // Abstract struct
 {
-	GameObject* gameObject;
+	GameObject* gameObject; // Pointer instead of ref so I don't need to pass go in constructor, would add extra boilerplate
 
 	virtual void Tick();
 

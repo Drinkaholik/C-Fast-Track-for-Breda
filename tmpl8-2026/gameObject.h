@@ -49,6 +49,36 @@ public:
 	}
 
 
+	// Return tells you whether component was found and removed
+	template<typename T> bool RemoveComponent()
+	{
+		for (auto& component : components)
+		{
+			T* ptr = dynamic_cast<T*>(component.get());
+			if (ptr)
+			{
+				components.erase(component);
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+
+
+	template<typename T> bool HasComponent()
+	{
+		for (const auto& component : components)
+		{
+			T* hasComponent = dynamic_cast<T*>(component.get());
+
+			if (hasComponent) return true;
+		}
+		return false;
+	}
+
+
 	virtual void Tick(); // Per-frame logic
 
 

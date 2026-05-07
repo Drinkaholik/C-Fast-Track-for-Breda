@@ -1,11 +1,11 @@
 #include "playerMove.h"
 
-#include "central.h"
 #include "utils.h"
-#include "game.h"
+#include "gameObject.h"
 
 #include <cmath>
 #include <algorithm>
+// Console:
 #include <iostream>
 #include <string>
 
@@ -25,7 +25,7 @@ void PlayerMove::Move()
 
     Game& game = *Central::game; // Cache pointer as ref
 
-    // Update key states
+    // Inputs
     game.UpdateKeys();
 
     int upMove = (game.GetKey(SDL_SCANCODE_W)) ? 1 : 0;
@@ -33,11 +33,12 @@ void PlayerMove::Move()
     int leftMove = (game.GetKey(SDL_SCANCODE_A)) ? 1 : 0;
     int rightMove = (game.GetKey(SDL_SCANCODE_D)) ? 1 : 0;
 
-
     int xInput = rightMove - leftMove;
     int yInput = upMove - downMove;
 
-    // X-axis movement //
+
+    // Handle momentum //
+    // X-axis movement
     if (xInput != 0) // accel
     {
         xVel += accel * xInput;
@@ -52,7 +53,7 @@ void PlayerMove::Move()
         }
     }
 
-    // Y-axis movement //
+    // Y-axis movement
     if (yInput != 0) // accel
     {
         yVel += accel * -yInput;

@@ -127,6 +127,7 @@
     <ClCompile Include="..\utils.cpp" />
     <ClCompile Include="central.cpp" />
     <ClCompile Include="baseComponents.cpp" />
+    <ClCompile Include="GravBody.cpp" />
     <ClCompile Include="particleEmitter.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="..\playerMove.h" />
     <ClInclude Include="..\utils.h" />
     <ClInclude Include="baseComponents.h" />
+    <ClInclude Include="GravBody.h" />
     <ClInclude Include="particleEmitter.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />

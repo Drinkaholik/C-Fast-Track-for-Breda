@@ -7,6 +7,7 @@
 #include <memory>
 
 class GameObject;
+class GravBody;
 
 using namespace Tmpl8;
 
@@ -20,6 +21,8 @@ public:
 	static Surface* surface;
 
 	static std::vector<std::shared_ptr<GameObject>> spawnedObjects;
+
+	static std::vector<std::shared_ptr<GameObject>> gravBodies;
 	
 	
 	static const int screenWidth = 500;

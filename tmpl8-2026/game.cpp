@@ -4,6 +4,7 @@
 #include "utils.h" // sign
 #include "gameObject.h"
 #include "playerMove.h"
+#include "gravBody.h"
 
 
 #include <cstdio> //printf
@@ -19,11 +20,12 @@ namespace Tmpl8
     // Sprites
     Sprite sTank(new Surface("assets/aagun.tga"), 36);
     Sprite sBall(new Surface("assets/ball.png"), 1);
-
+    Sprite sBall2(new Surface("assets/ball.png"), 1);
 
     // GameObjects
     shared_ptr<GameObject> oPlayer;
     shared_ptr<GameObject> oBall;
+    shared_ptr<GameObject> oBall2;
 
     vector<int> exampleVector (5, 20);
 
@@ -33,24 +35,36 @@ namespace Tmpl8
     void Game::Init()
     {
 
-#pragma region Instantiate GameObjects // Why dont they indent????
         // Player
         oPlayer = make_shared<GameObject>(0.0f, 0.0f, true);
         oPlayer->AddComponent<SpriteRenderer>(&sTank);
         oPlayer->AddComponent<Collider>(&sTank);
         oPlayer->AddComponent<PlayerMove>(oPlayer->GetComponent<Collider>());
+
+       /* bool test = oPlayer->RemoveComponent<SpriteRenderer>();
+        cout << to_string(test);*/
         
 
 
         oBall = make_shared<GameObject>(200.0f, 200.0f, true);
         oBall->AddComponent<SpriteRenderer>(&sBall);
         oBall->AddComponent<Collider>(&sBall);
+        //oBall->AddComponent<GravBody>(1, oBall->GetComponent<Collider>());
+
+        oBall2 = make_shared<GameObject>(100.0f, 100.0f, true);
+        oBall2->AddComponent<SpriteRenderer>(&sBall2);
+        oBall2->AddComponent<Collider>(&sBall2);
+        //oBall2->AddComponent<GravBody>(1, oBall2->GetComponent<Collider>());
 
         // Render order is determined by the order they're pushed
         Central::spawnedObjects.push_back(oBall);
+        Central::spawnedObjects.push_back(oBall2);
         Central::spawnedObjects.push_back(oPlayer);
+
+       Central::gravBodies.push_back(oBall);
+       Central::gravBodies.push_back(oBall2);
         
-#pragma endregion
+
         
     }
 

@@ -26,6 +26,9 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="baseComponents.cpp" />
+    <ClCompile Include="GravBody.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -53,6 +56,9 @@
       <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="baseComponents.h" />
+    <ClInclude Include="GravBody.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">

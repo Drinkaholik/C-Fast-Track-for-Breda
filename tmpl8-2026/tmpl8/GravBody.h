@@ -17,11 +17,13 @@ public:
 
 	GravBody(int m, Collider* collider);
 
+	GravBody(int m, float xVel, float yVel, Collider* collider);
+
 private:
 
 	Collider* collider;
 
-	void Gravity(GameObject& body);
+	void Gravity(GameObject* body);
 
 
 };

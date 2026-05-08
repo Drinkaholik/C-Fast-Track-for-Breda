@@ -57,6 +57,8 @@ void GravBody::GravMove(GameObject* body)
 
 	float force = (gravConstant * mass * gravBody->mass) / (distance * distance);
 
+	if (collider->CollideAt(x, y, body)) force = 0; // Stop gravity from building up endlessly during a collision
+
 	float xDistance = (oX - x);
 	float yDistance = (oY - x);
 

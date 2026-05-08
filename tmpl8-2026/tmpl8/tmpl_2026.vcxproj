@@ -125,12 +125,17 @@
     <ClCompile Include="..\gameObject.cpp" />
     <ClCompile Include="..\playerMove.cpp" />
     <ClCompile Include="..\utils.cpp" />
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="central.cpp" />
     <ClCompile Include="baseComponents.cpp" />
     <ClCompile Include="GravBody.cpp" />
+    <ClCompile Include="minimap.cpp" />
     <ClCompile Include="particleEmitter.cpp" />
+    <ClCompile Include="scene.cpp" />
+    <ClCompile Include="sceneHandler.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
+    <ClCompile Include="turretContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\game.h" />
@@ -139,10 +144,16 @@
     <ClInclude Include="..\playerMove.h" />
     <ClInclude Include="..\utils.h" />
     <ClInclude Include="baseComponents.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="GravBody.h" />
+    <ClInclude Include="minimap.h" />
     <ClInclude Include="particleEmitter.h" />
+    <ClInclude Include="scene.h" />
+    <ClInclude Include="sceneHandler.h" />
+    <ClInclude Include="StatePattern.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
+    <ClInclude Include="turretContext.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="_readme.txt" />

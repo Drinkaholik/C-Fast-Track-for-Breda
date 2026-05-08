@@ -1,9 +1,11 @@
 #pragma once
 
+
 #include <vector>
 #include <memory>
 
 struct Component;
+struct Camera;
 
 // Has a world-space position
 // Can hold pointers to components like colliders and spriterenderers
@@ -19,13 +21,7 @@ public:
 
 	bool debug = false; // Whether to draw origin, collider rect, etc
 
-
 	// Turns out that template functions need to always be defined in the header??
-	// Variadic template, still don't understand everything about it
-	// For this I need to learn about:
-	// 1. Perfect forwarding
-	// 2. How recursion relates to variadic templates
-	// 3. How the placement of ellipses and brackets changes the behaviour
 	template <typename T, typename... Args>
 	T& AddComponent(Args&&... args) {
 		auto comp = make_unique<T>(forward<Args>(args)...);
@@ -75,6 +71,7 @@ public:
 		return false;
 	}
 
+	virtual void Start();
 
 	virtual void Tick(); // Per-frame logic
 
@@ -89,6 +86,8 @@ public:
 private:
 
 	std::vector<std::unique_ptr<Component>> components;
+
+	GameObject* camera;
 
 	void DrawOrigin(); // To test whether origin is correctly at centre of sprite, instead of top-left
 

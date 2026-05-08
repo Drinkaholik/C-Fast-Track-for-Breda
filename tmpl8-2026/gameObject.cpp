@@ -6,12 +6,27 @@ using namespace std;
 
 // Constructors //
 GameObject::GameObject(float xSpawn, float ySpawn)
-	: x(xSpawn), y(ySpawn){};
+	: x(xSpawn), y(ySpawn)
+{
+	camera = Central::camera;
+};
 
 GameObject::GameObject(float xSpawn, float ySpawn, bool debug)
-	: x(xSpawn), y(ySpawn), debug(debug){};
+	: x(xSpawn), y(ySpawn), debug(debug) 
+{
+	camera = Central::camera;
+};
 
 
+void GameObject::Start()
+{
+	for (const auto& component : components)
+	{
+		component->Start();
+	}
+
+
+}
 
 void GameObject::Tick()
 {
@@ -33,6 +48,10 @@ void GameObject::Tick()
 void GameObject::DrawOrigin()
 {
 	if (!debug) return;
-	Central::surface->Box(x - 1, y - 1, x + 1, y + 1, 0xFF0000);
+
+	float xOffset = Central::camera->x;
+	float yOffset = Central::camera->y;
+
+	Central::surface->Box(x - 1 - xOffset, y - 1 - yOffset, x + 1 - xOffset, y + 1 - yOffset, 0xFF0000);
 }
 

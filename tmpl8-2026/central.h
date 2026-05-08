@@ -18,18 +18,21 @@ using namespace Tmpl8;
 
 struct Central
 {
-
+	// Main references
 	static Game* game; 
 	static Surface* surface;
 
-	static std::vector<std::shared_ptr<GameObject>> spawnedObjects;
-
-	static std::vector<std::shared_ptr<GameObject>> gravBodies;
-	
-	
+	// Camera
+	static GameObject* camera;
 	static const int screenWidth = 1000;
 	static const int screenHeight = 1000;
 
+	// Gameobjects
+	static std::vector<std::shared_ptr<GameObject>> spawnedObjects;
+	static std::vector<std::shared_ptr<GameObject>> gravBodies;
+	
+	
+	// Time
 	static float deltaTime;
 
 };

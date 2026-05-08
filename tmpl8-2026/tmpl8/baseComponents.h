@@ -9,6 +9,7 @@ struct Component // Abstract struct
 {
 	GameObject* gameObject; // Pointer instead of ref so I don't need to pass go in constructor, would add extra boilerplate
 
+	virtual void Start();
 	virtual void Tick();
 
 	virtual ~Component() = 0;
@@ -52,7 +53,6 @@ struct Collider : public Component
 
 	Collider(int width, int height); // Initialize with manual size
 
-	//~Collider() override;
 
 };
 
@@ -73,8 +73,6 @@ struct SpriteRenderer : public Component
 
 	//Structors
 	SpriteRenderer(Sprite* spr);
-	/*SpriteRenderer(Sprite* spr, float xScale, float yScale);*/
 
-	//~SpriteRenderer() override;
 
 };

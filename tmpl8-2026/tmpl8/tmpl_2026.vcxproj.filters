@@ -31,6 +31,19 @@
     <ClCompile Include="central.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="minimap.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="turretContext.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="sceneHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -63,6 +76,22 @@
     <ClInclude Include="..\central.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="StatePattern.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="minimap.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="turretContext.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -79,6 +108,12 @@
     </Filter>
     <Filter Include="Utils">
       <UniqueIdentifier>{0f9eb45e-23ba-4e92-b07c-db45cac229f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{98188f55-34f6-4efc-9a7b-b0172670dd24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{239c4e18-c259-44a0-89fa-862c291bd81b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

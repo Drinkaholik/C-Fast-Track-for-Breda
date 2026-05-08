@@ -13,11 +13,10 @@ using namespace std;
 
 Component::~Component() = default;
 
-// leaving it empty, but not gonna make it pure virtual cos not every component will need an update loop
-void Component::Tick()
-{
-};
+// leaving them empty, but not gonna make it pure virtual cos not every component will need a start/update
+void Component::Start() {};
 
+void Component::Tick(){};
 
 
 
@@ -38,7 +37,6 @@ Collider::Collider(int width, int height)
 {
 };
 
-//Collider::~Collider() = default;
 
 
 void Collider::Tick()
@@ -148,111 +146,17 @@ void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<
 
 
 	
-//	
-//bool Collider::Sweep(GameObject* go, float& targetX, float& targetY, float distance, int colliderLength)
-//{
-//	// Immediately check targetX if its within collider
-//
-//	bool collisionAxis = false;
-//
-//	if (abs(distance) < colliderLength)
-//	{
-//		collisionAxis = CollideAt(targetX, targetY, go);
-//		return collisionAxis; // Used to reduce nesting
-//	}
-//
-//
-//	// Otherwise begin sweep
-//	int iterations = (abs(distance) / colliderLength); // Number of times to sweep. Int cast truncates so no problemo
-//
-//	for (int j = 0; j < iterations; j++)
-//	{
-//		// Exit j loop if no collision occurs
-//		int checkX = targetX + (colliderLength * j);
-//		collisionAxis = CollideAt(checkX, y, go);
-//		if (!collisionAxis)
-//		{
-//			break; //!! Sweep will end here for most gameObjects in array !!// 
-//		}
-//
-//
-//
-//		// If a collision occurs, find the pixel-perfect distance from the rect:
-//
-//		checkX = checkX - colliderLength / 2; // Move back by half
-//		collisionAxis = CollideAt(checkX, y, go);
-//
-//
-//		if (!collisionAxis) // If no collision, move forward by quarter
-//		{
-//			checkX = checkX + colliderLength / 4;
-//			collisionAxis = CollideAt(checkX, y, go);
-//
-//
-//			if (!collisionAxis)
-//			{
-//				int i = 0;
-//				while (!collisionAxis) // Move forward pixel-by-pixel until collision occurs
-//				{
-//					i++;
-//					checkX = checkX + i;
-//					collisionAxis = CollideAt(checkX, y, go);
-//				}
-//				targetX = checkX - 1;
-//			}
-//
-//			else
-//			{
-//				int i = 0;
-//				while (collisionAxis) // Move backwards pixel-by-pixel until collision stops
-//				{
-//					i--;
-//					checkX = checkX + i;
-//					collisionAxis = CollideAt(checkX, y, go);
-//				}
-//				targetX = checkX;
-//			}
-//		}
-//
-//		else // If there's still a collision, keep moving back
-//		{
-//			checkX = checkX - colliderLength / 4; // Move back by quarter
-//			collisionAxis = CollideAt(checkX, y, go);
-//
-//			if (collisionAxis)
-//			{
-//				int i = 0;
-//				while (collisionAxis) // Move backwards pixel-by-pixel until collision stops
-//				{
-//					i--;
-//					checkX = checkX + i;
-//					collisionAxis = CollideAt(checkX, y, go);
-//				}
-//				targetX = checkX;
-//			}
-//
-//			else
-//			{
-//				int i = 0;
-//				while (!collisionAxis) // Move forward pixel-by-pixel until collision occurs
-//				{
-//					i++;
-//					checkX = checkX + i;
-//					collisionAxis = CollideAt(checkX, y, go);
-//				}
-//				targetX = checkX - 1;
-//
-//			}
-//		}
-//	}
-//}
-//
-
 
 void Collider::DrawCollider(bool debug)
 {
 	if (!debug) return;
-	Central::surface->Box(x1, y1, x2, y2, 0xFF0000);
+
+	if (Central::camera == nullptr) return;
+
+	float xOffset = Central::camera->x;
+	float yOffset = Central::camera->y;
+
+	Central::surface->Box(x1 - xOffset, y1 - yOffset, x2 - xOffset, y2 - yOffset, 0xFF0000);
 };
 
 
@@ -273,31 +177,26 @@ SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
 	screen = Central::surface;
 };
 
-//SpriteRenderer::SpriteRenderer(Sprite* spr, float xScale, float yScale)
-//	: sprite(spr), xScale(xScale), yScale(yScale)
-//{
-//	width = sprite->GetWidth() * xScale;
-//	height = sprite->GetHeight() * yScale;
-//	screen = Central::surface;
-//
-//}
 
 //SpriteRenderer::~SpriteRenderer() = default;
 
 void SpriteRenderer::Draw(float x, float y)
 {
+
+	if (Central::camera == nullptr) return;
+
+	float xOffset = Central::camera->x;
+	float yOffset = Central::camera->y;
+
+	// Only draw if within viewport
+
+
 	// Draw from centre rather than top left
 	sprite->Draw(screen,
-		x - width / 2,
-		y - height / 2
+		x - width / 2 - xOffset,
+		y - height / 2 - yOffset
 	);
 
-	// Draw from centre rather than top left - causes write error
-	/*sprite->DrawScaled(
-		x - width / 2,
-		y - height / 2,
-		width, height, screen
-	);*/
 }
 
 void SpriteRenderer::Tick()

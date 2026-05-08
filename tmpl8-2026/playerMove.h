@@ -20,9 +20,9 @@ private:
     float yVel = 0;
 
     // Movement values
-    float accel = 0.01;
+    float accel = 0.1;
     float decel = 0.001;
-    float maxSpeed = 1;
+    float maxSpeed = 2;
 
     Collider* collider;
 

@@ -11,11 +11,13 @@ class GravBody;
 
 using namespace Tmpl8;
 
+// Holds 'global' references and values for easy access
+// No need to split into separate structs / namespaces for a project of this size
+// also don't see any need for singleton pattern atp
 
-class Central
+
+struct Central
 {
-
-public:
 
 	static Game* game; 
 	static Surface* surface;
@@ -25,8 +27,8 @@ public:
 	static std::vector<std::shared_ptr<GameObject>> gravBodies;
 	
 	
-	static const int screenWidth = 500;
-	static const int screenHeight = 500;
+	static const int screenWidth = 1000;
+	static const int screenHeight = 1000;
 
 	static float deltaTime;
 

@@ -51,12 +51,12 @@ namespace Tmpl8
         oBall = make_shared<GameObject>(scrWidth * 0.75, scrHeight * 0.45, true);
         oBall->AddComponent<SpriteRenderer>(&sBall);
         oBall->AddComponent<Collider>(&sBall);
-        oBall->AddComponent<GravBody>(1.0f, 0.0f, -1.0f, oBall->GetComponent<Collider>());
+        oBall->AddComponent<GravBody>(3000.0f, 0.0f, -1.0f, oBall->GetComponent<Collider>());
 
         oBall2 = make_shared<GameObject>(scrWidth * 0.25, scrHeight * 0.55, true);
         oBall2->AddComponent<SpriteRenderer>(&sBall2);
         oBall2->AddComponent<Collider>(&sBall2);
-        oBall2->AddComponent<GravBody>(1.0f, 0.0f, 1.0f, oBall2->GetComponent<Collider>());
+        oBall2->AddComponent<GravBody>(3000.0f, 0.0f, 1.0f, oBall2->GetComponent<Collider>());
 
         // Render order is determined by the order they're pushed
         Central::spawnedObjects.push_back(oBall);

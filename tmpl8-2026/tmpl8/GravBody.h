@@ -23,6 +23,8 @@ private:
 
 	float xVel, yVel = 0.0f;
 
+	static float gravConstant;
+
 	Collider* collider;
 
 	void GravMove(GameObject* body);

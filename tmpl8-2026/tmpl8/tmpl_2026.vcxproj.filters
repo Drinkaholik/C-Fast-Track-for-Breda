@@ -10,24 +10,26 @@
     <ClCompile Include="..\gameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="..\playerMove.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="..\game.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="..\utils.cpp">
-      <Filter>Main</Filter>
+    <ClCompile Include="..\playerMove.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="particleEmitter.cpp">
-      <Filter>GameObjects</Filter>
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GravBody.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="baseComponents.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\utils.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="central.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="baseComponents.cpp" />
-    <ClCompile Include="GravBody.cpp">
-      <Filter>GameObjects</Filter>
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -40,24 +42,26 @@
     <ClInclude Include="..\gameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="..\playerMove.h">
-      <Filter>GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\central.h">
-      <Filter>Main</Filter>
-    </ClInclude>
     <ClInclude Include="..\game.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="..\utils.h">
-      <Filter>Main</Filter>
+    <ClInclude Include="..\playerMove.h">
+      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="particleEmitter.h">
-      <Filter>GameObjects</Filter>
+      <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="baseComponents.h" />
     <ClInclude Include="GravBody.h">
-      <Filter>GameObjects</Filter>
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="baseComponents.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\utils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\central.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +73,12 @@
     </Filter>
     <Filter Include="Template">
       <UniqueIdentifier>{bf32dd6e-4be7-4889-8ac6-49e7ee163c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{dd24aca6-9db7-45fb-af4f-8e401a303900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{0f9eb45e-23ba-4e92-b07c-db45cac229f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

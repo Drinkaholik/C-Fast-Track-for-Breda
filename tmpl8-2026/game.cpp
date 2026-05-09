@@ -61,15 +61,17 @@ namespace Tmpl8
         oBall = make_shared<GameObject>(scrWidth * 0.75, scrHeight * 0.45, true);
         oBall->AddComponent<SpriteRenderer>(&sBall);
         oBall->AddComponent<Collider>(&sBall);
-        oBall->AddComponent<GravBody>(250.0f, 0.0f, -0.18f, oBall->GetComponent<Collider>());
+        oBall->AddComponent<GravBody>(25.0f, 0.0f, 0.0f, oBall->GetComponent<Collider>());
 
         oBall2 = make_shared<GameObject>(scrWidth * 0.25, scrHeight * 0.55, true);
         oBall2->AddComponent<SpriteRenderer>(&sBall);
         oBall2->AddComponent<Collider>(&sBall);
-        oBall2->AddComponent<GravBody>(250.0f, 0.0f, 0.18f, oBall2->GetComponent<Collider>());
+        oBall2->AddComponent<GravBody>(25.0f, 0.0f, 0.0f, oBall2->GetComponent<Collider>());
 
         oBall3 = make_shared<GameObject>(scrWidth * 0.5, scrHeight * 0.5, true);
         oBall3->AddComponent<SpriteRenderer>(&sBall);
+        oBall3->AddComponent<Collider>(&sBall);
+        oBall3->AddComponent<GravBody>(2500.0f, 0.0f, 0.0f, oBall2->GetComponent<Collider>());
 
 
         // Execution & render order is determined by the order they're pushed
@@ -83,6 +85,7 @@ namespace Tmpl8
         // Vector of gravitational bodies
         Central::gravBodies.push_back(oBall);
         Central::gravBodies.push_back(oBall2);
+        Central::gravBodies.push_back(oBall3);
         
         // Run Start() for every gameObject
         for (shared_ptr<GameObject> go : Central::spawnedObjects)

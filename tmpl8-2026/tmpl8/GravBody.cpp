@@ -49,18 +49,16 @@ void GravBody::GravMove(GameObject* body)
 	float oX = body->x;
 	float oY = body->y;
 
-	cout << "myPosition: " << to_string(x) << " , " << to_string(y) << endl
-		<< "theirPosition: " << to_string(oX) << " , " << to_string(oY) << endl;
-
 	
 	float distance = utils::distance(x, y, oX, oY);
+	float xDistance = (oX - x);
+	float yDistance = (oY - x);
 
 	float force = (gravConstant * mass * gravBody->mass) / (distance * distance);
 
 	if (collider->CollideAt(x, y, body)) force = 0; // Stop gravity from building up endlessly during a collision
 
-	float xDistance = (oX - x);
-	float yDistance = (oY - x);
+	
 
 	float xRatio = xDistance / distance;
 	float yRatio = yDistance / distance;
@@ -75,8 +73,10 @@ void GravBody::GravMove(GameObject* body)
 	xVel += xForce / mass * Central::deltaTime;
 	yVel += yForce / mass * Central::deltaTime;
 
+	/*cout << "myPosition: " << to_string(x) << " , " << to_string(y) << endl
+		<< "theirPosition: " << to_string(oX) << " , " << to_string(oY) << endl;*/
 
-	cout << "Force: " << to_string(xForce) << " , " << to_string(yForce) << endl;
+	/*cout << "Force: " << to_string(xForce) << " , " << to_string(yForce) << endl;*/
 
 	collider->MoveAndCollide(xVel, yVel, Central::spawnedObjects);
 

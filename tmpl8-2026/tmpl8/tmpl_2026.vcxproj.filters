@@ -25,9 +25,6 @@
     <ClCompile Include="baseComponents.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="..\utils.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="central.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
@@ -43,7 +40,15 @@
     <ClCompile Include="scene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="sceneHandler.cpp" />
+    <ClCompile Include="sceneManager.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="prefab.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="playerPrefab.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -91,7 +96,15 @@
     <ClInclude Include="scene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="sceneHandler.h" />
+    <ClInclude Include="sceneManager.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="prefab.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="playerPrefab.h">
+      <Filter>Prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -115,13 +128,16 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{239c4e18-c259-44a0-89fa-862c291bd81b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Prefabs">
+      <UniqueIdentifier>{01d3fff3-52a4-40de-9062-8cd2440e6a53}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="_readme.txt">
+    <None Include="..\README.md">
       <Filter>Template</Filter>
-    </Text>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\README.md" />
+    <Text Include="readme.txt" />
   </ItemGroup>
 </Project>

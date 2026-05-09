@@ -124,15 +124,16 @@
     <ClCompile Include="..\game.cpp" />
     <ClCompile Include="..\gameObject.cpp" />
     <ClCompile Include="..\playerMove.cpp" />
-    <ClCompile Include="..\utils.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="central.cpp" />
     <ClCompile Include="baseComponents.cpp" />
     <ClCompile Include="GravBody.cpp" />
     <ClCompile Include="minimap.cpp" />
     <ClCompile Include="particleEmitter.cpp" />
+    <ClCompile Include="playerPrefab.cpp" />
+    <ClCompile Include="prefab.cpp" />
     <ClCompile Include="scene.cpp" />
-    <ClCompile Include="sceneHandler.cpp" />
+    <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
     <ClCompile Include="turretContext.cpp" />
@@ -148,18 +149,20 @@
     <ClInclude Include="GravBody.h" />
     <ClInclude Include="minimap.h" />
     <ClInclude Include="particleEmitter.h" />
+    <ClInclude Include="playerPrefab.h" />
+    <ClInclude Include="prefab.h" />
     <ClInclude Include="scene.h" />
-    <ClInclude Include="sceneHandler.h" />
+    <ClInclude Include="sceneManager.h" />
     <ClInclude Include="StatePattern.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
     <ClInclude Include="turretContext.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="_readme.txt" />
+    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\README.md" />
+    <Text Include="readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

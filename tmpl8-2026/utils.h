@@ -14,12 +14,13 @@ namespace utils
 	};
 
 	// Returns distance between 2 positions
-	template <typename T> static T distance(T x1, T y1, T x2, T y2)
+	// Accepts both float and int
+	template <typename T> static float distance(T x1, T y1, T x2, T y2)
 	{
 		T xDistance = abs(x1 - x2);
 		T yDistance = abs(y1 - y2);
 
-		return abs(sqrt((xDistance * xDistance) + (yDistance * yDistance)));
+		return abs(sqrt((xDistance * xDistance) + (yDistance * yDistance))); // Pythagorean theorem
 
 	}
 

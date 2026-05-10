@@ -1,9 +1,15 @@
 #include "sceneManager.h"
+#include "mainMenuScene.h"
+
+using namespace std;
 
 
-void SceneManager::ChangeScene(Scene scene)
+void SceneManager::LoadScene(int sceneID)
 {
-	if (currentScene != nullptr) 
+	if (currentScene != nullptr) currentScene.reset(); // Delete current scene object
+
+
+	currentScene = make_shared<Scene>(sceneList[sceneID]);
 
 }
 

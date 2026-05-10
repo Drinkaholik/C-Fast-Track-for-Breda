@@ -21,6 +21,7 @@ namespace Tmpl8
 {
     SceneManager* sceneManager = new SceneManager();
 
+
     // Camera
     shared_ptr<GameObject> oCamera;
     int scrWidth = Central::screenWidth;
@@ -32,24 +33,8 @@ namespace Tmpl8
     // -----------------------------------------------------------
     void Game::Init()
     {
-
-        // Camera
-        oCamera = make_shared<GameObject>(400.0f, 400.0f);
-        oCamera->AddComponent<Camera>(nullptr);
-
-
-        oCamera->GetComponent<Camera>()->SetTarget(oPlayer.get());
-        
-        // Execution & render order is determined by the order they're pushed
-        // Later objects are rendered on top
-        
-        // Vector of gravitational bodies
-        
-        // Run Start() for every gameObject
-        for (shared_ptr<GameObject> go : Central::spawnedObjects)
-        {
-            go->Start();
-        }
+        sceneManager->LoadScene(0); // Load main menu
+  
     }
 
     // -----------------------------------------------------------
@@ -69,11 +54,8 @@ namespace Tmpl8
     {
         screen->Clear(0); // clear the graphics window
 
-        // Drive gameObject update loop
-        for (shared_ptr<GameObject> go : Central::spawnedObjects)
-        {
-            go->Tick();
-        }
+        sceneManager->GetScene()->Tick(); // Drive gameObject update loop
+
         
         ShowFPS(10, 10, deltaTime);
 
@@ -90,13 +72,6 @@ namespace Tmpl8
         released = ~keys & held; // keys that were down in the previous tick but are not down now
         held = keys; // update prevKeys for the next tick
     };
-
-
-    void Game::MouseMove(int x, int y)
-    {
-
-    }
-
 
 
     // FPS counter //

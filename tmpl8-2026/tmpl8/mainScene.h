@@ -1,16 +1,18 @@
 #pragma once
-#include "scene.h"
+#include "sceneData.h"
+#include "playerPrefab.h"
 #include "planetPrefab.h"
+#include "cameraPrefab.h"
 
 
-class MainScene : public Scene
+struct MainSceneData : public SceneData
 {
 
 	PlayerPrefab playerPrefab;
 	PlanetPrefab planetPrefab;
+	CameraPrefab cameraPrefab;
 
-	void LoadScene() override;
-
+	void LoadObjects(std::vector<std::shared_ptr<GameObject>>* vector) override;
 
 };
 

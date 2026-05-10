@@ -125,6 +125,7 @@
     <ClCompile Include="..\gameObject.cpp" />
     <ClCompile Include="..\playerMove.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="cameraPrefab.cpp" />
     <ClCompile Include="central.cpp" />
     <ClCompile Include="baseComponents.cpp" />
     <ClCompile Include="cursor.cpp" />
@@ -150,8 +151,10 @@
     <ClInclude Include="..\utils.h" />
     <ClInclude Include="baseComponents.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="cameraPrefab.h" />
     <ClInclude Include="cursor.h" />
     <ClInclude Include="GravBody.h" />
+    <ClInclude Include="mainMenuScene.h" />
     <ClInclude Include="mainScene.h" />
     <ClInclude Include="minimap.h" />
     <ClInclude Include="particleEmitter.h" />
@@ -159,6 +162,7 @@
     <ClInclude Include="playerContext.h" />
     <ClInclude Include="playerPrefab.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="sceneData.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="spriteList.h" />
     <ClInclude Include="StatePattern.h" />

@@ -8,28 +8,33 @@
 #include "gameObject.h"
 #include "playerPrefab.h"
 
-// Abstract class
+struct SceneData;
+
 // Acts as a container for all gameObjects & logic in a given scene
 
 class Scene
 {
 public:
 
-	virtual void LoadScene(); // Calls Start() on all scene objects
-	virtual void Tick(); // Runs per-frame logic for all scene objects
-	virtual void UnloadScene(); // The vector of shared ptrs is destroyed when this scene is, so theres no need for manual mem management right?
+	Scene(std::unique_ptr<SceneData> data);
 
-	// Unloads all scene objects
-	virtual ~Scene() = 0;
+	void LoadScene(); // Calls Start() on all scene objects
+	void Tick(); // Runs per-frame logic for all scene objects
+	void UnloadScene(); // The vector of shared ptrs is destroyed when this scene is, so theres no need for manual mem management right?
 
-protected:
 
-	// Every scene needs a camera and a player, so they get their own pointers
-	shared_ptr<GameObject> sceneCamera;
-	shared_ptr<GameObject> player;
+private:
+
+	// Every scene needs a camera and a player, so they get their own pointers for easier access
+	std::shared_ptr<GameObject> oCamera;
+	std::shared_ptr<GameObject> oPlayer;
 
 	std::vector<std::shared_ptr<GameObject>> sceneObjects; // Objects spawned into the scene
-	int objectCount; // Number of objects loaded into scene - do i need this for anything? maybe just good for debugging
+	// If the sceneObjects vector is owning, then if an enemy deletes itself when its HP reaches 0 I'll get a double-free error
+	// on scene unload. Wouldn't it make more sense to use raw pointers, and then in unload() loop through vector and check for nullptr
+	// before deleting the object?
+
+	//int objectCount; // Number of objects loaded into scene - do i need this for anything? maybe just good for debugging
 
 };
 

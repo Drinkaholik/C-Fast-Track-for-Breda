@@ -1,25 +1,25 @@
 #include "mainScene.h"
 #include "template.h"
 #include "surface.h"
+#include "spriteList.h"
+#include "gameObject.h"
+#include "camera.h"
 
 using namespace std;
 
-
-Sprite sBall(new Surface("assets/ball.png"), 1);
-
-void MainScene::LoadScene()
+void MainSceneData::LoadObjects(vector<shared_ptr<GameObject>>* vector)
 {
+	// Instantiate objects
+	auto oCamera = cameraPrefab.Load(0, 0);
 	auto oPlayer = playerPrefab.Load(0, 0);
-	auto oPlanet1 = planetPrefab.Load(100, 100, &sBall, 10);
-	auto oPlanet2 = planetPrefab.Load(200, 200, &sBall, 10);
+	auto oPlanet1 = planetPrefab.Load(100, 100, SpriteList::sprites["ball"], 10);
+	auto oPlanet2 = planetPrefab.Load(200, 200, SpriteList::sprites["ball"], 10);
 
-	sceneObjects.push_back(oPlayer);
-	sceneObjects.push_back(oPlanet1);
-	sceneObjects.push_back(oPlanet2);
+	oCamera->GetComponent<Camera>()->SetTarget(oPlayer.get());
 
-	for (auto& obj : sceneObjects)
-	{
-		obj->Start();
-	}
+	// Add to vector
+	vector->push_back(oPlayer);
+	vector->push_back(oPlanet1);
+	vector->push_back(oPlanet2);
 
 }

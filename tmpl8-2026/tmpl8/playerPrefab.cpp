@@ -3,17 +3,17 @@
 #include "playerMove.h"
 #include "surface.h"
 #include "gameObject.h"
+#include "spriteList.h"
 
 using namespace std;
 
-Sprite sTank(new Surface("assets/aagun.tga"), 36);
 
 shared_ptr<GameObject> PlayerPrefab::Load(float xPos, float yPos)
 {
 	auto go = make_shared<GameObject>(xPos, yPos);
 
-	go->AddComponent<SpriteRenderer>(&sTank);
-	auto& col = go->AddComponent<Collider>(&sTank);
+	go->AddComponent<SpriteRenderer>(SpriteList::sprites["ball"]);
+	auto& col = go->AddComponent<Collider>(SpriteList::sprites["ball"]);
 	go->AddComponent<PlayerMove>(col);
 
 	return go;

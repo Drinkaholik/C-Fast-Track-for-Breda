@@ -27,8 +27,6 @@ struct Central
 	static const int screenWidth = 1000;
 	static const int screenHeight = 1000;
 
-	// Gameobjects
-	static std::vector<std::shared_ptr<GameObject>> spawnedObjects;
 	static std::vector<GravBody*> gravBodies;
 	
 	

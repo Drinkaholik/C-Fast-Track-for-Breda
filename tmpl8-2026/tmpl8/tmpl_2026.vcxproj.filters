@@ -52,14 +52,17 @@
     <ClCompile Include="spriteList.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="mainScene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="cursor.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="..\game.cpp">
       <Filter>Template</Filter>
+    </ClCompile>
+    <ClCompile Include="cameraPrefab.cpp">
+      <Filter>Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="mainScene.cpp">
+      <Filter>Scenes\SceneData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,14 +123,23 @@
     <ClInclude Include="spriteList.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="mainScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="cursor.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="..\game.h">
       <Filter>Template</Filter>
+    </ClInclude>
+    <ClInclude Include="mainMenuScene.h">
+      <Filter>Scenes\SceneData</Filter>
+    </ClInclude>
+    <ClInclude Include="mainScene.h">
+      <Filter>Scenes\SceneData</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneData.h">
+      <Filter>Scenes\SceneData</Filter>
+    </ClInclude>
+    <ClInclude Include="cameraPrefab.h">
+      <Filter>Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +166,9 @@
     </Filter>
     <Filter Include="Player">
       <UniqueIdentifier>{5c6bfd29-164f-4faf-a673-b0cd022ee9da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\SceneData">
+      <UniqueIdentifier>{d3726952-7e57-4a9d-ae51-e73e9f7c41c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

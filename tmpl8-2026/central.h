@@ -29,7 +29,7 @@ struct Central
 
 	// Gameobjects
 	static std::vector<std::shared_ptr<GameObject>> spawnedObjects;
-	static std::vector<std::shared_ptr<GameObject>> gravBodies;
+	static std::vector<GravBody*> gravBodies;
 	
 	
 	// Time

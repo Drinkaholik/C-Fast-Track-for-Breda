@@ -6,6 +6,7 @@
 #include "playerMove.h"
 #include "gravBody.h"
 #include "camera.h"
+#include "sceneManager.h"
 
 
 #include <cstdio> //printf
@@ -18,16 +19,7 @@ using namespace std;
 
 namespace Tmpl8
 {
-    // Sprites
-    Sprite sTank(new Surface("assets/aagun.tga"), 36);
-    Sprite sBall(new Surface("assets/ball.png"), 1);
-    Sprite sIdk(new Surface("assets/ball.png"), 1);
-
-    // GameObjects
-    shared_ptr<GameObject> oPlayer;
-    shared_ptr<GameObject> oBall;
-    shared_ptr<GameObject> oBall2;
-    shared_ptr<GameObject> oBall3;
+    SceneManager* sceneManager = new SceneManager();
 
     // Camera
     shared_ptr<GameObject> oCamera;
@@ -45,47 +37,13 @@ namespace Tmpl8
         oCamera = make_shared<GameObject>(400.0f, 400.0f);
         oCamera->AddComponent<Camera>(nullptr);
 
-        // Player
-        oPlayer = make_shared<GameObject>(400.0f, 400.0f, true);
-        oPlayer->AddComponent<SpriteRenderer>(&sTank);
-        oPlayer->AddComponent<Collider>(&sTank);
-        oPlayer->AddComponent<PlayerMove>(oPlayer->GetComponent<Collider>());
 
         oCamera->GetComponent<Camera>()->SetTarget(oPlayer.get());
-
-
-       /* bool test = oPlayer->RemoveComponent<SpriteRenderer>();
-        cout << to_string(test);*/
         
-        // Planets
-        oBall = make_shared<GameObject>(scrWidth * 0.75, scrHeight * 0.45, true);
-        oBall->AddComponent<SpriteRenderer>(&sBall);
-        oBall->AddComponent<Collider>(&sBall);
-        oBall->AddComponent<GravBody>(25.0f, 0.0f, 0.0f, oBall->GetComponent<Collider>());
-
-        oBall2 = make_shared<GameObject>(scrWidth * 0.25, scrHeight * 0.55, true);
-        oBall2->AddComponent<SpriteRenderer>(&sBall);
-        oBall2->AddComponent<Collider>(&sBall);
-        oBall2->AddComponent<GravBody>(25.0f, 0.0f, 0.0f, oBall2->GetComponent<Collider>());
-
-        oBall3 = make_shared<GameObject>(scrWidth * 0.5, scrHeight * 0.5, true);
-        oBall3->AddComponent<SpriteRenderer>(&sBall);
-        oBall3->AddComponent<Collider>(&sBall);
-        oBall3->AddComponent<GravBody>(2500.0f, 0.0f, 0.0f, oBall2->GetComponent<Collider>());
-
-
         // Execution & render order is determined by the order they're pushed
         // Later objects are rendered on top
-        Central::spawnedObjects.push_back(oCamera); // Camera needs to be first to set Central::camera
-        Central::spawnedObjects.push_back(oBall);
-        Central::spawnedObjects.push_back(oBall2);
-        Central::spawnedObjects.push_back(oBall3);
-        Central::spawnedObjects.push_back(oPlayer);
         
         // Vector of gravitational bodies
-        Central::gravBodies.push_back(oBall);
-        Central::gravBodies.push_back(oBall2);
-        Central::gravBodies.push_back(oBall3);
         
         // Run Start() for every gameObject
         for (shared_ptr<GameObject> go : Central::spawnedObjects)
@@ -133,6 +91,15 @@ namespace Tmpl8
         held = keys; // update prevKeys for the next tick
     };
 
+
+    void Game::MouseMove(int x, int y)
+    {
+
+    }
+
+
+
+    // FPS counter //
     float smoothedFPS = 1;
     float smoothing = 100; // Higher means smoother FPS, but less precise
 

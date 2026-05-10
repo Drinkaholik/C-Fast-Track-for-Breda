@@ -1,13 +1,11 @@
 #pragma once
 
-#include "prefab.h"
+#include <memory>
 
+class GameObject;
 
-class PlayerPrefab : public Prefab
+struct PlayerPrefab
 {
-public:
-
-	std::shared_ptr<GameObject> Load(float xPos, float yPos) override;
-
+	std::shared_ptr<GameObject> Load(float xPos, float yPos);
 };
 

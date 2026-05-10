@@ -27,7 +27,7 @@ private:
 
 	Collider* collider;
 
-	void GravMove(GameObject* body);
+	void GravMove(GravBody* body);
 
 };
 

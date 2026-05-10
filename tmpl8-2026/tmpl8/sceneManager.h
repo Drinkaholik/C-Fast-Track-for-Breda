@@ -1,23 +1,24 @@
 #pragma once
 
 #include "scene.h"
+#include <memory>
+
+// Holds a list of all scenes
+// Handles all scene logic (loading, tick, unloading)
 
 class SceneManager
 {
 
 public:
 
-	void LoadScene();
-	void UnloadScene();
-
-	void ChangeScene();
+	void ChangeScene(Scene scene); // Loads new scene, and unloads previous one (if it exists)
 
 	Scene* GetScene();
 
 
 private:
 
-	Scene* currentScene;
+	std::unique_ptr<Scene> currentScene;
 
 
 

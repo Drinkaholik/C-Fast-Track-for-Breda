@@ -8,7 +8,7 @@ Surface* Central::surface = nullptr;
 GameObject* Central::camera = nullptr;
 
 vector<shared_ptr<GameObject>> Central::spawnedObjects;
-vector<shared_ptr<GameObject>> Central::gravBodies;
+vector<GravBody*> Central::gravBodies;
 
 float Central::deltaTime = 0;
 

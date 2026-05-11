@@ -34,16 +34,18 @@ namespace Tmpl8
 
         int gridSize = 8;
         int colour = 50000;
+        int colour2 = 50000000;
 
-        for (int x = 0; x < 800 / gridSize; x++)
+        for (int x = 0; x < 512 * 800; x += gridSize)
         {
-            buffer[x * gridSize] = colour;
-            for (int y = 0; y < 5012 / gridSize; y++)
-            {
-           
-                buffer[y * x * gridSize] = colour;
-            }
+            buffer[x] = colour;
+
+            for (int y = 0; y < (800 * 512); y++)
+
+                buffer[y] = colour2;
+        
         }
+        
 
     }
 };

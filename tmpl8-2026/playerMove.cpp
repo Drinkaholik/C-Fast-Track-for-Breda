@@ -78,7 +78,7 @@ void PlayerMove::Move()
 
     float& dt = Central::deltaTime;
 
-    collider->MoveAndCollide(xVel * dt, yVel * dt, Central::spawnedObjects);
+    collider->MoveAndCollide(xVel * dt, yVel * dt);
 
 
     // Position clamp doesnt work with component setup, since it relies on width/height values that might not exist

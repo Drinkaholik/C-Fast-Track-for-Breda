@@ -2,6 +2,7 @@
 #include "central.h"
 #include "gameObject.h"
 #include "utils.h"
+#include "collisionSystem.h"
 
 #include <math.h>
 #include <iostream>
@@ -54,10 +55,8 @@ void Collider::UpdateRect(float x, float y)
 }
 
 
-bool Collider::CollideAt(float x, float y, GameObject* go)
+bool Collider::CollideAt(float x, float y, Collider* col)
 {
-	const Collider* col = go->GetComponent<Collider>();
-	if (!col) return false;
 
 	// Cache pos
 	float originalX = gameObject->x;
@@ -96,11 +95,12 @@ bool Collider::CollideAt(float x, float y, GameObject* go)
 // If there is a collision, sweep backwards by half width/height
 // Then sweep either forward or backwards by a quarter, and from there go 1 pixel at a time until 0 px from the collider
 
-void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<GameObject>> gameObjects)
+void Collider::MoveAndCollide(float xDistance, float yDistance)
 {
 	float& x = gameObject->x;
 	float& y = gameObject->y;
 	
+	auto& colliders = CollisionSystem::colliders;
 
 	float targetX = x + xDistance;
 	float targetY = y + yDistance;
@@ -112,13 +112,13 @@ void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<
 	bool yCollide = false;
 
 	// Check for collisions against every collider in scene
-	for (int i = 0; i < gameObjects.size(); i++) 
+	for (int i = 0; i < colliders.size(); i++)
 	{
-		GameObject* go = gameObjects[i].get();
+		Collider* col = colliders[i];
 
 		for (int j = 0; j < abs(xDistance); j++)
 		{
-			xCollide = CollideAt(x + (j + 1 * xMoveSign), y, go);
+			xCollide = CollideAt(x + (j + 1 * xMoveSign), y, col);
 
 			if (xCollide)
 			{
@@ -129,7 +129,7 @@ void Collider::MoveAndCollide(float xDistance, float yDistance, span<shared_ptr<
 
 		for (int j = 0; j < abs(yDistance); j++)
 		{
-			yCollide = CollideAt(x, y + (j + 1 * yMoveSign), go);
+			yCollide = CollideAt(x, y + (j + 1 * yMoveSign), col);
 
 			if (yCollide)
 			{

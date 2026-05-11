@@ -7,7 +7,7 @@ class GameObject;
 struct CameraPrefab
 {
 
-	std::shared_ptr<GameObject> Load(float xPos, float yPos);
+	std::unique_ptr<GameObject> Load(float xPos, float yPos);
 
 };
 

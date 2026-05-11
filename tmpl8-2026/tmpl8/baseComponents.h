@@ -33,17 +33,15 @@ struct Collider : public Component
 	
 
 	// Check if current object would collide with another object at X position
-	bool CollideAt(float x, float y, GameObject* go); // Check against single object, faster
-	bool CollideAt(float x, float y, std::span<GameObject> gameObjects); // Check against array
+	bool CollideAt(float x, float y, Collider* go); // Check against single object, faster
+	bool CollideAt(float x, float y); // Check against array
 
 	// Same as CollideAt, but returns collision instance
-	GameObject InstancePlace(float x, float y, GameObject* go);
-	GameObject InstancePlace(float x, float y, std::span<GameObject> gameObjects);
+	GameObject InstancePlace(float x, float y, Collider* go);
+	GameObject InstancePlace(float x, float y);
 
 	// Move gameObject by nDistance, if it would not collide
-	void MoveAndCollide(float xDistance, float yDistance, std::span<std::shared_ptr<GameObject>> gameObjects);
-
-	bool Sweep(GameObject* go, float& targetX, float& targetY, float distance, int axisLength);
+	void MoveAndCollide(float xDistance, float yDistance);
 
 
 	void Tick() override;

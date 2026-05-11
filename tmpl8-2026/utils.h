@@ -20,7 +20,7 @@ namespace utils
 		T xDistance = abs(x1 - x2);
 		T yDistance = abs(y1 - y2);
 
-		return abs(sqrt((xDistance * xDistance) + (yDistance * yDistance))); // Pythagorean theorem
+		return abs(sqrt((xDistance * xDistance) + (yDistance * yDistance))); // Finding hypotenuse
 
 	}
 

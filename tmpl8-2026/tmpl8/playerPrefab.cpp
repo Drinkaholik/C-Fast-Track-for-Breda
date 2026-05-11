@@ -8,13 +8,13 @@
 using namespace std;
 
 
-shared_ptr<GameObject> PlayerPrefab::Load(float xPos, float yPos)
+unique_ptr<GameObject> PlayerPrefab::Load(float xPos, float yPos)
 {
-	auto go = make_shared<GameObject>(xPos, yPos);
+	auto go = make_unique<GameObject>(xPos, yPos);
 
 	go->AddComponent<SpriteRenderer>(SpriteList::sprites["ball"]);
 	auto& col = go->AddComponent<Collider>(SpriteList::sprites["ball"]);
-	go->AddComponent<PlayerMove>(col);
+	go->AddComponent<PlayerMove>(&col);
 
 	return go;
 }

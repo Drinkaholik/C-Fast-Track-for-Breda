@@ -2,7 +2,7 @@
 #include "baseComponents.h"
 
 
-class GravBody : public Component
+struct GravBody : public Component
 {
 
 	/*Whats the best way to do this ?
@@ -21,7 +21,7 @@ public:
 
 private:
 
-	float xVel, yVel = 0.0f;
+	float xVel = 0.0f, yVel = 0.0f;
 
 	static float gravConstant;
 

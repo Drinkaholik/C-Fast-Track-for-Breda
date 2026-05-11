@@ -6,6 +6,6 @@ class GameObject;
 
 struct PlayerPrefab
 {
-	std::shared_ptr<GameObject> Load(float xPos, float yPos);
+	std::unique_ptr<GameObject> Load(float xPos, float yPos);
 };
 

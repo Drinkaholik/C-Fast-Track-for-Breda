@@ -7,7 +7,6 @@
 #include <memory>
 
 class GameObject;
-class GravBody;
 
 using namespace Tmpl8;
 
@@ -26,9 +25,6 @@ struct Central
 	static GameObject* camera;
 	static const int screenWidth = 1000;
 	static const int screenHeight = 1000;
-
-	static std::vector<GravBody*> gravBodies;
-	
 	
 	// Time
 	static float deltaTime;

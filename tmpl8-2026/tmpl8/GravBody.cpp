@@ -1,7 +1,7 @@
 #include "gravBody.h"
 
 #include "gameObject.h"
-#include "central.h"
+#include "gravitySystem.h"
 #include "utils.h"
 
 #include <cmath>
@@ -28,7 +28,7 @@ void GravBody::Tick()
 {
 	Component::Tick();
 
-	for (const auto& body : Central::gravBodies)
+	for (const auto& body : GravitySystem::bodies)
 	{
 		GravMove(body);
 	}
@@ -42,6 +42,7 @@ void GravBody::GravMove(GravBody* body)
 	if (body == this) return; // Prevent attraction to self - causes divide by 0 error
 
 	auto* otherGO = body->gameObject;
+	auto* otherCol = otherGO->GetComponent<Collider>();
 
 	float& x = gameObject->x;
 	float& y = gameObject->y;
@@ -56,7 +57,7 @@ void GravBody::GravMove(GravBody* body)
 
 	float force = (gravConstant * mass * body->mass) / (distance * distance);
 
-	if (collider->CollideAt(x, y, otherGO)) force = 0; // Stop gravity from building up endlessly during a collision
+	if (collider->CollideAt(x, y, otherCol)) force = 0; // Stop gravity from building up endlessly during a collision
 
 	float xRatio = xDistance / distance;
 	float yRatio = yDistance / distance;
@@ -76,7 +77,7 @@ void GravBody::GravMove(GravBody* body)
 
 	/*cout << "Force: " << to_string(xForce) << " , " << to_string(yForce) << endl;*/
 
-	collider->MoveAndCollide(xVel, yVel, Central::spawnedObjects);
+	collider->MoveAndCollide(xVel, yVel);
 
 
 }

@@ -7,15 +7,11 @@ using namespace std;
 // Constructors //
 GameObject::GameObject(float xSpawn, float ySpawn)
 	: x(xSpawn), y(ySpawn)
-{
-	camera = Central::camera;
-};
+{};
 
 GameObject::GameObject(float xSpawn, float ySpawn, bool debug)
 	: x(xSpawn), y(ySpawn), debug(debug) 
-{
-	camera = Central::camera;
-};
+{};
 
 
 void GameObject::Start()

@@ -1,20 +1,21 @@
 #include "scene.h"
-#include "sceneData.h"
+#include "baseComponents.h"
+#include "collisionSystem.h"
 
 using namespace std;
 
-Scene::Scene(unique_ptr<SceneData> data)
-{
-	// Instantiates all sceneData objects and pushes them to sceneObjects vector
-	data->LoadObjects(&sceneObjects);
-}
+
 
 void Scene::LoadScene()
 {
 	for (auto& obj : sceneObjects)
 	{
-		obj->Start();
+		// Add any colliders to vector
+		auto* col = obj->GetComponent<Collider>();
+		if (col != nullptr) CollisionSystem::Register(col);
 
+
+		obj->Start();
 	}
 }
 
@@ -23,10 +24,16 @@ void Scene::Tick() // Runs tick logic on all scene objects
 	for (auto& obj: sceneObjects)
 	{
 		obj->Tick();
-
 	}
 }
 
 void Scene::UnloadScene()
 {
+	for (auto& obj : sceneObjects) // This is probably pretty expensive?
+	{
+		// Remove any colliders from vector
+		auto* col = obj->GetComponent<Collider>();
+		if (col != nullptr) CollisionSystem::Deregister(col);
+
+	}
 }

@@ -5,7 +5,6 @@
 #include <memory>
 
 struct Component;
-struct Camera;
 
 // Has a world-space position
 // Can hold pointers to components like colliders and spriterenderers
@@ -50,7 +49,7 @@ public:
 			T* ptr = dynamic_cast<T*>(component.get());
 			if (ptr)
 			{
-				components.erase(component);
+				components.erase(component); // This is the issue here, im tryna erase by value instead of index
 				return true;
 			}
 		}
@@ -87,7 +86,6 @@ private:
 
 	std::vector<std::unique_ptr<Component>> components;
 
-	GameObject* camera;
 
 	void DrawOrigin(); // To test whether origin is correctly at centre of sprite, instead of top-left
 

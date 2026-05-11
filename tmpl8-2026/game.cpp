@@ -19,13 +19,8 @@ using namespace std;
 
 namespace Tmpl8
 {
-    SceneManager* sceneManager = new SceneManager();
+    unique_ptr<SceneManager> sceneManager = make_unique<SceneManager>();
 
-
-    // Camera
-    shared_ptr<GameObject> oCamera;
-    int scrWidth = Central::screenWidth;
-    int scrHeight = Central::screenHeight;
 
 
     // -----------------------------------------------------------
@@ -72,6 +67,8 @@ namespace Tmpl8
         released = ~keys & held; // keys that were down in the previous tick but are not down now
         held = keys; // update prevKeys for the next tick
     };
+
+
 
 
     // FPS counter //

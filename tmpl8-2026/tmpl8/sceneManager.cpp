@@ -1,19 +1,25 @@
 #include "sceneManager.h"
-#include "mainMenuScene.h"
+
+
 
 using namespace std;
 
+SceneManager::SceneManager()
+{
+	InitMap();
+}
+
+void SceneManager::InitMap()
+{
+	sceneList[0] = std::make_unique<MainScene>();
+}
 
 void SceneManager::LoadScene(int sceneID)
 {
-	if (currentScene != nullptr) currentScene.reset(); // Delete current scene object
-
-
-	currentScene = make_shared<Scene>(sceneList[sceneID]);
-
+	currentScene = sceneList[sceneID].get();
 }
 
 Scene* SceneManager::GetScene()
 {
-	return currentScene.get();
+	return currentScene;
 }

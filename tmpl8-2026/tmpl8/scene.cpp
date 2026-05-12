@@ -31,7 +31,7 @@ void Scene::UnloadScene()
 {
 	for (auto& obj : sceneObjects) // This is probably pretty expensive? Calling getComponent() and deregister()
 	{
-		// Remove any colliders from vector
+		// Remove any colliders from CollisionSystem::colliders
 		auto* col = obj->GetComponent<Collider>();
 		if (col != nullptr) CollisionSystem::Deregister(col);
 

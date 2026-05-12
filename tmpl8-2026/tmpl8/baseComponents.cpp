@@ -27,14 +27,14 @@ void Component::Tick(){};
 // Constructors
 Collider::Collider(Sprite* sprite)
 {
-	width = sprite->GetWidth();
-	height = sprite->GetHeight();
+	size.x = sprite->GetWidth();
+	size.y = sprite->GetHeight();
 
 	//UpdateRect(); // Cant be here because GameObject only gets set after constructor runs
 }
 
-Collider::Collider(int width, int height)
-	: width(width), height(height)
+Collider::Collider(vec2 size)
+	: size(size)
 {
 };
 
@@ -42,46 +42,44 @@ Collider::Collider(int width, int height)
 
 void Collider::Tick()
 {
-	UpdateRect(gameObject->x, gameObject->y);
+	UpdateRect(gameObject->pos);
 	DrawCollider(gameObject->debug);
 }
 
-void Collider::UpdateRect(float x, float y)
+void Collider::UpdateRect(vec2 pos)
 {
-	x1 = round(x - width / 2);
-	y1 = round(y - height / 2);
-	x2 = round(x + width / 2);
-	y2 = round(y + height / 2);
+	// round doesnt accept vec2
+	p1.x = round(pos.x - size.x / 2);
+	p1.y = round(pos.y - size.y / 2);
+	p2.x = round(pos.x + size.x / 2);
+	p2.y = round(pos.y + size.y / 2);
 }
 
 
-bool Collider::CollideAt(float x, float y, Collider* col)
+bool Collider::CollideAt(vec2 pos, Collider* col)
 {
 
 	// Cache pos
-	float originalX = gameObject->x;
-	float originalY = gameObject->y;
+	vec2 originalPos = gameObject->pos;
 
 	// Move rect to check position
-	UpdateRect(x, y);
+	UpdateRect(pos);
 
-	const float colX1 = col->x1; // Apparently passing by value is more efficient here? 
-	const float colX2 = col->x2; // Pointer / reference uses 8 bits whereas float uses 4
-	const float colY1 = col->y1; // Is this more efficient than just directly accessing them
-	const float colY2 = col->y2; // in the collision checks below?
+	const vec2 colP1 = col->p1; // Vec2 and pointer are both 8 bytes, so does it matter whther I pass by value or ptr / ref?
+	const vec2 colP2 = col->p2; // Pass by pointer would cause more cache misses ??
 
 
-	bool x1Collision = (x1 > colX1 && x1 < colX2);
-	bool x2Collision = (x2 > colX1 && x2 < colX2);
+	bool x1Collision = (p1.x > colP1.x && p1.x < colP2.x);
+	bool x2Collision = (p2.x > colP1.x && p2.x < colP2.x);
 
-	bool y1Collision = (y1 > colY1 && y1 < colY2);
-	bool y2Collision = (y2 > colY1 && y2 < colY2);
+	bool y1Collision = (p1.y > colP1.y && p1.y < colP2.y);
+	bool y2Collision = (p2.y > colP1.y && p2.y < colP2.y);
 
 	bool xCollision = x1Collision || x2Collision;
 	bool yCollision = y1Collision || y2Collision;
 
 	// Move rect back
-	UpdateRect(originalX, originalY);
+	UpdateRect(originalPos);
 
 	if (xCollision && yCollision) return true;
 	else return false;
@@ -95,18 +93,15 @@ bool Collider::CollideAt(float x, float y, Collider* col)
 // If there is a collision, sweep backwards by half width/height
 // Then sweep either forward or backwards by a quarter, and from there go 1 pixel at a time until 0 px from the collider
 
-void Collider::MoveAndCollide(float xDistance, float yDistance)
+void Collider::MoveAndCollide(vec2 distance)
 {
-	float& x = gameObject->x;
-	float& y = gameObject->y;
+	vec2& pos = gameObject->pos;
 	
 	auto& colliders = CollisionSystem::colliders;
 
-	float targetX = x + xDistance;
-	float targetY = y + yDistance;
-
-	int xMoveSign = utils::sign(xDistance);
-	int yMoveSign = utils::sign(yDistance);
+	vec2 targetPos = pos + distance;
+	int xMoveSign = utils::sign(distance.x);
+	int yMoveSign = utils::sign(distance.y);
 
 	bool xCollide = false;
 	bool yCollide = false;
@@ -116,32 +111,37 @@ void Collider::MoveAndCollide(float xDistance, float yDistance)
 	{
 		Collider* col = colliders[i];
 
-		for (int j = 0; j < abs(xDistance); j++)
+		for (int j = 0; j < abs(distance.x); j++)
 		{
-			xCollide = CollideAt(x + (j + 1 * xMoveSign), y, col);
+			xCollide = CollideAt(
+				vec2(pos.x + (j + 1 * xMoveSign), pos.y),
+				col);
 
 			if (xCollide)
 			{
-				targetX = (x + (j) * xMoveSign);
+				targetPos.x = (pos.x + (j) * xMoveSign);
 				break;
 			}
 		}
 
-		for (int j = 0; j < abs(yDistance); j++)
+		for (int j = 0; j < abs(distance.y); j++)
 		{
-			yCollide = CollideAt(x, y + (j + 1 * yMoveSign), col);
+			yCollide = CollideAt(
+				vec2(pos.x, pos.y + (j + 1 * yMoveSign)),
+				col);
 
 			if (yCollide)
 			{
-				targetY = (y + (j) * yMoveSign);
+				targetPos.y = (pos.y + (j) * yMoveSign);
 				break;
 			}
 		}
 	}
 
-	x = targetX;
+	// Handle x and y separately
+	pos.x = targetPos.x;
 
-	y = targetY;
+	pos.y = targetPos.y;
 }
 
 
@@ -153,10 +153,14 @@ void Collider::DrawCollider(bool debug)
 
 	if (Central::camera == nullptr) return;
 
-	float xOffset = Central::camera->x;
-	float yOffset = Central::camera->y;
+	vec2 offset = Central::camera->pos;
 
-	Central::surface->Box(x1 - xOffset, y1 - yOffset, x2 - xOffset, y2 - yOffset, 0xFF0000);
+	Central::surface->Box(
+		p1.x - offset.x, 
+		p1.y - offset.y, 
+		p2.x - offset.y, 
+		p2.y - offset.y, 
+		0xFF0000);
 };
 
 

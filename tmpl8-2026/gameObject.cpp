@@ -1,16 +1,18 @@
 #include "gameObject.h"
+
 #include "central.h"
 #include "baseComponents.h"
+#include "template.h"
 
 using namespace std;
 
 // Constructors //
-GameObject::GameObject(float xSpawn, float ySpawn)
-	: x(xSpawn), y(ySpawn)
+GameObject::GameObject(vec2 spawnPos)
+	: pos(spawnPos)
 {};
 
-GameObject::GameObject(float xSpawn, float ySpawn, bool debug)
-	: x(xSpawn), y(ySpawn), debug(debug) 
+GameObject::GameObject(vec2 spawnPos, bool debug)
+	: pos(spawnPos), debug(debug)
 {};
 
 
@@ -45,14 +47,14 @@ void GameObject::DrawOrigin()
 {
 	if (!debug) return;
 
-	float xOffset = Central::camera->x;
-	float yOffset = Central::camera->y;
+	vec2 offset = Central::camera->pos;
+	vec2 screenPos = pos - offset;
 
 	Central::surface->Box(
-		round(x - 1 - xOffset), // Rounding keeps box size consistent - would truncate otherwise
-		round(y - 1 - yOffset), 
-		round(x + 1 - xOffset), 
-		round(y + 1 - yOffset),
+		round(screenPos.x - 1), // Rounding keeps box size consistent - truncation causes jitter
+		round(screenPos.y - 1), 
+		round(screenPos.x + 1), 
+		round(screenPos.y + 1),
 		0xFF0000);
 }
 

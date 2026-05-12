@@ -10,6 +10,7 @@
 
 #include <cstdlib>
 #include <cstdio>
+#include <cmath>
 #include "central.h"
 
 constexpr int ScreenWidth = Central::screenWidth;

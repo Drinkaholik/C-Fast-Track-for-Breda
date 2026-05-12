@@ -1,6 +1,7 @@
 #pragma once
 
 #include "baseComponents.h" // FOrward declaration wasn't working i dont think
+#include "template.h"
 
 #include <vector>
 #include <memory>
@@ -16,7 +17,7 @@ class GameObject
 public:
 	
 	// Position
-	float x, y;
+	vec2 pos;
 
 	bool debug = false; // Whether to draw origin, collider rect, etc
 
@@ -76,9 +77,9 @@ public:
 
 
 	// Constructors
-	GameObject(float xSpawn, float ySpawn);
+	GameObject(vec2 spawnPos);
 
-	GameObject(float xSpawn, float ySpawn, bool debug);
+	GameObject(vec2 spawnPos, bool debug);
 
 
 

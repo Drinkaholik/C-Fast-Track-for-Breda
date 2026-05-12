@@ -1,9 +1,12 @@
 #pragma once
+
+#include "template.h"
+
 class UI
 {
 
 	// Ratio from 0 - 1
-	void DrawHPBar(vec2 p1, vec2 p2, Pixel* backgroundColour, Pixel* fillColour, float ratio);
+	void DrawHPBar(Tmpl8::vec2 p1, Tmpl8::vec2 p2, Pixel* backgroundColour, Pixel* fillColour, float ratio);
 
 
 

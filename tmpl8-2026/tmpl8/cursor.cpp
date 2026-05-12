@@ -3,5 +3,4 @@
 
 void Cursor::FollowMouse()
 {
-	gameObject->x = 5;
 }

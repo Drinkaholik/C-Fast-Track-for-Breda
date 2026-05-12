@@ -1,7 +1,7 @@
 #pragma once
 
 #include "baseComponents.h"
-
+#include "template.h"
 
 
 class PlayerMove : public Component
@@ -16,8 +16,7 @@ public:
 private:
 
     // Track current velocity
-    float xVel = 0;
-    float yVel = 0;
+    Tmpl8::vec2 vel = Tmpl8::vec2(0, 0);
 
     // Movement values
     float accel = 0.1;

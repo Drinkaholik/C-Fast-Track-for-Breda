@@ -17,7 +17,7 @@ class GameObject
 public:
 	
 	// Position
-	vec2 pos;
+	Tmpl8::vec2 pos;
 
 	bool debug = false; // Whether to draw origin, collider rect, etc
 
@@ -77,9 +77,9 @@ public:
 
 
 	// Constructors
-	GameObject(vec2 spawnPos);
+	GameObject(Tmpl8::vec2 spawnPos);
 
-	GameObject(vec2 spawnPos, bool debug);
+	GameObject(Tmpl8::vec2 spawnPos, bool debug);
 
 
 

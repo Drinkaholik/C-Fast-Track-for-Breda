@@ -1,5 +1,6 @@
 #include "mainScene.h"
 
+#include "template.h"
 #include "spriteList.h"
 #include "gameObject.h"
 #include "camera.h"
@@ -9,6 +10,7 @@
 
 
 using namespace std;
+using namespace Tmpl8;
 
 PlayerPrefab playerPrefab;
 PlanetPrefab planetPrefab;
@@ -17,10 +19,10 @@ CameraPrefab cameraPrefab;
 void MainScene::LoadScene()
 {
 	// Instantiate objects
-	auto camera = cameraPrefab.Load(0, 0);
-	auto player = playerPrefab.Load(0, 0);
-	auto planet1 = planetPrefab.Load(100, 100, SpriteList::sprites["ball"], 10);
-	auto planet2 = planetPrefab.Load(200, 200, SpriteList::sprites["ball"], 10);
+	auto camera = cameraPrefab.Load(vec2(0, 0));
+	auto player = playerPrefab.Load(vec2(0, 0));
+	auto planet1 = planetPrefab.Load(vec2(100, 100), SpriteList::sprites["ball"], 10);
+	auto planet2 = planetPrefab.Load(vec2(200, 200), SpriteList::sprites["ball"], 10);
 
 	camera->GetComponent<Camera>()->SetTarget(player.get());
 
@@ -42,10 +44,10 @@ void MainScene::LoadScene()
 void MainScene::LoadScene(bool debug)
 {
 	// Instantiate objects
-	auto camera = cameraPrefab.Load(0, 0);
-	auto player = playerPrefab.Load(0, 0, debug);
-	auto planet1 = planetPrefab.Load(100, 100, SpriteList::sprites["ball"], 10, debug);
-	auto planet2 = planetPrefab.Load(200, 200, SpriteList::sprites["ball"], 10, debug);
+	auto camera = cameraPrefab.Load(vec2(0, 0));
+	auto player = playerPrefab.Load(vec2(0, 0), debug);
+	auto planet1 = planetPrefab.Load(vec2(100, 100), SpriteList::sprites["ball"], 10, debug);
+	auto planet2 = planetPrefab.Load(vec2(200,200), SpriteList::sprites["ball"], 10, debug);
 
 	camera->GetComponent<Camera>()->SetTarget(player.get());
 

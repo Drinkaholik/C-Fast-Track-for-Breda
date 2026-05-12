@@ -3,6 +3,8 @@
 #include "template.h"
 #include "surface.h"
 
+using namespace Tmpl8;
+
 void UI::DrawHPBar(vec2 p1, vec2 p2, Pixel* backgroundColour, Pixel* fillColour, float ratio)
 {
 	// Clamp ratio

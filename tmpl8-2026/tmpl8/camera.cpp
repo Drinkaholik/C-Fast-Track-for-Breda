@@ -24,7 +24,7 @@ void Camera::SetTarget(GameObject* go)
 void Camera::FollowTarget()
 {
 
-	gameObject->x = target->x - Central::screenWidth / 2;
-	gameObject->y = target->y - Central::screenHeight / 2;
+	gameObject->pos.x = target->pos.x - Central::screenWidth / 2;
+	gameObject->pos.y = target->pos.y - Central::screenHeight / 2;
 
 }

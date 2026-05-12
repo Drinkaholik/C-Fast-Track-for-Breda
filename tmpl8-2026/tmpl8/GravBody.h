@@ -1,5 +1,6 @@
 #pragma once
 #include "baseComponents.h"
+#include "template.h"
 
 
 struct GravBody : public Component
@@ -17,11 +18,11 @@ public:
 
 	GravBody(float m, Collider* collider);
 
-	GravBody(float m, float xVel, float yVel, Collider* collider);
+	GravBody(float m, Tmpl8::vec2 vel, Collider* collider);
 
 private:
 
-	float xVel = 0.0f, yVel = 0.0f;
+	Tmpl8::vec2 vel = Tmpl8::vec2(0, 0);
 
 	static float gravConstant;
 

@@ -10,6 +10,7 @@
 #include <string>
 
 using namespace std;
+using namespace Tmpl8;
 
 
 PlayerMove::PlayerMove(Collider* col) : collider(col) {};
@@ -41,44 +42,44 @@ void PlayerMove::Move()
     // X-axis movement
     if (xInput != 0) // accel
     {
-        xVel += accel * xInput;
+        vel.x += accel * xInput;
     }
     else // decel
     {
-        xVel -= decel * utils::sign(xVel);
+        vel.x -= decel * utils::sign(vel.x);
 
-        if (std::abs(xVel) < 0.01f) // prevent overshoot
+        if (std::abs(vel.x) < 0.01f) // prevent overshoot
         {
-            xVel = 0;
+            vel.x = 0;
         }
     }
 
     // Y-axis movement
     if (yInput != 0) // accel
     {
-        yVel += accel * -yInput;
+        vel.y += accel * -yInput;
     }
     else // decel
     {
-        yVel -= decel * utils::sign(yVel);
+        vel.y -= decel * utils::sign(vel.y);
 
-        if (std::abs(yVel) < 0.01f) // prevent overshoot
+        if (std::abs(vel.y) < 0.01f) // prevent overshoot
         {
-            yVel = 0;
+            vel.y = 0;
         }
     }
 
     // Clamp velocity
-    xVel = std::clamp(xVel, -maxSpeed, maxSpeed); 
-    yVel = std::clamp(yVel, -maxSpeed, maxSpeed); 
+    vel.x = std::clamp(vel.x, -maxSpeed, maxSpeed); 
+    vel.y = std::clamp(vel.y, -maxSpeed, maxSpeed); 
 
     // Update position
-    float& xPos = gameObject->x;
-    float& yPos = gameObject->y;
+    float& xPos = gameObject->pos.x;
+    float& yPos = gameObject->pos.y;
 
     float& dt = Central::deltaTime;
 
-    collider->MoveAndCollide(xVel * dt, yVel * dt);
+    collider->MoveAndCollide(vel * dt);
 
 
     // Position clamp doesnt work with component setup, since it relies on width/height values that might not exist

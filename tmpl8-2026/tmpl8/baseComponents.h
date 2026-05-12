@@ -20,12 +20,12 @@ struct Component // Abstract struct
 // Simple bounding box collider
 struct Collider : public Component
 {
-	vec2 p1; // xMin, yMin
-	vec2 p2; // xMax, yMax
+	Tmpl8::vec2 p1; // xMin, yMin
+	Tmpl8::vec2 p2; // xMax, yMax
 
-	vec2 size; // width, height
+	Tmpl8::vec2 size; // width, height
 
-	void UpdateRect(vec2 pos);
+	void UpdateRect(Tmpl8::vec2 pos);
 
 	// I really like snake_case here but PascalCase in other places...
 	void DrawCollider(bool debug); // Bool set by gameObject
@@ -33,15 +33,15 @@ struct Collider : public Component
 	
 
 	// Check if current object would collide with another object at X position
-	bool CollideAt(vec2 pos, Collider* go); // Check against single object, faster
-	bool CollideAt(vec2 pos); // Check against system's collider array
+	bool CollideAt(Tmpl8::vec2 pos, Collider* go); // Check against single object, faster
+	bool CollideAt(Tmpl8::vec2 pos); // Check against system's collider array
 
 	// Same as CollideAt, but returns collision instance
-	GameObject InstancePlace(vec2 pos, Collider* go);
-	GameObject InstancePlace(vec2 pos);
+	GameObject InstancePlace(Tmpl8::vec2 pos, Collider* go);
+	GameObject InstancePlace(Tmpl8::vec2 pos);
 
 	// Move gameObject by nDistance, if it would not collide
-	void MoveAndCollide(vec2 distance);
+	void MoveAndCollide(Tmpl8::vec2 distance);
 
 
 	void Tick() override;
@@ -49,7 +49,7 @@ struct Collider : public Component
 	// Structors
 	Collider(Sprite* sprite); // Initialize thru sprite size
 
-	Collider(vec2 size); // Initialize with manual size
+	Collider(Tmpl8::vec2 size); // Initialize with manual size
 
 
 };
@@ -60,11 +60,11 @@ struct SpriteRenderer : public Component
 	Surface* screen; // Caches Central::surface - does that actually provide performance benefits? both are pointers. Apparently yes (cache misses?)
 	Sprite* sprite;
 
-	vec2 size;
+	Tmpl8::vec2 size;
 
 	//float xScale, yScale = 1.0f; // DrawScaled doesnt work properly...
 
-	void Draw(vec2 pos);
+	void Draw(Tmpl8::vec2 pos);
 
 	void Tick() override;
 

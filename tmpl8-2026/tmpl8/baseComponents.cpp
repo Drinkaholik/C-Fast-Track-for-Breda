@@ -10,6 +10,7 @@
 
 
 using namespace std;
+using namespace Tmpl8;
 
 
 Component::~Component() = default;
@@ -176,36 +177,36 @@ void Collider::DrawCollider(bool debug)
 
 SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
 {
-	width = sprite->GetWidth();
-	height = sprite->GetHeight();
+	size.x = sprite->GetWidth();
+	size.y = sprite->GetHeight();
 	screen = Central::surface;
 };
 
 
 //SpriteRenderer::~SpriteRenderer() = default;
 
-void SpriteRenderer::Draw(float x, float y)
+void SpriteRenderer::Draw(vec2 pos)
 {
 
 	if (Central::camera == nullptr) return;
 
-	float xOffset = Central::camera->x;
-	float yOffset = Central::camera->y;
+	vec2 offset = Central::camera->pos;
+	vec2 screenPos = pos - (size * 0.5) - offset;
 
 	// Only draw if within viewport
 
 
 	// Draw from centre rather than top left
 	sprite->Draw(screen,
-		x - width / 2 - xOffset,
-		y - height / 2 - yOffset
+		screenPos.x,
+		screenPos.y
 	);
 
 }
 
 void SpriteRenderer::Tick()
 {
-	Draw(gameObject->x, gameObject->y);
+	Draw(gameObject->pos);
 }
 
 #pragma endregion

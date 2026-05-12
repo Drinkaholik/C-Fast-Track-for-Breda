@@ -6,11 +6,12 @@
 #include "spriteList.h"
 
 using namespace std;
+using namespace Tmpl8;
 
 
-unique_ptr<GameObject> PlayerPrefab::Load(float xPos, float yPos)
+unique_ptr<GameObject> PlayerPrefab::Load(vec2 pos)
 {
-	auto go = make_unique<GameObject>(xPos, yPos);
+	auto go = make_unique<GameObject>(pos);
 
 	auto spr = SpriteList::sprites["tank"];
 
@@ -21,9 +22,9 @@ unique_ptr<GameObject> PlayerPrefab::Load(float xPos, float yPos)
 	return go;
 }
 
-unique_ptr<GameObject> PlayerPrefab::Load(float xPos, float yPos, bool debug)
+unique_ptr<GameObject> PlayerPrefab::Load(vec2 pos, bool debug)
 {
-	auto go = make_unique<GameObject>(xPos, yPos, debug);
+	auto go = make_unique<GameObject>(pos, debug);
 
 	auto spr = SpriteList::sprites["tank"];
 

@@ -6,11 +6,13 @@
 #include "surface.h"
 
 
-using namespace std;
 
-unique_ptr<GameObject> CameraPrefab::Load(float xPos, float yPos)
+using namespace std;
+using namespace Tmpl8;
+
+unique_ptr<GameObject> CameraPrefab::Load(vec2 pos)
 {
-	auto go = make_unique<GameObject>(xPos, yPos);
+	auto go = make_unique<GameObject>(pos);
 	go->AddComponent<Camera>(nullptr);
 
 	return go;

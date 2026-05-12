@@ -10,14 +10,15 @@
 #include <string>
 
 using namespace std;
+using namespace Tmpl8;
 
 
 GravBody::GravBody(float m, Collider* collider) : mass(m), collider(collider)
 {
 };
 
-GravBody::GravBody(float m, float xVel, float yVel, Collider* collider)
-	: mass(m), xVel(xVel), yVel(yVel), collider(collider) {
+GravBody::GravBody(float m, vec2 vel, Collider* collider)
+	: mass(m), vel(vel), collider(collider) {
 };
 
 
@@ -44,11 +45,11 @@ void GravBody::GravMove(GravBody* body)
 	auto* otherGO = body->gameObject;
 	auto* otherCol = otherGO->GetComponent<Collider>();
 
-	float& x = gameObject->x;
-	float& y = gameObject->y;
+	float& x = gameObject->pos.x;
+	float& y = gameObject->pos.y;
 
-	float oX = otherGO->x;
-	float oY = otherGO->y;
+	float oX = otherGO->pos.x;
+	float oY = otherGO->pos.y;
 
 	
 	float distance = utils::distance(x, y, oX, oY);
@@ -57,7 +58,7 @@ void GravBody::GravMove(GravBody* body)
 
 	float force = (gravConstant * mass * body->mass) / (distance * distance);
 
-	if (collider->CollideAt(x, y, otherCol)) force = 0; // Stop gravity from building up endlessly during a collision
+	if (collider->CollideAt(vec2(x, y), otherCol)) force = 0; // Stop gravity from building up endlessly during a collision
 
 	float xRatio = xDistance / distance;
 	float yRatio = yDistance / distance;
@@ -69,15 +70,15 @@ void GravBody::GravMove(GravBody* body)
 	// Lets do some trig to decompose the forces
 	// Force is our hypotenuse, and xForce / yForce are the opposite and adjacent sides
 
-	xVel += xForce / mass * Central::deltaTime;
-	yVel += yForce / mass * Central::deltaTime;
+	vel.x += xForce / mass * Central::deltaTime;
+	vel.y += yForce / mass * Central::deltaTime;
 
 	/*cout << "myPosition: " << to_string(x) << " , " << to_string(y) << endl
 		<< "theirPosition: " << to_string(oX) << " , " << to_string(oY) << endl;*/
 
 	/*cout << "Force: " << to_string(xForce) << " , " << to_string(yForce) << endl;*/
 
-	collider->MoveAndCollide(xVel, yVel);
+	collider->MoveAndCollide(vel);
 
 
 }

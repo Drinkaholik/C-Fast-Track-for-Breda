@@ -5,6 +5,7 @@
 #include "template.h"
 
 using namespace std;
+using namespace Tmpl8;
 
 // Constructors //
 GameObject::GameObject(vec2 spawnPos)

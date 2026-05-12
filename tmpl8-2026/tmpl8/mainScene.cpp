@@ -38,3 +38,28 @@ void MainScene::LoadScene()
 	Scene::LoadScene(); // Run start() on all sceneObjects
 
 }
+
+void MainScene::LoadScene(bool debug)
+{
+	// Instantiate objects
+	auto camera = cameraPrefab.Load(0, 0);
+	auto player = playerPrefab.Load(0, 0, debug);
+	auto planet1 = planetPrefab.Load(100, 100, SpriteList::sprites["ball"], 10, debug);
+	auto planet2 = planetPrefab.Load(200, 200, SpriteList::sprites["ball"], 10, debug);
+
+	camera->GetComponent<Camera>()->SetTarget(player.get());
+
+	// Add to vector
+	sceneObjects.push_back(move(camera));
+	sceneObjects.push_back(move(player));
+	sceneObjects.push_back(move(planet1));
+	sceneObjects.push_back(move(planet2));
+
+	oCamera = sceneObjects[0].get();
+	oPlayer = sceneObjects[1].get();
+
+
+
+	Scene::LoadScene(); // Run start() on all sceneObjects
+
+}

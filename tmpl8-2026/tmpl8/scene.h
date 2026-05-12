@@ -18,11 +18,13 @@ class Scene
 {
 public:
 
-	virtual void LoadScene() = 0; // Calls Start() on all scene objects
+	virtual void LoadScene() = 0;// Calls Start() on all scene objects
+	virtual void LoadScene(bool debug) = 0; 
 	void UnloadScene(); // The vector of smart ptrs is destroyed when this scene is, so theres no need for manual mem management right?
 	
 	void Tick(); // Runs per-frame logic for all scene objects
 	
+	bool debug; // Sets debug state of all gameObjects
 	
 
 protected:

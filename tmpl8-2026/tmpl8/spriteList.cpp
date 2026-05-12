@@ -6,7 +6,7 @@ using namespace std;
 
 // Init sprite instances here
 Sprite sBall(new Surface("assets/ball.png"), 1);
-Sprite sTank(new Surface("assets/aagun.tga"), 16);
+Sprite sTank(new Surface("assets/aagun.tga"), 36);
 
 
 // Sprites are shared across gameObjects. Might become an issue if I wanna do flashing 

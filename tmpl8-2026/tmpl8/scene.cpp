@@ -29,7 +29,7 @@ void Scene::Tick() // Runs tick logic on all scene objects
 
 void Scene::UnloadScene()
 {
-	for (auto& obj : sceneObjects) // This is probably pretty expensive?
+	for (auto& obj : sceneObjects) // This is probably pretty expensive? Calling getComponent() and deregister()
 	{
 		// Remove any colliders from vector
 		auto* col = obj->GetComponent<Collider>();

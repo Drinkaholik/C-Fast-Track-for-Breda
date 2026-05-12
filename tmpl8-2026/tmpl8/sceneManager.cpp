@@ -20,6 +20,13 @@ void SceneManager::LoadScene(int sceneID)
 	currentScene->LoadScene();
 }
 
+// Loads with debug info
+void SceneManager::LoadScene(int sceneID, bool debug)
+{
+	currentScene = sceneList[sceneID].get();
+	currentScene->LoadScene(debug);
+}
+
 Scene* SceneManager::GetScene()
 {
 	return currentScene;

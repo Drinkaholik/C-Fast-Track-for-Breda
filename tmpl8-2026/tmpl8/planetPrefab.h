@@ -13,14 +13,13 @@ class GameObject;
 
 struct PlanetPrefab
 {
-	// No velocity, debug/no debug
-	std::unique_ptr<GameObject> Load(Tmpl8::vec2 pos, Tmpl8::Sprite* spr, float mass);
-	std::unique_ptr<GameObject> Load(Tmpl8::vec2 pos, Tmpl8::Sprite* spr, float mass, bool debug);
+	// No velocity
+	std::unique_ptr<GameObject> Load(Tmpl8::vec2 pos, float mass, Tmpl8::Sprite* spr);
 
 
-	// Velocity, debug/no debug
-	std::unique_ptr<GameObject> Load(Tmpl8::vec2 pos, Tmpl8::Sprite* spr, float mass, Tmpl8::vec2 vel);
-	std::unique_ptr<GameObject> Load(Tmpl8::vec2 pos, Tmpl8::Sprite* spr, float mass, Tmpl8::vec2 vel, bool debug);
+		// Velocity
+	std::unique_ptr<GameObject> Load(Tmpl8::vec2 pos, float mass, Tmpl8::vec2 vel, Tmpl8::Sprite* spr);
+
 
 };
 

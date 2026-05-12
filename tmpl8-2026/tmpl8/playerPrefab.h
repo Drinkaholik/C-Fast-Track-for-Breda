@@ -8,6 +8,5 @@ class GameObject;
 struct PlayerPrefab
 {
 	std::unique_ptr<GameObject> Load(Tmpl8::vec2 pos);
-	std::unique_ptr<GameObject> Load(Tmpl8::vec2 pos, bool debug);
 };
 

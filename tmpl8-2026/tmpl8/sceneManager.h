@@ -20,8 +20,7 @@ public:
 
 	std::unordered_map<int, std::unique_ptr<Scene>> sceneList;
 
-	void LoadScene(int sceneID); // Loads new scene, and unloads previous one (if it exists)
-	void LoadScene(int sceneID, bool debug);
+	void LoadScene(int sceneID, bool debug); // Loads new scene, and unloads previous one (if it exists)
 
 	Scene* GetScene();
 

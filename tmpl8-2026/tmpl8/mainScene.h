@@ -8,7 +8,6 @@ struct CameraPrefab;
 class MainScene : public Scene
 {
 
-	void LoadScene() override;
 	void LoadScene(bool debug) override;
 
 };

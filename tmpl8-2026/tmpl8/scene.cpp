@@ -6,14 +6,14 @@ using namespace std;
 
 
 
-void Scene::LoadScene()
+void Scene::LoadScene(bool debug)
 {
 	for (auto& obj : sceneObjects)
 	{
 		// Add any colliders to vector
 		auto* col = obj->GetComponent<Collider>();
 		if (col != nullptr) CollisionSystem::Register(col);
-
+		obj->debug = debug;
 
 		obj->Start();
 	}

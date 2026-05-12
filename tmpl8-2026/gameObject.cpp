@@ -48,6 +48,11 @@ void GameObject::DrawOrigin()
 	float xOffset = Central::camera->x;
 	float yOffset = Central::camera->y;
 
-	Central::surface->Box(x - 1 - xOffset, y - 1 - yOffset, x + 1 - xOffset, y + 1 - yOffset, 0xFF0000);
+	Central::surface->Box(
+		round(x - 1 - xOffset), // Rounding keeps box size consistent - would truncate otherwise
+		round(y - 1 - yOffset), 
+		round(x + 1 - xOffset), 
+		round(y + 1 - yOffset),
+		0xFF0000);
 }
 

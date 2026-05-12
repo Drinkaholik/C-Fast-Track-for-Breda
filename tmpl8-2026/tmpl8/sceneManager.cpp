@@ -17,6 +17,7 @@ void SceneManager::InitMap()
 void SceneManager::LoadScene(int sceneID)
 {
 	currentScene = sceneList[sceneID].get();
+	currentScene->LoadScene();
 }
 
 Scene* SceneManager::GetScene()

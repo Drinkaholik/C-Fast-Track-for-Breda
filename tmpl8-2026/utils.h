@@ -21,7 +21,6 @@ namespace utils
 		T yDistance = abs(y1 - y2);
 
 		return abs(sqrt((xDistance * xDistance) + (yDistance * yDistance))); // Finding hypotenuse
-
 	}
 
 	

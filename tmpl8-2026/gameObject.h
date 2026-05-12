@@ -1,10 +1,10 @@
 #pragma once
 
+#include "baseComponents.h" // FOrward declaration wasn't working i dont think
 
 #include <vector>
 #include <memory>
 
-struct Component;
 
 // Has a world-space position
 // Can hold pointers to components like colliders and spriterenderers

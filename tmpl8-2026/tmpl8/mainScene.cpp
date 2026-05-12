@@ -1,4 +1,5 @@
 #include "mainScene.h"
+
 #include "spriteList.h"
 #include "gameObject.h"
 #include "camera.h"
@@ -24,13 +25,13 @@ void MainScene::LoadScene()
 	camera->GetComponent<Camera>()->SetTarget(player.get());
 
 	// Add to vector
-	/*sceneObjects.push_back(move(camera));
+	sceneObjects.push_back(move(camera));
 	sceneObjects.push_back(move(player));
 	sceneObjects.push_back(move(planet1));
 	sceneObjects.push_back(move(planet2));
 	
 	oCamera = sceneObjects[0].get();
-	oPlayer = sceneObjects[1].get();*/
+	oPlayer = sceneObjects[1].get();
 	
 
 

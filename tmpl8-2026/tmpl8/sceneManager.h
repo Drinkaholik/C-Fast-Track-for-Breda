@@ -27,10 +27,7 @@ public:
 
 private:
 
-	// Holds all the gameObjects a level starts with
-	// Lets me have just a single scene class with different implementations, instead of a different class for each scene
-
-	void InitMap();
+	void InitMap(); // trying to init map of unique ptrs in header was causing issues - copy constructor being invoked?
 
 	Scene* currentScene;
 

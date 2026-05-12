@@ -11,6 +11,7 @@
 struct SceneData;
 struct CollisionSystem;
 
+// Abstract class
 // Acts as a container for all gameObjects & logic in a given scene
 
 class Scene

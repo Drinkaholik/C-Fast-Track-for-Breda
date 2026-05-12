@@ -51,7 +51,11 @@ void MainScene::LoadScene(bool debug)
 
 	camera->GetComponent<Camera>()->SetTarget(player.get());
 
+	auto star = make_unique<GameObject>(vec2(0, 0));
+	star->AddComponent<SpriteRenderer>(SpriteList::sprites["star"]);
+
 	// Add to vector
+	sceneObjects.push_back(move(star));
 	sceneObjects.push_back(move(camera));
 	sceneObjects.push_back(move(player));
 	sceneObjects.push_back(move(planet1));

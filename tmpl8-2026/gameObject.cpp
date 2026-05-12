@@ -29,6 +29,9 @@ void GameObject::Start()
 
 void GameObject::Tick()
 {
+
+
+
 	for (const auto& component : components)
 	{
 		component->Tick();

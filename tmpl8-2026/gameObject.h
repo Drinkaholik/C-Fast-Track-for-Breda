@@ -1,6 +1,6 @@
 #pragma once
 
-#include "baseComponents.h" // FOrward declaration wasn't working i dont think
+#include "baseComponents.h" // Forward declaration wasn't working I dont think
 #include "template.h"
 
 #include <vector>

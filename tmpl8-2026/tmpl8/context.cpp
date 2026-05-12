@@ -11,8 +11,8 @@ void Context::Transition(State* newState)
 {
 	if (currentState == newState) return;
 
+	currentState = newState;
 
-
-
+	// Is this really all the code I need?
 
 }

@@ -2,10 +2,11 @@
 
 #include <vector>
 
-struct GravBody;
+class GravBody;
 
-struct GravitySystem
+class GravitySystem
 {
+public:
 	inline static std::vector<GravBody*> bodies;
 
 

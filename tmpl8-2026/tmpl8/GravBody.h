@@ -3,7 +3,7 @@
 #include "template.h"
 
 
-struct GravBody : public Component
+class GravBody : public Component
 {
 
 	/*Whats the best way to do this ?

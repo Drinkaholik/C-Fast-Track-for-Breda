@@ -5,21 +5,26 @@
 
 class GameObject; // Forward declaration to prevent circular dependancy
 
-struct Component // Abstract struct
+class Component // Abstract struct
 {
-	GameObject* gameObject; // Pointer instead of ref so I don't need to pass go in constructor, would add extra boilerplate
 
+public:
+	GameObject* gameObject; // Pointer instead of ref so I don't need to pass go in constructor, would add extra boilerplate
 	virtual void Start();
 	virtual void Tick();
 
 	virtual ~Component() = 0;
+
+	
 };
 
 
 
 // Simple bounding box collider
-struct Collider : public Component
+class Collider : public Component
 {
+
+public:
 	Tmpl8::vec2 p1; // xMin, yMin
 	Tmpl8::vec2 p2; // xMax, yMax
 
@@ -46,6 +51,7 @@ struct Collider : public Component
 
 	void Tick() override;
 
+
 	// Structors
 	Collider(Sprite* sprite); // Initialize thru sprite size
 
@@ -55,8 +61,9 @@ struct Collider : public Component
 };
 
 
-struct SpriteRenderer : public Component
+class SpriteRenderer : public Component
 {
+public:
 	Surface* screen; // Caches Central::surface - does that actually provide performance benefits? both are pointers. Apparently yes (cache misses?)
 	Sprite* sprite;
 

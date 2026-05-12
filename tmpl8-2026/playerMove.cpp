@@ -79,7 +79,7 @@ void PlayerMove::Move()
 
     float& dt = Central::deltaTime;
 
-    collider->MoveAndCollide(vel * dt);
+    collider->MoveAndCollide(vel * dt); // diagonal movement is quicker - change here or in moveandcollide()?
 
 
     // Position clamp doesnt work with component setup, since it relies on width/height values that might not exist

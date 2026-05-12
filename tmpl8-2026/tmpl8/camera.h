@@ -6,9 +6,10 @@
 class GameObject;
 
 
-struct Camera : public Component
+class Camera : public Component
 {
 
+public:
 	Camera(GameObject* target);
 
 	/*struct Rect

@@ -157,10 +157,10 @@ void Collider::DrawCollider(bool debug)
 	vec2 offset = Central::camera->pos;
 
 	Central::surface->Box(
-		p1.x - offset.x, 
-		p1.y - offset.y, 
-		p2.x - offset.y, 
-		p2.y - offset.y, 
+		round(p1.x - offset.x), 
+		round(p1.y - offset.y), 
+		round(p2.x - offset.x), 
+		round(p2.y - offset.y), 
 		0xFF0000);
 };
 

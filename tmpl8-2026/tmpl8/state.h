@@ -1,5 +1,7 @@
 #pragma once
-#include "context.h"
+
+
+class Context;
 
 // Abstract class
 
@@ -10,13 +12,15 @@ class State
 {
 public:
 
+	State(Context* context) : context(context) {};
+
 	virtual void Tick() = 0;
 
 private:
 
 	Context* context;
 
-	virtual void TransitionLogic() = 0;
+	virtual void TransitionLogic() = 0; // Calls context->Transition based on certain conditions
 
 
 	

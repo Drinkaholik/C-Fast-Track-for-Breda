@@ -2,10 +2,11 @@
 
 #include <vector>
 
-struct Collider;
+class Collider;
 
-struct CollisionSystem
+class CollisionSystem
 {
+public:
 	inline static std::vector<Collider*> colliders;
 
 

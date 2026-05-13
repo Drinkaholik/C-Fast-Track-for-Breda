@@ -26,13 +26,13 @@ void MainScene::LoadScene(bool debug)
 	oCamera = cameraPrefab.Load(this, vec2(0, 0));
 
 	housePrefab.Load(this, vec2(0, 0));
-	housePrefab.Load(this, vec2(400, 400));
-	housePrefab.Load(this, vec2(-400, -400));
+	housePrefab.Load(this, vec2(400, 0));
+	//housePrefab.Load(this, vec2(-400, -400));
 
 	// Player always needs to be on top - unless I add clouds or smth
 	oPlayer = playerPrefab.Load(this, vec2(0, 0));
 
-	missileSpawnerPrefab.Load(this, oCamera, oPlayer);
+	missileSpawnerPrefab.Load(this, oPlayer);
 
 	oCamera->GetComponent<Camera>()->SetTarget(oPlayer);
 

@@ -14,7 +14,7 @@ public:
 	void Start() override;
 	void Tick() override;
 
-	MissileSpawner(Scene* scene, GameObject* cam, GameObject* player) : scene(scene), camera(cam), player(player) {};
+	MissileSpawner(Scene* scene, GameObject* player) : scene(scene), player(player) {};
 
 private:
 
@@ -53,7 +53,6 @@ private:
 
 	// Pointers
 	Scene* scene;
-	GameObject* camera; // Needed to spawn off-screen
 	GameObject* player;
 
 

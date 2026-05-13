@@ -7,14 +7,7 @@
 using namespace std;
 using namespace Tmpl8;
 
-// Constructors //
-GameObject::GameObject(vec2 spawnPos)
-	: pos(spawnPos)
-{};
 
-GameObject::GameObject(vec2 spawnPos, bool debug)
-	: pos(spawnPos), debug(debug)
-{};
 
 
 void GameObject::Start()

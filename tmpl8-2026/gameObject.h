@@ -77,10 +77,10 @@ public:
 	virtual void Tick(); // Per-frame logic
 
 
-	// Constructors
-	GameObject(Tmpl8::vec2 spawnPos);
+	// Constructors //
+	GameObject(vec2 spawnPos) : pos(spawnPos){};
 
-	GameObject(Tmpl8::vec2 spawnPos, bool debug);
+	GameObject(vec2 spawnPos, bool debug) : pos(spawnPos), debug(debug){};
 
 
 

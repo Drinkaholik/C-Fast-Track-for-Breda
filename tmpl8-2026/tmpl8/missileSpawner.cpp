@@ -69,7 +69,13 @@ void MissileSpawner::SpawnSingle()
 	// Time between warning icon and missile spawn
 	while (count > 0) count -= Central::dts;
 
-	vec2 realSpawn = camera->pos - relSpawn;
+	vec2 playerPos = player->pos;
+
+	vec2 realSpawn = playerPos - relSpawn;
+
+	cout << "relativeSpawn - " << "x: " << to_string(relSpawn.x) << " , " << "y: " << to_string(relSpawn.y) << endl
+		<< "cameraPosition - " << "x: " << to_string(playerPos.x) << " , " << "y: " << to_string(playerPos.y) << endl
+		<< "realSpawn - " << "x: " << to_string(realSpawn.x) << " , " << "y: " << to_string(realSpawn.y) << endl << endl;
 
 	// Spawn object
 	auto* m = pool->SpawnFromPool();

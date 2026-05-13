@@ -18,5 +18,15 @@ Credits:
 sign() in utils.h
 - taken from StackOverflow : https://stackoverflow.com/a/4609795
 
+Deregister() in collisionSystem.h
+- taken from StackOverflow: https://stackoverflow.com/a/3385251/32197364
+
 AddComponent() in gameObject.h
 - written by AI
+
+
+My notes:
+Order of operations for gameObjects:
+1. Constructor runs
+2. Start() runs
+3. Tick() runs

@@ -7,15 +7,13 @@ class GameObject; // Forward declaration to prevent circular dependancy
 
 class Component // Abstract struct
 {
-
 public:
+
 	GameObject* gameObject; // Pointer instead of ref so I don't need to pass go in constructor, would add extra boilerplate
 	virtual void Start();
 	virtual void Tick();
 
 	virtual ~Component() = 0;
-
-	
 };
 
 
@@ -23,19 +21,13 @@ public:
 // Simple bounding box collider
 class Collider : public Component
 {
-
 public:
+
 	Tmpl8::vec2 p1; // xMin, yMin
 	Tmpl8::vec2 p2; // xMax, yMax
 
-	Tmpl8::vec2 size; // width, height
-
-	void UpdateRect(Tmpl8::vec2 pos);
-
-	// I really like snake_case here but PascalCase in other places...
-	void DrawCollider(bool debug); // Bool set by gameObject
-
-	
+	void Start() override;
+	void Tick() override;
 
 	// Check if current object would collide with another object at X position
 	bool CollideAt(Tmpl8::vec2 pos, Collider* go); // Check against single object, faster
@@ -49,7 +41,6 @@ public:
 	void MoveAndCollide(Tmpl8::vec2 distance);
 
 
-	void Tick() override;
 
 
 	// Structors
@@ -57,27 +48,54 @@ public:
 
 	Collider(Tmpl8::vec2 size); // Initialize with manual size
 
+	~Collider(); // Used to deregister from CollisionSystem::colliders
+
+private:
+
+	Tmpl8::vec2 size; // width, height
+
+	void UpdateRect(Tmpl8::vec2 pos);
+
+	// I really like snake_case here but PascalCase in other places...
+	void DrawCollider(bool debug); // Bool set by gameObject
 
 };
 
 
+// Sprites live in world-space
 class SpriteRenderer : public Component
 {
 public:
+	
+	void Tick() override;
+
+	//Structors
+	SpriteRenderer(Sprite* spr);
+
+private:
+
 	Surface* screen; // Caches Central::surface - does that actually provide performance benefits? both are pointers. Apparently yes (cache misses?)
 	Sprite* sprite;
 
 	Tmpl8::vec2 size;
 
-	//float xScale, yScale = 1.0f; // DrawScaled doesnt work properly...
-
 	void Draw(Tmpl8::vec2 pos);
+};
+
+
+
+// Images live in screen-space
+class Image : public Component
+{
+public:
 
 	void Tick() override;
 
+	// Structors
+	Image(Sprite* spr) : sprite(spr), screen(Central::surface) {};
 
-	//Structors
-	SpriteRenderer(Sprite* spr);
+private:
 
-
+	Surface* screen;
+	Sprite* sprite;
 };

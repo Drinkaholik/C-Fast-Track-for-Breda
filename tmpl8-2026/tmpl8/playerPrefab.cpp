@@ -4,7 +4,6 @@
 #include "surface.h"
 #include "gameObject.h"
 #include "spriteList.h"
-#include "gravBody.h"
 
 using namespace std;
 using namespace Tmpl8;
@@ -18,7 +17,6 @@ unique_ptr<GameObject> PlayerPrefab::Load(vec2 pos)
 
 	go->AddComponent<SpriteRenderer>(spr);
 	auto& col = go->AddComponent<Collider>(spr);
-	go->AddComponent<GravBody>(20, &col);
 	go->AddComponent<PlayerMove>(&col);
 
 	return go;

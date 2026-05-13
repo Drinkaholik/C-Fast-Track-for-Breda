@@ -18,6 +18,10 @@ void SceneManager::InitMap()
 // Loads with debug info
 void SceneManager::LoadScene(int sceneID, bool debug)
 {
+	if (currentScene != nullptr)
+	{
+		currentScene->UnloadScene();
+	}
 	currentScene = sceneList[sceneID].get();
 	currentScene->LoadScene(debug);
 }

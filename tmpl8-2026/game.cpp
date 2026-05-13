@@ -2,10 +2,6 @@
 
 #include "central.h"
 #include "utils.h" // sign
-#include "gameObject.h"
-#include "playerMove.h"
-#include "gravBody.h"
-#include "camera.h"
 #include "sceneManager.h"
 
 

@@ -31,15 +31,23 @@ Collider::Collider(Sprite* sprite)
 	size.x = sprite->GetWidth();
 	size.y = sprite->GetHeight();
 
-	//UpdateRect(); // Cant be here because GameObject only gets set after constructor runs
+	//UpdateRect(); // Cant be here because GameObject only gets set after constructor runs, set in first Tick
 }
 
-Collider::Collider(vec2 size)
-	: size(size)
+Collider::Collider(vec2 size) : size(size){};
+
+Collider::~Collider()
 {
-};
+	CollisionSystem::Deregister(this);
+}
 
 
+void Collider::Start()
+{
+	// Idk if it actually matters whether this runs in Start() or only in first Tick()
+	UpdateRect(gameObject->pos);
+	CollisionSystem::Register(this);
+}
 
 void Collider::Tick()
 {
@@ -55,7 +63,6 @@ void Collider::UpdateRect(vec2 pos)
 	p2.x = round(pos.x + size.x / 2);
 	p2.y = round(pos.y + size.y / 2);
 }
-
 
 bool Collider::CollideAt(vec2 pos, Collider* col)
 {
@@ -87,12 +94,12 @@ bool Collider::CollideAt(vec2 pos, Collider* col)
 };
 
 
-
 // More efficient (probably) way:
 // If the distance is lower than collider width / height, check it directly
 // If its higher, sweep toward there in increments equal to the width / height
 // If there is a collision, sweep backwards by half width/height
 // Then sweep either forward or backwards by a quarter, and from there go 1 pixel at a time until 0 px from the collider
+// No clue how to implement without creating a mess of if-else trees tho
 
 void Collider::MoveAndCollide(vec2 distance)
 {
@@ -145,9 +152,6 @@ void Collider::MoveAndCollide(vec2 distance)
 	pos.y = targetPos.y;
 }
 
-
-	
-
 void Collider::DrawCollider(bool debug)
 {
 	if (!debug) return;
@@ -164,12 +168,7 @@ void Collider::DrawCollider(bool debug)
 		0xFF0000);
 };
 
-
-
 #pragma endregion
-
-
-
 
 
 // SpriteRenderer //
@@ -182,16 +181,15 @@ SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
 	screen = Central::surface;
 };
 
-
-//SpriteRenderer::~SpriteRenderer() = default;
-
 void SpriteRenderer::Draw(vec2 pos)
 {
 
 	if (Central::camera == nullptr) return;
 
-	vec2 offset = Central::camera->pos;
-	vec2 screenPos = pos - (size * 0.5) - offset;
+	vec2 camOffset = Central::camera->pos;
+	vec2 originOffset = size * 0.5; // Ensures origin is centre, not top-left
+
+	vec2 screenPos = pos - originOffset - camOffset;
 
 	// Only draw if within viewport
 
@@ -210,3 +208,7 @@ void SpriteRenderer::Tick()
 }
 
 #pragma endregion
+
+
+
+// Image //

@@ -29,7 +29,7 @@ private:
 
 	void InitMap(); // trying to init map of unique ptrs in header was causing issues - copy constructor being invoked?
 
-	Scene* currentScene;
+	Scene* currentScene = nullptr;
 
 	
 

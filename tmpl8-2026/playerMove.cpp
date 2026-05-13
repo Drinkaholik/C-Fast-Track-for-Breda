@@ -48,7 +48,7 @@ void PlayerMove::Move()
     {
         vel.x -= decel * utils::sign(vel.x);
 
-        if (std::abs(vel.x) < 0.01f) // prevent overshoot
+        if (std::abs(vel.x) < 0.01f) // prevent overshoot (what did i mean here???)
         {
             vel.x = 0;
         }

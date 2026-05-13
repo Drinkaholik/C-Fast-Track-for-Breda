@@ -5,7 +5,6 @@
 #include "gameObject.h"
 #include "camera.h"
 #include "playerPrefab.h"
-#include "planetPrefab.h"
 #include "cameraPrefab.h"
 
 
@@ -13,7 +12,6 @@ using namespace std;
 using namespace Tmpl8;
 
 PlayerPrefab playerPrefab;
-PlanetPrefab planetPrefab;
 CameraPrefab cameraPrefab;
 
 
@@ -22,8 +20,6 @@ void MainScene::LoadScene(bool debug)
 	// Instantiate objects
 	auto camera = cameraPrefab.Load(vec2(0, 0));
 	auto player = playerPrefab.Load(vec2(0, 0));
-	auto planet1 = planetPrefab.Load(vec2(100, 100), 100, SpriteList::sprites["ball"]);
-	auto planet2 = planetPrefab.Load(vec2(200,200), 100, SpriteList::sprites["ball"]);
 
 	camera->GetComponent<Camera>()->SetTarget(player.get());
 
@@ -34,8 +30,6 @@ void MainScene::LoadScene(bool debug)
 	sceneObjects.push_back(move(star));
 	sceneObjects.push_back(move(camera));
 	sceneObjects.push_back(move(player));
-	sceneObjects.push_back(move(planet1));
-	sceneObjects.push_back(move(planet2));
 
 	oCamera = sceneObjects[0].get();
 	oPlayer = sceneObjects[1].get();

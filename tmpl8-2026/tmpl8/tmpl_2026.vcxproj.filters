@@ -13,9 +13,6 @@
     <ClCompile Include="particleEmitter.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="GravBody.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="baseComponents.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -35,9 +32,6 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="playerPrefab.cpp">
-      <Filter>Prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="planetPrefab.cpp">
       <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="..\playerMove.cpp">
@@ -73,7 +67,15 @@
     <ClCompile Include="UI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="math.cpp" />
+    <ClCompile Include="atttackState.cpp">
+      <Filter>Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="defenseState.cpp">
+      <Filter>Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="moveState.cpp">
+      <Filter>Player\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -86,9 +88,6 @@
       <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="particleEmitter.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="GravBody.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="baseComponents.h">
@@ -115,9 +114,6 @@
     <ClInclude Include="playerPrefab.h">
       <Filter>Prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="planetPrefab.h">
-      <Filter>Prefabs</Filter>
-    </ClInclude>
     <ClInclude Include="..\playerMove.h">
       <Filter>Player</Filter>
     </ClInclude>
@@ -135,9 +131,6 @@
     </ClInclude>
     <ClInclude Include="mainScene.h">
       <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="gravitySystem.h">
-      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="collisionSystem.h">
       <Filter>Systems</Filter>
@@ -157,7 +150,15 @@
     <ClInclude Include="UI.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="math.h" />
+    <ClInclude Include="moveState.h">
+      <Filter>Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="attackState.h">
+      <Filter>Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="defenseState.h">
+      <Filter>Player\States</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObjects">
@@ -189,6 +190,9 @@
     </Filter>
     <Filter Include="State Pattern">
       <UniqueIdentifier>{56367da7-6192-4238-b30c-e78890efc248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player\States">
+      <UniqueIdentifier>{94f32910-fcf2-4763-8787-23b873981a22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

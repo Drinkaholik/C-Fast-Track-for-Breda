@@ -35,24 +35,24 @@ namespace Tmpl8
     {
     }
 
-
-
-
     // -----------------------------------------------------------
     // Main application tick function
     // -----------------------------------------------------------
     void Game::Tick(float deltaTime)
     {
-        screen->Clear(0x00bb33); // clear the graphics window
+        screen->Clear(0x008833); // clear the graphics window
 
         sceneManager->GetScene()->Tick(); // Drive gameObject update loop
 
         
-        ShowFPS(10, 10, deltaTime);
+        ShowFPS(10, 10);
 
         screen->Bar(100, 100, 300, 120, 0xFFFFFF);
 
         screen->Plot(300, 300, 0xFF0000);
+
+
+   
 
     }
   
@@ -71,12 +71,12 @@ namespace Tmpl8
     float smoothedFPS = 1;
     float smoothing = 100; // Higher means smoother FPS, but less precise
 
-    void Game::ShowFPS(int xPos, int yPos, float deltaTime)
+    void Game::ShowFPS(int xPos, int yPos)
     {
 
         // Why mult by 1000 specifically? Measured in milliseconds?
         // Idk but it matches what i can see with sprite movement
-        float realFPS = (1 / deltaTime) * 1000; 
+        float realFPS = (1 / Central::deltaTime) * 1000; 
 
         // Higher value as the gap between realFPS and smoothedFPS increases,
         // stops it from taking ages to catch up

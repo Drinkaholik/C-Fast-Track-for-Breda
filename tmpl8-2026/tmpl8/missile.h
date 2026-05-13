@@ -3,7 +3,7 @@
 #include "template.h"
 
 class GameObject;
-
+class MissilePool;
 
 class Missile : public Component
 {
@@ -15,24 +15,29 @@ public:
 
 
 	// Structors
-	Missile(GameObject* player) : player(player) {};
+	Missile(MissilePool* pool, GameObject* player) : pool(pool), player(player) {};
 
 
 
 private:
 
-	float speed = 5;
-	float speedRange = 2; // random range
-	float angleRange = 0.1;
+	float speed = 300.0f;
+	float speedRange = 100.0f; // random range
+	float angleRange = 0.1f;
+
+	float lifetime = 5.0f;
 
 	Tmpl8::vec2 direction; // Working with vector directions is soooooo nice
 
-	GameObject* player;
+	GameObject* player; // Needed for targeting
+	MissilePool* pool; // Needed to return self to pool
 
 	void SetSpeed();
 	void SetDirection();
 
 	void Move();
+
+	void Respawn();
 
 
 

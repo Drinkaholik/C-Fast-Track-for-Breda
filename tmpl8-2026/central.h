@@ -27,7 +27,8 @@ struct Central
 	static const int screenHeight = 1000;
 	
 	// Time
-	static float deltaTime;
+	static float deltaTime; // Delta time in milliseconds
+	static float dts; // Delta time in seconds
 
 };
 

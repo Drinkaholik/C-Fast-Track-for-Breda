@@ -74,16 +74,16 @@ void PlayerMove::Move()
     float& xPos = gameObject->pos.x;
     float& yPos = gameObject->pos.y;
 
-    float& dt = Central::deltaTime;
+    float& dt = Central::dts;
 
     vec2 normVel = vec2::normalize(vel);
 
-    cout << "xVel: " << to_string(normVel.x)
-        << "yVel: " << to_string(normVel.y) << endl;
+   /* cout << "xVel: " << to_string(normVel.x) << " , "
+        << "yVel: " << to_string(normVel.y) << endl;*/
 
     // Not gonna use MoveAndCollide() since UFO shouldn't bump into anything
-    xPos += vel.x;
-    yPos += vel.y;
+    xPos += vel.x * dt;
+    yPos += vel.y * dt;
 
 };
 

@@ -370,7 +370,8 @@ int main( int argc, char **argv )
 		// calculate frame time and pass it to game->Tick
 		float elapsedTime = t.elapsed();
 		t.reset();
-		Central::deltaTime = elapsedTime / 10;
+		Central::deltaTime = elapsedTime; // Delta time in milliseconds
+		Central::dts = elapsedTime / 1000; // Delta time in seconds
 		game->Tick( elapsedTime );
 		// event loop
 		SDL_Event event;

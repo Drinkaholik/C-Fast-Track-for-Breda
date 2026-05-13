@@ -1,30 +1,34 @@
 #include "missilePool.h"
 #include "gameObject.h"
+#include "missilePrefab.h"
+#include "missile.h"
 
 
 using namespace Tmpl8;
 using namespace std;
 
-void MissilePool::InstantiateToPool(GameObject* player)
+MissilePrefab missilePrefab;
+
+void MissilePool::InstantiateToPool(Scene* scene, GameObject* player)
 {
-	/*for (int i = 0; i < poolSize; i++)
+	for (int i = 0; i < poolSize; i++)
 	{
-		auto go = missilePrefab.Load(vec2(0, 0), player);
+		auto go = missilePrefab.Load(scene, this, vec2(0, 0), player);
 		go->active = false;
-		pool.push_back(move(go));
-	}*/
+		pool.push(go->GetComponent<Missile>());
+	}
 }
 
-void MissilePool::SpawnFromPool(Missile* m, vec2 pos)
+Missile* MissilePool::SpawnFromPool()
 {
-	m->Spawn(pos);
+	auto& m = pool.front();
+	pool.pop();
 	m->gameObject->active = true;
+	return m;
 }
 
 void MissilePool::ReturnToPool(Missile* m)
 {
-
-
-
-
+	pool.push(m);
+	m->gameObject->active = false;
 }

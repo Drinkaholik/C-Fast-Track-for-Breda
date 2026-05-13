@@ -20,9 +20,9 @@ private:
     Tmpl8::vec2 vel = Tmpl8::vec2(0, 0);
 
     // Movement values
-    float accel = 0.008;
-    float decel = 0.05;
-    float maxSpeed = 1.2;
+    float accel = 60;
+    float decel = 30;
+    float maxSpeed = 180;
 
     Collider* collider;
 

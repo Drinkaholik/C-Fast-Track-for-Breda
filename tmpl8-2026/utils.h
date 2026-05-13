@@ -25,6 +25,8 @@ namespace utils
 		return abs(sqrt((xDistance * xDistance) + (yDistance * yDistance))); // Finding hypotenuse
 	}
 
+
+	// Returns a value between -range and range
 	inline float random_range(float range)
 	{
 		// Bit of a hacky way to get a random range but i think it works?

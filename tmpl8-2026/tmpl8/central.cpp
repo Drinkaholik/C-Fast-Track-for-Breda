@@ -9,6 +9,7 @@ GameObject* Central::camera = nullptr;
 
 
 float Central::deltaTime = 0;
+float Central::dts = 0;
 
 
 

@@ -1,34 +1,36 @@
 #pragma once
 
-#include "missile.h"
-#include "missilePrefab.h"
-#include "template.h"
 #include "gameObject.h"
 #include <vector>
 #include <memory>
+#include <queue>
+
+class GameObject;
+class Missile;
+class MissilePrefab;
+
+class Scene;
 
 
 class MissilePool
 {
 public:
 
-	void InstantiateToPool(GameObject* player);
+	void InstantiateToPool(Scene* scene, GameObject* player);
 
-	void SpawnFromPool(Missile* m, Tmpl8::vec2 pos);
+	Missile* SpawnFromPool();
 
 	void ReturnToPool(Missile* m);
 
 
 	// Structors
-	//MissilePool(int poolSize) : poolSize(poolSize) {};
+	MissilePool(int poolSize) : poolSize(poolSize) {};
 
 private:
 
-	MissilePrefab missilePrefab;
-
 	int poolSize;
 
-	//GameObject* pool[];
+	std::queue<Missile*> pool;
 	
 };
 

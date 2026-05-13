@@ -1,6 +1,7 @@
 #include "missile.h"
 
 #include "gameObject.h"
+#include "missilePool.h"
 #include "utils.h"
 #include "central.h"
 
@@ -12,6 +13,7 @@ using namespace std;
 
 void Missile::Spawn(vec2 pos)
 {
+	gameObject->pos = pos;
 	SetSpeed();
 	SetDirection();
 }
@@ -19,11 +21,12 @@ void Missile::Spawn(vec2 pos)
 void Missile::Tick()
 {
 	Move();
+	Respawn();
 }
 
 void Missile::Move()
 {
-	gameObject->pos += direction * speed * Central::deltaTime;
+	gameObject->pos += direction * speed * Central::dts;
 }
 
 // Randomizes speed
@@ -46,3 +49,11 @@ void Missile::SetDirection()
 
 }
 
+void Missile::Respawn()
+{
+	lifetime -= Central::dts;
+	if (lifetime <= 0)
+	{
+		pool->ReturnToPool(this);
+	}
+}

@@ -11,7 +11,7 @@ void Scene::LoadScene(bool debug)
 	for (auto& obj : sceneObjects)
 	{
 		obj->Start();
-		obj->debug = debug;
+		//obj->debug = debug;
 	}
 }
 

@@ -22,7 +22,7 @@ public:
 private:
 
 	float speed = 300.0f;
-	float speedRange = 100.0f; // random range
+	float speedRange = 0.3f; // random range, %
 	float angleRange = 0.1f;
 
 	float lifetime = 5.0f;

@@ -1,21 +1,25 @@
 
 
-
+Dont forget!!!! ->->->->->->->->->
+When handing in assignments based on this template, please run
+clean.bat prior to zipping the folder. This deletes any intermediate
+files created during compilation.
+->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->
 
 #######   For teachers   #######
 
 
 ##  Game Instructions  ##
 
-You are Mr.CowLover34, a notorious Zordian shitposter-cum-activist. 
+You are Mr.CowLover34, a notorious Zordian shitposter-cum-activist with a penchant for Earthly bovines. 
 You have made it your life goal to bring as many cows as possible to your personal sanctuary using 
-your saucer-drones' onboard transporters. 
+your saucer-drones' onboard Teleportinators™. 
 Hoover up as many cows as you can before those pesky human air defenses take you down. 
 
 Controls:
 WASD to move
 Shift to dash
-Space to brake
+Space to abduct
 
 
 

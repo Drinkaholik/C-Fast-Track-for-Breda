@@ -129,6 +129,10 @@
     <ClCompile Include="central.cpp" />
     <ClCompile Include="baseComponents.cpp" />
     <ClCompile Include="context.cpp" />
+    <ClCompile Include="cow.cpp" />
+    <ClCompile Include="cowPrefab.cpp" />
+    <ClCompile Include="cowManager.cpp" />
+    <ClCompile Include="cowManagerPrefab.cpp" />
     <ClCompile Include="cursor.cpp" />
     <ClCompile Include="defenseState.cpp" />
     <ClCompile Include="housePrefab.cpp" />
@@ -142,7 +146,6 @@
     <ClCompile Include="missilePool.cpp" />
     <ClCompile Include="particleEmitter.cpp" />
     <ClCompile Include="playerContext.cpp" />
-    <ClCompile Include="playerHP.cpp" />
     <ClCompile Include="playerPrefab.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="sceneManager.cpp" />
@@ -162,6 +165,10 @@
     <ClInclude Include="camera.h" />
     <ClInclude Include="cameraPrefab.h" />
     <ClInclude Include="collisionSystem.h" />
+    <ClInclude Include="cow.h" />
+    <ClInclude Include="cowPrefab.h" />
+    <ClInclude Include="cowManager.h" />
+    <ClInclude Include="cowManagerPrefab.h" />
     <ClInclude Include="cursor.h" />
     <ClInclude Include="defenseState.h" />
     <ClInclude Include="housePrefab.h" />
@@ -185,9 +192,6 @@
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
     <ClInclude Include="UI.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\readme.txt" />

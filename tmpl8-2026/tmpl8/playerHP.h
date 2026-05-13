@@ -18,7 +18,7 @@ public:
 
 
 	// These functions are small enough to keep in the header
-	// Should give better performance since it'll stop cache misses
+	// Should give better performance since it'll stop (or reduce?) cache misses
 	void SetHP(int value)
 	{
 		value = Clamp(hp, 0, maxHP);
@@ -34,8 +34,5 @@ public:
 
 	int GetHP() {return hp;}
 	
-
-
-
 };
 

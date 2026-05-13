@@ -14,14 +14,14 @@ using namespace Tmpl8;
 
 void PlayerMove::Tick()
 {
+    UpdateInputs();
     Move();
+    Dash();
 };
 
-
-void PlayerMove::Move()
+void PlayerMove::UpdateInputs()
 {
-
-    Game& game = *Central::game; // Cache pointer as ref
+    Game& game = *Central::game; // Get ref to game
 
     // Inputs
     game.UpdateKeys();
@@ -31,60 +31,75 @@ void PlayerMove::Move()
     int leftMove = (game.GetKey(SDL_SCANCODE_A)) ? 1 : 0;
     int rightMove = (game.GetKey(SDL_SCANCODE_D)) ? 1 : 0;
 
+    bool tryDash = (game.GetKey(SDL_SCANCODE_LSHIFT)) ? 1 : 0;
+
     int xInput = rightMove - leftMove;
-    int yInput = upMove - downMove;
+    int yInput = downMove - upMove;
+
+    vec2 rawVector = vec2(xInput, yInput);
+    inputVector = vec2::normalize(rawVector);
+}
 
 
-    // Handle momentum //
-    // X-axis movement
-    if (xInput != 0) // accel
+
+void PlayerMove::Move()
+{
+    // X-axis movement //
+    if (inputVector.x != 0) // accel
     {
-        vel.x += accel * xInput;
+        vel.x += accel * inputVector.x;
     }
     else // decel
     {
         vel.x -= decel * utils::sign(vel.x);
 
         if (std::abs(vel.x) < 0.01f) // prevent overshoot
-        {
             vel.x = 0;
-        }
     }
 
-    // Y-axis movement
-    if (yInput != 0) // accel
+    // Y-axis movement //
+    if (inputVector.y != 0) // accel
     {
-        vel.y += accel * -yInput;
+        vel.y += accel * inputVector.y;
     }
     else // decel
     {
         vel.y -= decel * utils::sign(vel.y);
 
         if (std::abs(vel.y) < 0.01f) // prevent overshoot
-        {
             vel.y = 0;
-        }
     }
 
     // Clamp velocity
-    vel.x = std::clamp(vel.x, -maxSpeed, maxSpeed); 
-    vel.y = std::clamp(vel.y, -maxSpeed, maxSpeed); 
 
-    // Update position
-    float& xPos = gameObject->pos.x;
-    float& yPos = gameObject->pos.y;
+    float xNormMaxSpeed = abs(maxSpeed * inputVector.x); // Prevents diagonals from being faster
+    float yNormMaxSpeed = abs(maxSpeed * inputVector.y);
+
+    vel.x = std::clamp(vel.x, -xNormMaxSpeed, xNormMaxSpeed);
+    vel.y = std::clamp(vel.y, -yNormMaxSpeed, yNormMaxSpeed);
 
     float& dt = Central::dts;
 
-    vec2 normVel = vec2::normalize(vel);
+    // Update position
+    gameObject->pos += vel * dt;
+
 
    /* cout << "xVel: " << to_string(normVel.x) << " , "
         << "yVel: " << to_string(normVel.y) << endl;*/
 
     // Not gonna use MoveAndCollide() since UFO shouldn't bump into anything
-    xPos += vel.x * dt;
-    yPos += vel.y * dt;
+    // using vec::normalize completely ruins movement, idk why
+  
 
 };
+
+
+void PlayerMove::Dash()
+{
+    if (!tryDash) return;
+
+    vel += inputVector * dashSpeed;
+
+}
 
 

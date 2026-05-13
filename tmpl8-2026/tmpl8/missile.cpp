@@ -32,7 +32,7 @@ void Missile::Move()
 // Randomizes speed
 void Missile::SetSpeed()
 {
-	speed += utils::random_range(speedRange);
+	speed *= 1 + utils::random_range(speedRange);
 }
 
 

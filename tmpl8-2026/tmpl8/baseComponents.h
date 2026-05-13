@@ -69,6 +69,11 @@ public:
 	
 	void Tick() override;
 
+	void ChangeSprite(Sprite* spr)
+	{
+		sprite = spr;
+	}
+
 	//Structors
 	SpriteRenderer(Sprite* spr);
 
@@ -90,6 +95,11 @@ class Image : public Component
 public:
 
 	void Tick() override;
+
+	void ChangeImage(Sprite* spr)
+	{
+		sprite = spr;
+	}
 
 	// Structors
 	Image(Sprite* spr) : sprite(spr), screen(Central::surface) {};

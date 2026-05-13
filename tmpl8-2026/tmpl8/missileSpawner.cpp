@@ -17,7 +17,7 @@ void MissileSpawner::Tick()
 {
 	if (!poolFilled)
 	{
-		// DO NOT put in start() - resizing the sceneObjects vector 
+		// DO NOT put in start()!!!!!!!! - resizing the sceneObjects vector 
 		// while its still being iterated over causes dangling references
 		pool->InstantiateToPool(scene, player); 
 		poolFilled = true;

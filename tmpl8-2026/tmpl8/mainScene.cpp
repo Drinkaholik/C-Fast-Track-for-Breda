@@ -27,10 +27,12 @@ void MainScene::LoadScene(bool debug)
 
 	housePrefab.Load(this, vec2(0, 0));
 	housePrefab.Load(this, vec2(400, 0));
-	//housePrefab.Load(this, vec2(-400, -400));
+	housePrefab.Load(this, vec2(-400, 0));
+	housePrefab.Load(this, vec2(0, -400));
+	housePrefab.Load(this, vec2(0, 400));
 
 	// Player always needs to be on top - unless I add clouds or smth
-	oPlayer = playerPrefab.Load(this, vec2(0, 0));
+	oPlayer = playerPrefab.Load(this, vec2(0, 0), 3);
 
 	missileSpawnerPrefab.Load(this, oPlayer);
 

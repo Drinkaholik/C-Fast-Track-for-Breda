@@ -1,9 +1,9 @@
-#include "playerPrefab.h"
+#include "cowPrefab.h"
 
-#include "playerMove.h"
-#include "playerHP.h"
+
 #include "surface.h"
 #include "gameObject.h"
+#include "cow.h"
 #include "spriteList.h"
 #include "scene.h"
 
@@ -11,7 +11,7 @@ using namespace std;
 using namespace Tmpl8;
 
 
-GameObject* PlayerPrefab::Load(Scene* scene, vec2 pos, int maxHP)
+GameObject* CowPrefab::Load(Scene* scene, vec2 pos)
 {
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
@@ -20,9 +20,8 @@ GameObject* PlayerPrefab::Load(Scene* scene, vec2 pos, int maxHP)
 	go->AddComponent<SpriteRenderer>(spr);
 
 	auto& col = go->AddComponent<Collider>(spr);
-	
-	go->AddComponent<PlayerMove>(&col);
-	go->AddComponent<PlayerHP>(maxHP);
+
+	go->AddComponent<Cow>();
 
 	return scene->AddObject(ref);
 

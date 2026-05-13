@@ -38,7 +38,7 @@ Collider::Collider(vec2 size) : size(size){};
 
 Collider::~Collider()
 {
-	CollisionSystem::Deregister(this);
+	//CollisionSystem::Deregister(this); // Causes an issue on program shutdown - need to fix later
 }
 
 
@@ -52,7 +52,7 @@ void Collider::Start()
 void Collider::Tick()
 {
 	UpdateRect(gameObject->pos);
-	DrawCollider(gameObject->debug);
+	DrawCollider();
 }
 
 void Collider::UpdateRect(vec2 pos)
@@ -152,9 +152,9 @@ void Collider::MoveAndCollide(vec2 distance)
 	pos.y = targetPos.y;
 }
 
-void Collider::DrawCollider(bool debug)
+void Collider::DrawCollider()
 {
-	if (!debug) return;
+	if (!gameObject->debug) return;
 
 	if (Central::camera == nullptr) return;
 

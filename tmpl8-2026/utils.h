@@ -1,5 +1,7 @@
 #pragma once
 
+#include "template.h"
+
 
 // Global functions for use
 namespace utils
@@ -23,7 +25,57 @@ namespace utils
 		return abs(sqrt((xDistance * xDistance) + (yDistance * yDistance))); // Finding hypotenuse
 	}
 
-	
+	inline float random_range(float range)
+	{
+		// Bit of a hacky way to get a random range but i think it works?
+		float r = Rand(2 * range);
+
+		if (r > range)
+		{
+			r -= range;
+			r *= -1;
+		}
+		return r;
+	}
+
+
+
+
+
+	// I dont think this is gonna work
+	template <typename T> class generic_array
+	{
+	public:
+
+
+		generic_array(int size) : size(size)
+		{
+			items = new T[size];
+		}
+
+		T* get(int i)
+		{
+			if (i >= size) return nullptr;
+			return items[i];
+		}
+
+		void set(int i, T item)
+		{
+			if (i >= size) return;
+			items[i] = item;
+		}
+
+		int get_size()
+		{
+			return size;
+		}
+
+
+	private:
+		T* items;
+		int size;
+
+	};
 
 
 };

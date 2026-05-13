@@ -34,8 +34,8 @@ public:
 	bool CollideAt(Tmpl8::vec2 pos); // Check against system's collider array
 
 	// Same as CollideAt, but returns collision instance
-	GameObject InstancePlace(Tmpl8::vec2 pos, Collider* go);
-	GameObject InstancePlace(Tmpl8::vec2 pos);
+	GameObject CollideWith(Tmpl8::vec2 pos, Collider* go);
+	GameObject CollideWith(Tmpl8::vec2 pos);
 
 	// Move gameObject by nDistance, if it would not collide
 	void MoveAndCollide(Tmpl8::vec2 distance);
@@ -57,7 +57,7 @@ private:
 	void UpdateRect(Tmpl8::vec2 pos);
 
 	// I really like snake_case here but PascalCase in other places...
-	void DrawCollider(bool debug); // Bool set by gameObject
+	void DrawCollider(); // Bool set by gameObject
 
 };
 

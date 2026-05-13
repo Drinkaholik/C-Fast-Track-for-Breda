@@ -124,7 +124,6 @@
     <ClCompile Include="..\game.cpp" />
     <ClCompile Include="..\gameObject.cpp" />
     <ClCompile Include="..\playerMove.cpp" />
-    <ClCompile Include="atttackState.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cameraPrefab.cpp" />
     <ClCompile Include="central.cpp" />
@@ -132,11 +131,18 @@
     <ClCompile Include="context.cpp" />
     <ClCompile Include="cursor.cpp" />
     <ClCompile Include="defenseState.cpp" />
+    <ClCompile Include="housePrefab.cpp" />
     <ClCompile Include="mainScene.cpp" />
     <ClCompile Include="minimap.cpp" />
+    <ClCompile Include="missile.cpp" />
+    <ClCompile Include="missilePrefab.cpp" />
+    <ClCompile Include="missileSpawner.cpp" />
+    <ClCompile Include="missileSpawnerPrefab.cpp" />
     <ClCompile Include="moveState.cpp" />
+    <ClCompile Include="missilePool.cpp" />
     <ClCompile Include="particleEmitter.cpp" />
     <ClCompile Include="playerContext.cpp" />
+    <ClCompile Include="playerHP.cpp" />
     <ClCompile Include="playerPrefab.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="sceneManager.cpp" />
@@ -144,7 +150,6 @@
     <ClCompile Include="state.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
-    <ClCompile Include="turretContext.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -153,18 +158,24 @@
     <ClInclude Include="..\central.h" />
     <ClInclude Include="..\playerMove.h" />
     <ClInclude Include="..\utils.h" />
-    <ClInclude Include="attackState.h" />
     <ClInclude Include="baseComponents.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="cameraPrefab.h" />
     <ClInclude Include="collisionSystem.h" />
     <ClInclude Include="cursor.h" />
     <ClInclude Include="defenseState.h" />
+    <ClInclude Include="housePrefab.h" />
     <ClInclude Include="mainScene.h" />
     <ClInclude Include="minimap.h" />
+    <ClInclude Include="missile.h" />
+    <ClInclude Include="missilePrefab.h" />
+    <ClInclude Include="missileSpawner.h" />
+    <ClInclude Include="missileSpawnerPrefab.h" />
     <ClInclude Include="moveState.h" />
+    <ClInclude Include="missilePool.h" />
     <ClInclude Include="particleEmitter.h" />
     <ClInclude Include="playerContext.h" />
+    <ClInclude Include="playerHP.h" />
     <ClInclude Include="playerPrefab.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="sceneManager.h" />
@@ -173,7 +184,6 @@
     <ClInclude Include="context.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
-    <ClInclude Include="turretContext.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>

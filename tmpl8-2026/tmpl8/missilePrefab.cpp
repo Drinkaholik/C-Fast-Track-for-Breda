@@ -1,16 +1,16 @@
-#include "playerPrefab.h"
+#include "missilePrefab.h"
 
-#include "playerMove.h"
 #include "surface.h"
 #include "gameObject.h"
 #include "spriteList.h"
+#include "missile.h"
 #include "scene.h"
 
 using namespace std;
 using namespace Tmpl8;
 
 
-GameObject* PlayerPrefab::Load(Scene* scene, vec2 pos)
+GameObject* MissilePrefab::Load(Scene* scene, vec2 pos, GameObject* player)
 {
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
@@ -19,9 +19,8 @@ GameObject* PlayerPrefab::Load(Scene* scene, vec2 pos)
 	go->AddComponent<SpriteRenderer>(spr);
 
 	auto& col = go->AddComponent<Collider>(spr);
-	
-	go->AddComponent<PlayerMove>(&col);
 
+	go->AddComponent<Missile>(player);
 	return scene->AddObject(ref);
 
 }

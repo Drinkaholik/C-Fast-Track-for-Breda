@@ -1,15 +1,17 @@
 #pragma once
 
 #include "template.h"
+#include "camera.h"
 #include <memory>
 
+class Scene;
 
 class GameObject;
 
 struct CameraPrefab
 {
 
-	std::unique_ptr<GameObject> Load(Tmpl8::vec2 pos);
+	GameObject* Load(Scene* scene, Tmpl8::vec2 pos);
 
 };
 

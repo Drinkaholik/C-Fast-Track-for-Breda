@@ -20,6 +20,7 @@ public:
 	Tmpl8::vec2 pos;
 
 	bool debug = false; // Whether to draw origin, collider rect, etc
+	bool active = true; // Whether to run Tick() logic
 
 	// Turns out that template functions need to always be defined in the header??
 	template <typename T, typename... Args>

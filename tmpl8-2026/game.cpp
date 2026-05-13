@@ -15,8 +15,8 @@ using namespace std;
 
 namespace Tmpl8
 {
-    unique_ptr<SceneManager> sceneManager = make_unique<SceneManager>();
 
+    unique_ptr<SceneManager> sceneManager = make_unique<SceneManager>();
 
 
     // -----------------------------------------------------------
@@ -43,7 +43,7 @@ namespace Tmpl8
     // -----------------------------------------------------------
     void Game::Tick(float deltaTime)
     {
-        screen->Clear(0); // clear the graphics window
+        screen->Clear(0x00bb33); // clear the graphics window
 
         sceneManager->GetScene()->Tick(); // Drive gameObject update loop
 

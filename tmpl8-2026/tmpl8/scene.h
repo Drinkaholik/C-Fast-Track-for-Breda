@@ -19,6 +19,7 @@ public:
 
 	virtual void LoadScene(bool debug) = 0;  // Calls Start() on all scene objects
 	void UnloadScene(); // The vector of smart ptrs is destroyed when this scene is, so theres no need for manual mem management right?
+	GameObject* AddObject(std::unique_ptr<GameObject>& go);
 	
 	void Tick(); // Runs per-frame logic for all scene objects
 	

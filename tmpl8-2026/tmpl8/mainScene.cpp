@@ -6,36 +6,36 @@
 #include "camera.h"
 #include "playerPrefab.h"
 #include "cameraPrefab.h"
+#include "housePrefab.h"
+#include "missileSpawnerPrefab.h"
 
 
 using namespace std;
 using namespace Tmpl8;
 
-PlayerPrefab playerPrefab;
 CameraPrefab cameraPrefab;
+PlayerPrefab playerPrefab;
+MissileSpawnerPrefab missileSpawnerPrefab;
+HousePrefab housePrefab;
 
 
 void MainScene::LoadScene(bool debug)
 {
 	// Instantiate objects
-	auto camera = cameraPrefab.Load(vec2(0, 0));
-	auto player = playerPrefab.Load(vec2(0, 0));
+	// Prefabs all push themselves to the sceneObjects vector
+	oCamera = cameraPrefab.Load(this, vec2(0, 0));
 
-	camera->GetComponent<Camera>()->SetTarget(player.get());
+	missileSpawnerPrefab.Load(this);
+	
+	housePrefab.Load(this, vec2(0, 0));
+	housePrefab.Load(this, vec2(400, 400));
+	housePrefab.Load(this, vec2(-400, -400));
 
-	auto star = make_unique<GameObject>(vec2(0, 0));
-	star->AddComponent<SpriteRenderer>(SpriteList::sprites["star"]);
+	// Player always needs to be on top - unless I add clouds or smth
+	oPlayer = playerPrefab.Load(this, vec2(0, 0));
 
-	// Add to vector
-	sceneObjects.push_back(move(star));
-	sceneObjects.push_back(move(camera));
-	sceneObjects.push_back(move(player));
-
-	oCamera = sceneObjects[0].get();
-	oPlayer = sceneObjects[1].get();
-
-
+	oCamera->GetComponent<Camera>()->SetTarget(oPlayer);
 
 	Scene::LoadScene(debug); // Run start() on all sceneObjects
 
-}
+};

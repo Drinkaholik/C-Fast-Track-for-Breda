@@ -10,7 +10,8 @@ public:
 
 	void Tick() override; 
 
-    PlayerMove(Collider* col);
+    // Structors
+    PlayerMove(Collider* col) : collider(col) {};
 
 
 private:
@@ -19,9 +20,9 @@ private:
     Tmpl8::vec2 vel = Tmpl8::vec2(0, 0);
 
     // Movement values
-    float accel = 0.1;
-    float decel = 0.001;
-    float maxSpeed = 2;
+    float accel = 0.008;
+    float decel = 0.05;
+    float maxSpeed = 1.2;
 
     Collider* collider;
 

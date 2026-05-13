@@ -2,6 +2,8 @@
 
 #include <vector>
 
+// Gotta move to singleton pattern because colliders
+
 class Collider;
 
 class CollisionSystem

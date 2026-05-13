@@ -12,9 +12,6 @@
 using namespace std;
 using namespace Tmpl8;
 
-
-PlayerMove::PlayerMove(Collider* col) : collider(col) {};
-
 void PlayerMove::Tick()
 {
     Move();
@@ -48,7 +45,7 @@ void PlayerMove::Move()
     {
         vel.x -= decel * utils::sign(vel.x);
 
-        if (std::abs(vel.x) < 0.01f) // prevent overshoot (what did i mean here???)
+        if (std::abs(vel.x) < 0.01f) // prevent overshoot
         {
             vel.x = 0;
         }
@@ -79,14 +76,14 @@ void PlayerMove::Move()
 
     float& dt = Central::deltaTime;
 
-    collider->MoveAndCollide(vel * dt); // diagonal movement is quicker - change here or in moveandcollide()?
+    vec2 normVel = vec2::normalize(vel);
 
+    cout << "xVel: " << to_string(normVel.x)
+        << "yVel: " << to_string(normVel.y) << endl;
 
-    // Position clamp doesnt work with component setup, since it relies on width/height values that might not exist
-    // Ig thats the responsibility of the collider. 
-   /* xPos = clamp(xPos, (float)width/2, (float)Central::screenWidth - width/2);
-    yPos = clamp(yPos, (float)height/2, (float)Central::screenHeight - height/2);*/
-
+    // Not gonna use MoveAndCollide() since UFO shouldn't bump into anything
+    xPos += vel.x;
+    yPos += vel.y;
 
 };
 

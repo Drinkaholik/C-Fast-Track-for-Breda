@@ -19,35 +19,17 @@
     <ClCompile Include="central.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="camera.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="turretContext.cpp">
-      <Filter>GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="scene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="sceneManager.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="playerPrefab.cpp">
-      <Filter>Prefabs</Filter>
-    </ClCompile>
-    <ClCompile Include="..\playerMove.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="playerContext.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
     <ClCompile Include="spriteList.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="..\game.cpp">
       <Filter>Template</Filter>
-    </ClCompile>
-    <ClCompile Include="cameraPrefab.cpp">
-      <Filter>Prefabs</Filter>
     </ClCompile>
     <ClCompile Include="mainScene.cpp">
       <Filter>Scenes</Filter>
@@ -67,14 +49,47 @@
     <ClCompile Include="UI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="atttackState.cpp">
-      <Filter>Player\States</Filter>
-    </ClCompile>
     <ClCompile Include="defenseState.cpp">
-      <Filter>Player\States</Filter>
+      <Filter>GameObjects\Player\States</Filter>
     </ClCompile>
     <ClCompile Include="moveState.cpp">
-      <Filter>Player\States</Filter>
+      <Filter>GameObjects\Player\States</Filter>
+    </ClCompile>
+    <ClCompile Include="missilePrefab.cpp">
+      <Filter>GameObjects\Missiles</Filter>
+    </ClCompile>
+    <ClCompile Include="playerContext.cpp">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="playerHP.cpp">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\playerMove.cpp">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="playerPrefab.cpp">
+      <Filter>GameObjects\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="missilePool.cpp">
+      <Filter>GameObjects\Missiles</Filter>
+    </ClCompile>
+    <ClCompile Include="missile.cpp">
+      <Filter>GameObjects\Missiles\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="missileSpawner.cpp">
+      <Filter>GameObjects\Missiles\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="cameraPrefab.cpp">
+      <Filter>GameObjects\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>GameObjects\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="housePrefab.cpp">
+      <Filter>Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="missileSpawnerPrefab.cpp">
+      <Filter>GameObjects\Missiles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,35 +114,17 @@
     <ClInclude Include="..\central.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="turretContext.h">
-      <Filter>GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="scene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="sceneManager.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="playerPrefab.h">
-      <Filter>Prefabs</Filter>
-    </ClInclude>
-    <ClInclude Include="..\playerMove.h">
-      <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="playerContext.h">
-      <Filter>Player</Filter>
-    </ClInclude>
     <ClInclude Include="spriteList.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\game.h">
       <Filter>Template</Filter>
-    </ClInclude>
-    <ClInclude Include="cameraPrefab.h">
-      <Filter>Prefabs</Filter>
     </ClInclude>
     <ClInclude Include="mainScene.h">
       <Filter>Scenes</Filter>
@@ -151,13 +148,46 @@
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="moveState.h">
-      <Filter>Player\States</Filter>
-    </ClInclude>
-    <ClInclude Include="attackState.h">
-      <Filter>Player\States</Filter>
+      <Filter>GameObjects\Player\States</Filter>
     </ClInclude>
     <ClInclude Include="defenseState.h">
-      <Filter>Player\States</Filter>
+      <Filter>GameObjects\Player\States</Filter>
+    </ClInclude>
+    <ClInclude Include="missilePrefab.h">
+      <Filter>GameObjects\Missiles</Filter>
+    </ClInclude>
+    <ClInclude Include="playerContext.h">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="playerHP.h">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\playerMove.h">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="playerPrefab.h">
+      <Filter>GameObjects\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="missilePool.h">
+      <Filter>GameObjects\Missiles</Filter>
+    </ClInclude>
+    <ClInclude Include="missile.h">
+      <Filter>GameObjects\Missiles\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="missileSpawner.h">
+      <Filter>GameObjects\Missiles\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="cameraPrefab.h">
+      <Filter>GameObjects\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="camera.h">
+      <Filter>GameObjects\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="housePrefab.h">
+      <Filter>Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="missileSpawnerPrefab.h">
+      <Filter>GameObjects\Missiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -179,20 +209,32 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{239c4e18-c259-44a0-89fa-862c291bd81b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Prefabs">
-      <UniqueIdentifier>{01d3fff3-52a4-40de-9062-8cd2440e6a53}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Player">
-      <UniqueIdentifier>{5c6bfd29-164f-4faf-a673-b0cd022ee9da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Systems">
       <UniqueIdentifier>{60f357c2-83fc-4fd3-935e-fae2969fd25d}</UniqueIdentifier>
     </Filter>
     <Filter Include="State Pattern">
       <UniqueIdentifier>{56367da7-6192-4238-b30c-e78890efc248}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Player\States">
+    <Filter Include="GameObjects\Missiles">
+      <UniqueIdentifier>{57d9f72e-84c4-49e6-a8f5-0638b58d0a51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Missiles\Components">
+      <UniqueIdentifier>{c0e10c40-b526-4201-b3ed-f91e7854ca0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Player">
+      <UniqueIdentifier>{5c6bfd29-164f-4faf-a673-b0cd022ee9da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Player\States">
       <UniqueIdentifier>{94f32910-fcf2-4763-8787-23b873981a22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Player\Components">
+      <UniqueIdentifier>{977d6a5e-1e4f-4df8-a66f-0ea531d4cc9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Camera">
+      <UniqueIdentifier>{c211b2ce-44ce-46b1-929e-8953d762be35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Environment">
+      <UniqueIdentifier>{95ca70a2-358f-44fd-b05f-67fab09dcad7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

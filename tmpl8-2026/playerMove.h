@@ -20,13 +20,13 @@ private:
     Tmpl8::vec2 vel = Tmpl8::vec2(0, 0);
 
     // Base movement
-    float accel = 150;
-    float decel = 100;
-    float maxSpeed = 300;
+    float accel = 900;
+    float decel = 400;
+    float maxSpeed = 600;
 
     // Dash
     float dashSpeed = 300;
-    bool tryDash;
+    bool tryDash = false;
 
     Tmpl8::vec2 inputVector = Tmpl8::vec2(0, 0);
 

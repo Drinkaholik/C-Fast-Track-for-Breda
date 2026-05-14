@@ -10,7 +10,7 @@ using namespace std;
 using namespace Tmpl8;
 
 
-GameObject* CowManagerPrefab::Load(Scene* scene)
+GameObject* CowManagerPrefab::Load(Scene* scene, bool runStart)
 {
 	auto go = make_unique<GameObject>(vec2(0, 0));
 	auto& ref = go;
@@ -18,6 +18,6 @@ GameObject* CowManagerPrefab::Load(Scene* scene)
 	auto& cm = go->AddComponent<CowManager>(scene);
 	cm.SetPlayer(scene->GetPlayer());
 
-	return scene->AddObject(ref);
+	return scene->AddObject(ref, runStart);
 
 }

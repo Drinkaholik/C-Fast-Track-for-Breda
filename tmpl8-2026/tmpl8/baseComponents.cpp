@@ -3,6 +3,7 @@
 #include "gameObject.h"
 #include "utils.h"
 #include "collisionSystem.h"
+#include "scene.h"
 
 #include <math.h>
 #include <iostream>
@@ -26,27 +27,30 @@ void Component::Tick(){};
 #pragma region Collider
 
 // Constructors
-Collider::Collider(Sprite* sprite)
+Collider::Collider(Scene* scene, string layer, Sprite* sprite) : layer(layer)
 {
-	size.x = sprite->GetWidth();
-	size.y = sprite->GetHeight();
+	collisionSystem = scene->GetCollisionSystem();
+	size.x = (float)sprite->GetWidth();
+	size.y = (float)sprite->GetHeight();
 
 	//UpdateRect(); // Cant be here because GameObject only gets set after constructor runs, set in first Tick
 }
 
-Collider::Collider(vec2 size) : size(size){};
+Collider::Collider(Scene* scene, string layer, vec2 size) : layer(layer), size(size)
+{
+	collisionSystem = scene->GetCollisionSystem();
+};
 
 Collider::~Collider()
 {
-	//CollisionSystem::Deregister(this); // Causes an issue on program shutdown - need to fix later
+	//collisionSystem->Deregister(this); // Causes an issue on program shutdown - need to fix later
 }
 
 
 void Collider::Start()
 {
-	// Idk if it actually matters whether this runs in Start() or only in first Tick()
-	UpdateRect(gameObject->pos);
-	CollisionSystem::Register(this);
+	UpdateRect(gameObject->pos);// Idk if it actually matters whether this runs in Start() or only in first Tick()
+	collisionSystem->Register(layer, this);
 }
 
 void Collider::Tick()
@@ -57,26 +61,24 @@ void Collider::Tick()
 
 void Collider::UpdateRect(vec2 pos)
 {
-	// round doesnt accept vec2
 	p1.x = round(pos.x - size.x / 2);
 	p1.y = round(pos.y - size.y / 2);
 	p2.x = round(pos.x + size.x / 2);
 	p2.y = round(pos.y + size.y / 2);
 }
 
-bool Collider::CollideAt(vec2 pos, Collider* col)
+bool Collider::CollideAt(const vec2 pos, Collider* col)
 {
-
 	// Cache pos
 	vec2 originalPos = gameObject->pos;
 
 	// Move rect to check position
 	UpdateRect(pos);
 
-	const vec2 colP1 = col->p1; // Vec2 and pointer are both 8 bytes, so does it matter whther I pass by value or ptr / ref?
-	const vec2 colP2 = col->p2; // Pass by pointer would cause more cache misses ??
+	const vec2 colP1 = col->GetP1(); // Vec2 and pointer are both 8 bytes, so does it matter whther I pass by value or ptr / ref?
+	const vec2 colP2 = col->GetP2(); // Pass by pointer would cause more cache misses ??
 
-
+	// AABB logic
 	bool x1Collision = (p1.x > colP1.x && p1.x < colP2.x);
 	bool x2Collision = (p2.x > colP1.x && p2.x < colP2.x);
 
@@ -93,6 +95,45 @@ bool Collider::CollideAt(vec2 pos, Collider* col)
 	else return false;
 };
 
+bool Collider::CollideAt(Tmpl8::vec2 pos, std::string layer)
+{
+	// Cache pos
+	vec2 originalPos = gameObject->pos;
+
+	for (auto& col : collisionSystem->GetLayer(layer))
+	{
+		// Move rect to check position
+		UpdateRect(pos);
+
+		const vec2 colP1 = col->GetP1(); // Vec2 and pointer are both 8 bytes, so does it matter whther I pass by value or ptr / ref?
+		const vec2 colP2 = col->GetP2(); // Pass by pointer would cause more cache misses ??
+
+		// AABB logic
+		bool x1Collision = (p1.x > colP1.x && p1.x < colP2.x);
+		bool x2Collision = (p2.x > colP1.x && p2.x < colP2.x);
+
+		bool y1Collision = (p1.y > colP1.y && p1.y < colP2.y);
+		bool y2Collision = (p2.y > colP1.y && p2.y < colP2.y);
+
+		bool xCollision = x1Collision || x2Collision;
+		bool yCollision = y1Collision || y2Collision;
+
+		// Move rect back
+		UpdateRect(originalPos);
+
+		
+
+		if (xCollision && yCollision)
+		{
+			cout << "I'm colliding!!!" << endl;
+			return true;
+		}
+		
+		
+	}
+	return false;
+}
+
 
 // More efficient (probably) way:
 // If the distance is lower than collider width / height, check it directly
@@ -101,11 +142,11 @@ bool Collider::CollideAt(vec2 pos, Collider* col)
 // Then sweep either forward or backwards by a quarter, and from there go 1 pixel at a time until 0 px from the collider
 // No clue how to implement without creating a mess of if-else trees tho
 
-void Collider::MoveAndCollide(vec2 distance)
+void Collider::MoveAndCollide(string layer, vec2 distance)
 {
 	vec2& pos = gameObject->pos;
 	
-	auto& colliders = CollisionSystem::colliders;
+	auto& colliders = collisionSystem->GetLayer(layer);
 
 	vec2 targetPos = pos + distance;
 	int xMoveSign = utils::sign(distance.x);
@@ -161,10 +202,10 @@ void Collider::DrawCollider()
 	vec2 offset = Central::camera->pos;
 
 	Central::surface->Box(
-		round(p1.x - offset.x), 
-		round(p1.y - offset.y), 
-		round(p2.x - offset.x), 
-		round(p2.y - offset.y), 
+		(int)round(p1.x - offset.x),
+		(int)round(p1.y - offset.y),
+		(int)round(p2.x - offset.x),
+		(int)round(p2.y - offset.y),
 		0xFF0000);
 };
 
@@ -176,9 +217,10 @@ void Collider::DrawCollider()
 
 SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
 {
-	size.x = sprite->GetWidth();
-	size.y = sprite->GetHeight();
+	size.x = (float)sprite->GetWidth();
+	size.y = (float)sprite->GetHeight();
 	screen = Central::surface;
+	camera = Central::camera;
 
 	frameCount = sprite->Frames();
 };
@@ -186,7 +228,7 @@ SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
 void SpriteRenderer::Draw(vec2 pos)
 {
 
-	if (Central::camera == nullptr) return;
+	if (camera == nullptr) camera = Central::camera; // In case of init issues
 
 	vec2 camOffset = Central::camera->pos;
 	vec2 originOffset = size * 0.5; // Ensures origin is centre, not top-left
@@ -198,8 +240,8 @@ void SpriteRenderer::Draw(vec2 pos)
 
 	// Draw from centre rather than top left
 	sprite->Draw(screen,
-		screenPos.x,
-		screenPos.y
+		(int)round(screenPos.x),
+		(int)round(screenPos.y)
 	);
 
 }
@@ -214,3 +256,10 @@ void SpriteRenderer::Tick()
 
 
 // Image //
+
+
+void Image::Draw(vec2 pos)
+{
+
+	sprite->Draw(screen, pos.x, pos.y);
+}

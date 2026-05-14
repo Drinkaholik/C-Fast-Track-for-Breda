@@ -27,22 +27,21 @@ void MainScene::LoadScene()
 
 	// Instantiate objects
 	// Prefabs all push themselves to scene->sceneObjects in Load()
+	housePrefab.Load(this, vec2(0, 0), false);
+	housePrefab.Load(this, vec2(400, 0), false);
+	housePrefab.Load(this, vec2(-400, 0), false);
+	housePrefab.Load(this, vec2(0, -400), false);
+	housePrefab.Load(this, vec2(0, 400), false);
+
+	// Player always needs to render on top - unless I add clouds or smth
 	
+	oPlayer = playerPrefab.Load(this, vec2(0, 0), 3, false);
+	oCamera = cameraPrefab.Load(this, vec2(0, 0), false);
 
-	housePrefab.Load(this, vec2(0, 0));
-	housePrefab.Load(this, vec2(400, 0));
-	housePrefab.Load(this, vec2(-400, 0));
-	housePrefab.Load(this, vec2(0, -400));
-	housePrefab.Load(this, vec2(0, 400));
+	cowManagerPrefab.Load(this, false);
 
-	// Player always needs to be on top - unless I add clouds or smth
-	oPlayer = playerPrefab.Load(this, vec2(0, 0), 3);
-	oCamera = cameraPrefab.Load(this, vec2(0, 0));
-
-	missileSpawnerPrefab.Load(this);
-	cowManagerPrefab.Load(this);
-
-	// The issue is that I only run start() on the objects that are added during LoadScene()
-	// Any objects added after don't run it. 
+	missileSpawnerPrefab.Load(this, false);
+	
+	Scene::LoadScene();
 
 };

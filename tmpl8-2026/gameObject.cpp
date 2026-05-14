@@ -30,6 +30,11 @@ void GameObject::Tick()
 }
 
 
+vector<unique_ptr<Component>>& GameObject::GetComponents()
+{
+	auto& ref = components;
+	return ref;
+}
 
 
 

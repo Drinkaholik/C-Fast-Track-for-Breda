@@ -40,9 +40,6 @@
     <ClCompile Include="state.cpp">
       <Filter>State Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="minimap.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="cursor.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -100,6 +97,21 @@
     <ClCompile Include="playerPrefab.cpp">
       <Filter>GameObjects\Player\Prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="damageSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="abductor.cpp">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="playerHP.cpp">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="renderSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -146,9 +158,6 @@
     </ClInclude>
     <ClInclude Include="state.h">
       <Filter>State Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="minimap.h">
-      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="cursor.h">
       <Filter>UI</Filter>
@@ -212,6 +221,15 @@
     </ClInclude>
     <ClInclude Include="playerPrefab.h">
       <Filter>GameObjects\Player\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="damageSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="abductor.h">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="renderSystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,13 +16,11 @@
 class Prefab
 {
 
-	// Nah this doesnt work at all
-	// AddComponent needs to be passed the component type, which this doesn't do
-	
+	// Nah this doesnt work at all	
 
 	// Single component go
 	template <typename... Args>
-	GameObject* Load(vec2 pos, Component c, Args&&... args)
+	GameObject* Load(Tmpl8::vec2 pos, Component c, Args&&... args)
 	{
 		auto go = std::make_unique<GameObject>(pos);
 
@@ -32,7 +30,7 @@ class Prefab
 
 	// 2-component go
 	template <typename... Args>
-	GameObject* Load(vec2 pos, Component c1, Args&&... args1, Component c2, Args&&... args2)
+	GameObject* Load(Tmpl8::vec2 pos, Component c1, Args&&... args1, Component c2, Args&&... args2)
 	{
 		auto go = std::make_unique<GameObject>(pos);
 

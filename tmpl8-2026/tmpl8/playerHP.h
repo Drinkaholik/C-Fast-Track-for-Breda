@@ -1,38 +1,29 @@
 #pragma once
 #include "baseComponents.h"
 
+//#include "scene.h"
 
 
 class PlayerHP : public Component
 {
+public:
+
+	void Start() override;
+
+	void SetHP(int value);
+
+	void TakeDamage();
+
+	int GetHP();
+
+	PlayerHP(Scene* scene, int maxHP);
 
 private:
 
 	int hp;
 	int maxHP;
 
-
-public:
-
-	PlayerHP(int maxHP) : maxHP(maxHP), hp(maxHP) {};
-
-
-	// These functions are small enough to keep in the header
-	// Should give better performance since it'll stop (or reduce?) cache misses
-	void SetHP(int value)
-	{
-		value = Clamp(hp, 0, maxHP);
-
-		hp = value;
-	}
-
-	void IncreaseHP(int value) {hp += value;};
-
-	void DecreaseHP(int value) {hp -= value;};
-
-
-
-	int GetHP() {return hp;}
+	SpriteRenderer* spriteRenderer;
 	
 };
 

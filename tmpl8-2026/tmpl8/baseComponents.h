@@ -2,14 +2,18 @@
 
 #include "template.h"
 #include <span>
+#include <string>
 
 class GameObject; // Forward declaration to prevent circular dependancy
+class CollisionSystem;
+class Scene;
 
 class Component // Abstract struct
 {
 public:
 
 	GameObject* gameObject; // Pointer instead of ref so I don't need to pass go in constructor, would add extra boilerplate
+
 	virtual void Start();
 	virtual void Tick();
 
@@ -23,37 +27,53 @@ class Collider : public Component
 {
 public:
 
-	Tmpl8::vec2 p1; // xMin, yMin
-	Tmpl8::vec2 p2; // xMax, yMax
-
 	void Start() override;
 	void Tick() override;
 
+
 	// Check if current object would collide with another object at X position
 	bool CollideAt(Tmpl8::vec2 pos, Collider* go); // Check against single object, faster
-	bool CollideAt(Tmpl8::vec2 pos); // Check against system's collider array
+	bool CollideAt(Tmpl8::vec2 pos, std::string layer); // Check against system's collider array
 
 	// Same as CollideAt, but returns collision instance
 	GameObject CollideWith(Tmpl8::vec2 pos, Collider* go);
 	GameObject CollideWith(Tmpl8::vec2 pos);
 
 	// Move gameObject by nDistance, if it would not collide
-	void MoveAndCollide(Tmpl8::vec2 distance);
+	void MoveAndCollide(std::string layer, Tmpl8::vec2 distance);
 
 
+
+	Tmpl8::vec2 GetP1() { return p1; }
+	Tmpl8::vec2 GetP2() { return p2; }
+
+	void SetCollisionSystem(CollisionSystem* system)
+	{
+		collisionSystem = system;
+	}
 
 
 	// Structors
-	Collider(Sprite* sprite); // Initialize thru sprite size
+	Collider(Scene* scene, std::string layer, Tmpl8::Sprite* sprite); // Initialize thru sprite size
 
-	Collider(Tmpl8::vec2 size); // Initialize with manual size
+	Collider(Scene* scene, std::string layer, Tmpl8::vec2 size); // Initialize with manual size
 
 	~Collider(); // Used to deregister from CollisionSystem::colliders
 
+
 private:
+
+	Tmpl8::vec2 p1; // xMin, yMin
+	Tmpl8::vec2 p2; // xMax, yMax
 
 	Tmpl8::vec2 size; // width, height
 
+	CollisionSystem* collisionSystem;
+	std::string layer;
+
+	
+
+	
 	void UpdateRect(Tmpl8::vec2 pos);
 
 	// I really like snake_case here but PascalCase in other places...
@@ -67,9 +87,12 @@ class SpriteRenderer : public Component
 {
 public:
 	
-	void Tick() override;
+	// Specifically not override so it won't be called by gameObject->Tick()
+	// Gets called by the renderSystem instead
+	virtual void Tick(); 
 
-	void ChangeSprite(Sprite* spr)
+
+	void ChangeSprite(Tmpl8::Sprite* spr)
 	{
 		sprite = spr;
 	}
@@ -89,40 +112,43 @@ public:
 	}
 
 	//Structors
-	SpriteRenderer(Sprite* spr);
+	SpriteRenderer(Tmpl8::Sprite* spr);
 
-private:
+protected:
 
 	int frameCount;
 	int currentFrame = 0;
 
-	Surface* screen; // Caches Central::surface - does that actually provide performance benefits? both are pointers. Apparently yes (cache misses?)
-	Sprite* sprite;
+	Tmpl8::Surface* screen;
+	GameObject* camera;
+	Tmpl8::Sprite* sprite;
 
 	Tmpl8::vec2 size;
 
-	void Draw(Tmpl8::vec2 pos);
+	virtual void Draw(Tmpl8::vec2 pos);
 };
 
 
 
+
 // Images live in screen-space
-class Image : public Component
+class Image : public SpriteRenderer
 {
 public:
 
 	void Tick() override;
 
-	void ChangeImage(Sprite* spr)
+	void ChangeImage(Tmpl8::Sprite* spr)
 	{
 		sprite = spr;
 	}
 
 	// Structors
-	Image(Sprite* spr) : sprite(spr), screen(Central::surface) {};
+	Image(Tmpl8::Sprite* spr) : SpriteRenderer(spr) {};
 
 private:
 
-	Surface* screen;
-	Sprite* sprite;
+	void Draw(Tmpl8::vec2 pos) override;
+
+
 };

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <unordered_map>
+#include <string>
 
 // Gotta move to singleton pattern because colliders
 
@@ -9,18 +11,27 @@ class Collider;
 class CollisionSystem
 {
 public:
-	inline static std::vector<Collider*> colliders;
+	
+	std::vector<Collider*>& GetLayer(std::string name);
 
+	void Register(std::string name, Collider* col);
 
-	inline static void Register(Collider* col)
+	void Deregister(std::string name, Collider* col);
+
+	
+private:
+
+	std::vector<Collider*> layer1;
+	std::vector<Collider*> layer2;
+	std::vector<Collider*> layer3;
+
+	std::unordered_map<std::string, std::vector<Collider*>> layers =
 	{
-		colliders.push_back(col);
-	}
+		{ "cow", layer1 },
+		{ "missile", layer2 },
+		{ "player", layer3},
 
-	inline static void Deregister(Collider* col)
-	{
-		colliders.erase(std::remove(colliders.begin(), colliders.end(), col), colliders.end());
-	}
+	};
 
 };
 

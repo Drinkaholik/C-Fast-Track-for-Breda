@@ -4,6 +4,7 @@
 #include "template.h"
 #include "objectPool.h"
 #include <memory>
+#include <unordered_set>
 
 // Spawns cows in groups around a common centre - always offscreen
 // Makes an initial on-screen spawn in Start()
@@ -13,6 +14,7 @@
 
 class Scene;
 class GameObject;
+class Cow;
 
 class CowManager : public Component
 {
@@ -21,22 +23,27 @@ public:
 	void Start() override;
 	void Tick() override;
 
+	void Abduct(Cow* cow); // Called by abductor class
+
 	void SetPlayer(GameObject* go) { player = go; };
+	std::unordered_set<Cow*>& GetCows() { return activeCows; }; // Needed for abduct class to iterate over
 
 
 	// Structors
-	CowManager(Scene* scene);
+	CowManager(Scene* scene) : scene(scene) {};
 
 
 private:
 
-	float spawnDelay = 3.0f; // Time between spawns
-	float spawnMargin = 100.0f; // How far offscreen to spawn cows
-	int groupCount = 2; // Number of groups to spawn at a time
+	float spawnDelay = 1.0f; // Time between spawns
+	float spawnMargin = 500.0f; // How far offscreen to spawn cows
+	int groupCount = 3; // Number of groups to spawn at a time
 	int groupRange = 1;
 
-	int initialGroupCount = 5; // For the first spawn in Start()
+	int initialGroupCount = 5; // For the first spawn on level load
 	int initialGroupRange = 2;
+
+	float despawnRange = 2500.0f; // How far from the player before despawning
 
 
 #pragma region Group structs
@@ -89,6 +96,8 @@ private:
 	bool spawnOnScreen = true; // Allows cows to be spawned on screen in start()
 	
 	void Spawn(int groupCount);
+	void Despawn(Cow* cow); // Despawns a specific cow
+	void RangeDespawn(); // Checks distance and returns to pool
 
 	void SetGroupSize();
 
@@ -99,7 +108,10 @@ private:
 	// Pointers
 	Scene* scene;
 	GameObject* player;
-	std::unique_ptr<ObjectPool> pool = std::make_unique<ObjectPool>(100);
+
+	int poolSize = 300;
+	std::unique_ptr<ObjectPool> pool = std::make_unique<ObjectPool>(poolSize);
+	std::unordered_set<Cow*> activeCows;
 
 };
 

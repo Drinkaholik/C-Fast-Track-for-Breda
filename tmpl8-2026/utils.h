@@ -10,17 +10,17 @@ namespace utils
 	// Math functions //
 
 	// Sign - taken from StackOverflow
-	template <typename T> static int sign(T value)
+	template <typename T> inline int sign(T value)
 	{
 		return (T(0) < value) - (value < T(0)); // Uses bools being 1 or 0 to return the sign of the value
 	};
 
 	// Returns distance between 2 positions
 	// Accepts both float and int
-	template <typename T> static float distance(T x1, T y1, T x2, T y2)
+	inline float distance(Tmpl8::vec2 p1, Tmpl8::vec2 p2)
 	{
-		T xDistance = abs(x1 - x2);
-		T yDistance = abs(y1 - y2);
+		float xDistance = abs(p1.x - p2.x);
+		float yDistance = abs(p1.y - p2.y);
 
 		return abs(sqrt((xDistance * xDistance) + (yDistance * yDistance))); // Finding hypotenuse
 	}

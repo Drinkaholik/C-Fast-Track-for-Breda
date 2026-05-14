@@ -8,7 +8,7 @@
 using namespace Tmpl8;
 using namespace std;
 
-GameObject* MissileSpawnerPrefab::Load(Scene* scene)
+GameObject* MissileSpawnerPrefab::Load(Scene* scene, bool runStart)
 {
 	auto go = make_unique<GameObject>(vec2(0, 0));
 	auto& ref = go;
@@ -16,6 +16,6 @@ GameObject* MissileSpawnerPrefab::Load(Scene* scene)
 	auto& ms = go->AddComponent<MissileSpawner>(scene);
 	ms.SetPlayer(scene->GetPlayer());
 
-	return scene->AddObject(ref);
+	return scene->AddObject(ref, runStart);
 
 }

@@ -3,21 +3,19 @@
 #include "utils.h"
 #include "cowPrefab.h"
 #include "central.h"
+#include "cow.h"
 
 using namespace Tmpl8;
 using namespace std;
 
 CowPrefab cowPrefab;
 
-CowManager::CowManager(Scene* scene) : scene(scene) 
-{
-	
-};
+
 
 void CowManager::Start()
 {
 
-	pool->InstantiateToPool(cowPrefab, scene, pool.get(), vec2(0, 0));
+	pool->InstantiateToPool(cowPrefab, scene, pool.get(), vec2(0, 0), true);
 
 	for (const SpawnGroup& s : groups) // For weighted spawn system
 	{
@@ -39,6 +37,26 @@ void CowManager::Tick()
 	
 	int spawnAmount = groupCount + utils::random_range(groupRange);
 	Spawn(spawnAmount);
+	RangeDespawn();
+}
+
+
+
+void CowManager::Abduct(Cow* cow) // Return cow to pool, scare nearby cows
+{
+	vec2 pos = cow->gameObject->pos;
+
+	for (auto* c : activeCows)
+	{
+		float radius = cow->GetRadius();
+		float distance = utils::distance(c->gameObject->pos, pos);
+		if (distance < radius)
+		{
+			c->SetScared(radius / distance);
+		}
+	}
+
+	Despawn(cow);
 }
 
 
@@ -74,10 +92,38 @@ void CowManager::Spawn(int groupCount)
 			auto* go = pool->SpawnFromPool();
 			if (go == nullptr) return;
 			go->pos = SetSpawnPos();
+			activeCows.insert(go->GetComponent<Cow>());
 		}
 	}
 	count = spawnDelay;
 }
+
+
+void CowManager::Despawn(Cow* cow)
+{
+	pool->ReturnToPool(cow->gameObject);
+	activeCows.erase(cow);
+}
+
+float c = 1.0f;
+void CowManager::RangeDespawn() // Despawn cow if they get too far from player
+{
+	// Only run once a sec
+	c -= Central::dts;
+	if (c > 0) return;
+	c = 1.0f;
+	
+	for (auto* cow : activeCows)
+	{
+		float distance = utils::distance(cow->gameObject->pos, player->pos);
+		if (distance >= despawnRange)
+		{
+			Despawn(cow);
+		}	
+	}
+}
+
+
 
 
 vec2 CowManager::SetSpawnCentre()

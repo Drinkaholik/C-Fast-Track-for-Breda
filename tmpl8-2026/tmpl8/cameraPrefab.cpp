@@ -12,12 +12,12 @@
 using namespace std;
 using namespace Tmpl8;
 
-GameObject* CameraPrefab::Load(Scene* scene, vec2 pos)
+GameObject* CameraPrefab::Load(Scene* scene, vec2 pos, bool runStart)
 {
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
 	auto& cam = go->AddComponent<Camera>();
 	cam.SetTarget(scene->GetPlayer());
 
-	return scene->AddObject(ref);
+	return scene->AddObject(ref, runStart);
 }

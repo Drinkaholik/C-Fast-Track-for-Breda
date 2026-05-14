@@ -1,6 +1,7 @@
 #include "central.h"
 
 using namespace std;
+using namespace Tmpl8;
 
 
 Game* Central::game = nullptr;

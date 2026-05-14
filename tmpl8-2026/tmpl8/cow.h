@@ -41,13 +41,14 @@ private:
 	float scaredLevel; // Defines speed and duration
 	float counter;
 
-	float scareRadius = 500.0f; // How close they need to be to an abduction to become scared
+	float baseScareRadius = 500.0f; // How close they need to be to an abduction to become scared
 	float scareRadiusRange = 0.5f;
 
 
 
 	Tmpl8::vec2 moveDir;
 	float speed;
+	float scareRadius;
 
 
 	void Mooooove(); // Exceptionally cow-like movement
@@ -68,7 +69,7 @@ private:
 	} cowState = CowState::Idle;
 
 
-	ObjectPool* pool; // to return self to pool, injected via CowManager
+	ObjectPool* pool; // used to return self to pool, injected via CowManager
 
 };
 

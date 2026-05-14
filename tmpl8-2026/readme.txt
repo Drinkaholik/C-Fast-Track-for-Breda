@@ -11,17 +11,24 @@ files created during compilation.
 
 ##  Game Instructions  ##
 
+Story:
 You are Mr.CowLover34, a notorious Zordian shitposter-cum-activist with a penchant for Earthly bovines
 and a distate for modern agricultural practices. 
 You have made it your life goal to rescue as many cows as possible from Earth, using your saucer-drones' 
 onboard Teleportinators™ to bring them to your off-world sanctuary. 
-. 
+
 Hoover up as many cows as you can before those pesky human air defenses take you down. 
 
 Controls:
 WASD to move
-Shift to dash
-Space to abduct
+Space to transform
+Shift to:
+ - dash (in evasive form)
+ - shield (in defensive form)
+
+Instructions:
+1. Hover over cows to abduct them. Each cow is worth 1 point. 
+2. Avoid the incoming missiles. You only have 3 lives!
 
 
 
@@ -71,4 +78,13 @@ Order of operations for gameObjects:
 ##  Modifications to template  ## 
 
 - Changed vec2::normalized to prevent divide by 0 error
-- Linked up a couple things to Central for easier access (deltaTime, game*)
+- Linked up a couple things to Central for easier access (deltaTime, surface*, game*)
+- Added public UpdateKeys() function to game class so I can use inputs in other scripts
+
+
+## Biggest issues with the code ##
+- So many components need a scene pointer to get all their own pointers / refs
+which I think makes for a pretty poor design
+- The scene has pointers to useful objects so I can link them more easily
+- For sceneObjects I reserve more space than I need because resizing would cause issues
+- Objects are rendered in the order they're pushed to sceneObjects - need a layering system

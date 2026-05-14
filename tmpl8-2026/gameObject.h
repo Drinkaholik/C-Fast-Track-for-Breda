@@ -16,6 +16,10 @@ class GameObject
 
 public:
 	
+
+	virtual void Start(); // Init logic, runs after constructor
+	virtual void Tick(); // Per-frame logic
+
 	// Position
 	Tmpl8::vec2 pos;
 
@@ -72,15 +76,16 @@ public:
 		return false;
 	}
 
-	virtual void Start();
+	
 
-	virtual void Tick(); // Per-frame logic
+	std::vector<std::unique_ptr<Component>>& GetComponents();
+
 
 
 	// Constructors //
-	GameObject(vec2 spawnPos) : pos(spawnPos){};
+	GameObject(Tmpl8::vec2 spawnPos) : pos(spawnPos){};
 
-	GameObject(vec2 spawnPos, bool debug) : pos(spawnPos), debug(debug){};
+	GameObject(Tmpl8::vec2 spawnPos, bool debug) : pos(spawnPos), debug(debug){};
 
 
 

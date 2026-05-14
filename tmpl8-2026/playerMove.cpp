@@ -75,25 +75,31 @@ void PlayerMove::Move()
             vel.y = 0;
     }
 
-    // Clamp velocity
+    // Clamp velocity //
+    // Bit of a scuffed way to handle this but hey it works
+    float xClamp = 0;
+    float yClamp = 0;
 
-    //float xNormMaxSpeed = abs(maxSpeed * inputVector.x); // Prevents diagonals from being faster
-    //float yNormMaxSpeed = abs(maxSpeed * inputVector.y);
+    if (inputVector.length() > 1)
+    {
+        xClamp = abs(maxSpeed * inputVector.x); // Prevents diagonals from being faster
+        yClamp = abs(maxSpeed * inputVector.y);
+    }
+    else
+    {
+        xClamp = maxSpeed; 
+        yClamp = maxSpeed;
+    }
+    
+    vel.x = std::clamp(vel.x, -xClamp, xClamp);
+    vel.y = std::clamp(vel.y, -yClamp, yClamp);
 
-    //vel.x = std::clamp(vel.x, -xNormMaxSpeed, xNormMaxSpeed);
-    //vel.y = std::clamp(vel.y, -yNormMaxSpeed, yNormMaxSpeed);
 
-    // Update position
+    // Update position //
     gameObject->pos += vel * dt;
 
-
-    cout << "xVel: " << to_string(vel.x) << " , "
-        << "yVel: " << to_string(vel.y) << endl;
-
-    // Not gonna use MoveAndCollide() since UFO shouldn't bump into anything
-    // using vec::normalize completely ruins movement, idk why
-  
-
+    /*cout << "xVel: " << to_string(vel.x) << " , "
+        << "yVel: " << to_string(vel.y) << endl;*/
 };
 
 

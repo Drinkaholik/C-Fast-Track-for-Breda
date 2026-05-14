@@ -10,7 +10,7 @@ class GameObject;
 struct CameraPrefab
 {
 
-	GameObject* Load(Scene* scene, Tmpl8::vec2 pos);
+	GameObject* Load(Scene* scene, Tmpl8::vec2 pos, bool runStart);
 
 };
 

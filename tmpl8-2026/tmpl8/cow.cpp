@@ -15,6 +15,8 @@ void Cow::Start()
 	SetDir();
 	SetSpeed(walkSpeed * (1 + utils::random_range(walkSpeedRange)));
 
+	scareRadius = baseScareRadius * (1 + utils::random_range(scareRadiusRange));
+
 	/*cout << "dir - " << "x: " << to_string(moveDir.x) << " , " << "y: " << to_string(moveDir.y) << " , " << endl
 		<< "speed: " << to_string(speed) << endl;*/
 }
@@ -83,6 +85,7 @@ void Cow::SetWalking()
 
 void Cow::SetScared(float amount)
 {
+	if (cowState == CowState::Scared) return;
 	amount = Clamp(amount, minScare, maxScare);
 
 	cowState = CowState::Scared;

@@ -9,7 +9,7 @@ class ObjectPool;
 class CowPrefab
 {
 public:
-	GameObject* Load(Scene* scene, ObjectPool* pool, Tmpl8::vec2 pos);
+	GameObject* Load(Scene* scene, ObjectPool* pool, Tmpl8::vec2 pos, bool runStart);
 };
 
 

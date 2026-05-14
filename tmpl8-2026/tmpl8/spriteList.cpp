@@ -20,9 +20,9 @@ unordered_map<string, Sprite*> SpriteList::sprites =
 	{ "tank", &sTank },
 	{ "house", &sHouse },
 	{ "cow", &sCow },
-	{ "UFO_3hp", &sUFO_noDamage },
-	{ "UFO_2hp", &sUFO_lightDamage },
-	{ "UFO_1hp", &sUFO_heavyDamage },
+	{ "ufo_3hp", &sUFO_noDamage },
+	{ "ufo_2hp", &sUFO_lightDamage },
+	{ "ufo_1hp", &sUFO_heavyDamage },
 
 
 };

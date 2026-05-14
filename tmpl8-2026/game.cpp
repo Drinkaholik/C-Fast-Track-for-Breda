@@ -24,7 +24,7 @@ namespace Tmpl8
     // -----------------------------------------------------------
     void Game::Init()
     {
-        sceneManager->LoadScene(0, true); // Load main menu
+        sceneManager->LoadScene(0, false); // Load main menu
   
     }
 

@@ -8,8 +8,6 @@
 
 class GameObject;
 
-using namespace Tmpl8;
-
 // Holds 'global' references and values for easy access
 // No need to split into separate structs / namespaces for a project of this size
 // also don't see any need for singleton pattern atp
@@ -18,8 +16,8 @@ using namespace Tmpl8;
 struct Central
 {
 	// Main references
-	static Game* game; 
-	static Surface* surface;
+	static Tmpl8::Game* game; 
+	static Tmpl8::Surface* surface;
 
 	// Camera
 	static GameObject* camera;

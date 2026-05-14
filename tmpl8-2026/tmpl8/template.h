@@ -77,7 +77,7 @@ struct timer
 	static void init();
 };
 
-// vectors
+// unordered_sets
 class vec2 // adapted from https://github.com/dcow/RayTracer
 {
 public:

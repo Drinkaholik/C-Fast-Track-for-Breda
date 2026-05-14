@@ -8,7 +8,7 @@
 using namespace Tmpl8;
 using namespace std;
 
-GameObject* HousePrefab::Load(Scene* scene, vec2 pos)
+GameObject* HousePrefab::Load(Scene* scene, vec2 pos, bool runStart)
 {
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
@@ -16,7 +16,7 @@ GameObject* HousePrefab::Load(Scene* scene, vec2 pos)
 	auto* spr = SpriteList::sprites["house"];
 	go->AddComponent<SpriteRenderer>(spr);
 
-	auto& col = go->AddComponent<Collider>(spr);
+	//auto& col = go->AddComponent<Collider>(scene, spr);
 
-	return scene->AddObject(ref);
+	return scene->AddObject(ref, runStart);
 }

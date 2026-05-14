@@ -21,26 +21,15 @@ MissileSpawner::MissileSpawner(Scene* scene) : scene(scene)
 
 void MissileSpawner::Start()
 {
-	pool->InstantiateToPool(missilePrefab, scene, pool.get(), vec2(0, 0), player);
+	pool->InstantiateToPool(missilePrefab, scene, pool.get(), vec2(0, 0), player, true);
 }
+
+
 
 void MissileSpawner::Tick()
 {
-	//if (!poolFilled)
-	//{
-	//	// DO NOT put in start()!!!!!!!! - resizing the sceneObjects vector 
-	//	// while its still being iterated over causes dangling references
-	//	pool->InstantiateToPool(scene, player); 
-	//	poolFilled = true;
-	//}
-
-	// Ok yeah idk whats going on
-	// I mean we iterate in Tick() too so obviously that cant be the main issue
-	// And its a vector of unique ptrs so the object location should still be the same regardless?
-	
 	delayCounter -= Central::dts; // Count down till next spawn
 	if (delayCounter <= 0) SpawnSingle();
-	
 }
 
 

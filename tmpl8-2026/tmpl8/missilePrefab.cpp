@@ -10,17 +10,18 @@ using namespace std;
 using namespace Tmpl8;
 
 
-GameObject* MissilePrefab::Load(Scene* scene, ObjectPool* pool, vec2 pos, GameObject* player)
+GameObject* MissilePrefab::Load(Scene* scene, ObjectPool* pool, vec2 pos, GameObject* player, bool runStart)
 {
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
 
 	auto* spr = SpriteList::sprites["tank"];
-	go->AddComponent<SpriteRenderer>(spr);
+	auto* rend = &go->AddComponent<SpriteRenderer>(spr);
 
-	auto& col = go->AddComponent<Collider>(spr);
+	auto& col = go->AddComponent<Collider>(scene, "missile", spr);
 	go->AddComponent<Missile>(pool, player);
 
-	return scene->AddObject(ref);
+	scene->GetRenderSystem()->Register(3, rend);
+	return scene->AddObject(ref, runStart);
 
 }

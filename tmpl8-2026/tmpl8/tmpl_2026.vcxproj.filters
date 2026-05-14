@@ -55,20 +55,11 @@
     <ClCompile Include="moveState.cpp">
       <Filter>GameObjects\Player\States</Filter>
     </ClCompile>
-    <ClCompile Include="missilePrefab.cpp">
-      <Filter>GameObjects\Missiles</Filter>
-    </ClCompile>
     <ClCompile Include="playerContext.cpp">
       <Filter>GameObjects\Player\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\playerMove.cpp">
       <Filter>GameObjects\Player\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="playerPrefab.cpp">
-      <Filter>GameObjects\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="missilePool.cpp">
-      <Filter>GameObjects\Missiles</Filter>
     </ClCompile>
     <ClCompile Include="missile.cpp">
       <Filter>GameObjects\Missiles\Components</Filter>
@@ -85,23 +76,29 @@
     <ClCompile Include="housePrefab.cpp">
       <Filter>Environment</Filter>
     </ClCompile>
-    <ClCompile Include="missileSpawnerPrefab.cpp">
-      <Filter>GameObjects\Missiles</Filter>
-    </ClCompile>
-    <ClCompile Include="cow.cpp">
-      <Filter>GameObjects\Cow</Filter>
-    </ClCompile>
-    <ClCompile Include="cowPrefab.cpp">
-      <Filter>GameObjects\Cow</Filter>
-    </ClCompile>
-    <ClCompile Include="cowManager.cpp">
-      <Filter>GameObjects\Cow</Filter>
-    </ClCompile>
-    <ClCompile Include="cowManagerPrefab.cpp">
-      <Filter>GameObjects\Cow</Filter>
-    </ClCompile>
     <ClCompile Include="objectPool.cpp">
       <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="cow.cpp">
+      <Filter>GameObjects\Cow\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="cowManager.cpp">
+      <Filter>GameObjects\Cow\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="cowManagerPrefab.cpp">
+      <Filter>GameObjects\Cow\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="cowPrefab.cpp">
+      <Filter>GameObjects\Cow\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="missileSpawnerPrefab.cpp">
+      <Filter>GameObjects\Missiles\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="missilePrefab.cpp">
+      <Filter>GameObjects\Missiles\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="playerPrefab.cpp">
+      <Filter>GameObjects\Player\Prefabs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,9 +162,6 @@
     <ClInclude Include="defenseState.h">
       <Filter>GameObjects\Player\States</Filter>
     </ClInclude>
-    <ClInclude Include="missilePrefab.h">
-      <Filter>GameObjects\Missiles</Filter>
-    </ClInclude>
     <ClInclude Include="playerContext.h">
       <Filter>GameObjects\Player\Components</Filter>
     </ClInclude>
@@ -176,12 +170,6 @@
     </ClInclude>
     <ClInclude Include="..\playerMove.h">
       <Filter>GameObjects\Player\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="playerPrefab.h">
-      <Filter>GameObjects\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="missilePool.h">
-      <Filter>GameObjects\Missiles</Filter>
     </ClInclude>
     <ClInclude Include="missile.h">
       <Filter>GameObjects\Missiles\Components</Filter>
@@ -198,23 +186,32 @@
     <ClInclude Include="housePrefab.h">
       <Filter>Environment</Filter>
     </ClInclude>
-    <ClInclude Include="missileSpawnerPrefab.h">
-      <Filter>GameObjects\Missiles</Filter>
-    </ClInclude>
-    <ClInclude Include="cow.h">
-      <Filter>GameObjects\Cow</Filter>
-    </ClInclude>
-    <ClInclude Include="cowPrefab.h">
-      <Filter>GameObjects\Cow</Filter>
-    </ClInclude>
-    <ClInclude Include="cowManager.h">
-      <Filter>GameObjects\Cow</Filter>
-    </ClInclude>
-    <ClInclude Include="cowManagerPrefab.h">
-      <Filter>GameObjects\Cow</Filter>
-    </ClInclude>
     <ClInclude Include="objectPool.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="prefab.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="cowManager.h">
+      <Filter>GameObjects\Cow\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="cow.h">
+      <Filter>GameObjects\Cow\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="cowPrefab.h">
+      <Filter>GameObjects\Cow\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="cowManagerPrefab.h">
+      <Filter>GameObjects\Cow\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="missileSpawnerPrefab.h">
+      <Filter>GameObjects\Missiles\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="missilePrefab.h">
+      <Filter>GameObjects\Missiles\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="playerPrefab.h">
+      <Filter>GameObjects\Player\Prefabs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +262,18 @@
     </Filter>
     <Filter Include="GameObjects\Cow">
       <UniqueIdentifier>{4b88da23-fd17-4a86-a45b-867f6d99f6bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Cow\Components">
+      <UniqueIdentifier>{75cba451-a652-4c00-8e77-1cb8011a26f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Cow\Prefabs">
+      <UniqueIdentifier>{1762dfb2-e438-43e6-b57e-e94d1b532145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Missiles\Prefabs">
+      <UniqueIdentifier>{dbacbe1d-9910-47ca-8e11-aede6e5fd46f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\Player\Prefabs">
+      <UniqueIdentifier>{41857843-d322-4dd6-bd77-235d41112397}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

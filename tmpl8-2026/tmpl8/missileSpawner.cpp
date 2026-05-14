@@ -11,6 +11,14 @@ using namespace Tmpl8;
 
 MissilePrefab missilePrefab;
 
+
+MissileSpawner::MissileSpawner(Scene* scene) : scene(scene) 
+{
+
+	
+};
+
+
 void MissileSpawner::Start()
 {
 	pool->InstantiateToPool(missilePrefab, scene, pool.get(), vec2(0, 0), player);
@@ -28,6 +36,7 @@ void MissileSpawner::Tick()
 
 	// Ok yeah idk whats going on
 	// I mean we iterate in Tick() too so obviously that cant be the main issue
+	// And its a vector of unique ptrs so the object location should still be the same regardless?
 	
 	delayCounter -= Central::dts; // Count down till next spawn
 	if (delayCounter <= 0) SpawnSingle();
@@ -79,13 +88,14 @@ void MissileSpawner::SpawnSingle()
 
 	vec2 realSpawn = playerPos - relSpawn;
 
-	cout << "relativeSpawn - " << "x: " << to_string(relSpawn.x) << " , " << "y: " << to_string(relSpawn.y) << endl
+	/*cout << "relativeSpawn - " << "x: " << to_string(relSpawn.x) << " , " << "y: " << to_string(relSpawn.y) << endl
 		<< "cameraPosition - " << "x: " << to_string(playerPos.x) << " , " << "y: " << to_string(playerPos.y) << endl
-		<< "realSpawn - " << "x: " << to_string(realSpawn.x) << " , " << "y: " << to_string(realSpawn.y) << endl << endl;
+		<< "realSpawn - " << "x: " << to_string(realSpawn.x) << " , " << "y: " << to_string(realSpawn.y) << endl << endl;*/
 
 	// Spawn object
-	auto* m = pool->SpawnFromPool();
-	m->GetComponent<Missile>()->Spawn(realSpawn); // kinda expensive to do a GetComponent() call every time I spawn a missile
+	auto* go = pool->SpawnFromPool();
+	if (go == nullptr) return;
+	go->GetComponent<Missile>()->Spawn(realSpawn); // kinda expensive to do a GetComponent() call every time I spawn a missile
 
 	
 }
@@ -110,32 +120,22 @@ Two cases:
 vec2 MissileSpawner::SetSpawnPos()
 {
 
-	bool flip = (int)round(Rand(1)); // Randomly sets flip to either 0 or 1
-
-	//cout << "flip: " << to_string(flip) << endl;
-
 	float y = 0;
 	float x = 0;
 
 	int screenWidth = Central::screenWidth;
 	int screenHeight = Central::screenHeight;
 
-	int sign = utils::sign(
-		Rand(1) - 0.5f // Returns a number between -0.5 and 0.5
-	);
-
-	//cout << "sign: " << to_string(sign) << endl;
-
-	if (flip) // Spawn in Y direction - top or bottom of screen
+	if (utils::flip()) // Spawn in Y direction - top or bottom of screen
 	{
 		x = utils::random_range(screenWidth / 2 + margin);
 
-		y = sign * (screenHeight / 2 + margin);
+		y = utils::rand_sign() * (screenHeight / 2 + margin);
 	}
 
 	else // Spawn in X direction - left or right of screen
 	{
-		x = sign * (screenWidth / 2 + margin);
+		x = utils::rand_sign() * (screenWidth / 2 + margin);
 		
 		y = utils::random_range(screenHeight / 2 + margin);
 	}

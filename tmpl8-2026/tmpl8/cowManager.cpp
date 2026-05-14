@@ -1,30 +1,45 @@
 #include "cowManager.h"
 
 #include "utils.h"
+#include "cowPrefab.h"
+#include "central.h"
 
 using namespace Tmpl8;
 using namespace std;
 
+CowPrefab cowPrefab;
 
+CowManager::CowManager(Scene* scene) : scene(scene) 
+{
+	
+};
 
 void CowManager::Start()
 {
-	for (SpawnGroup s : groups)
+
+	pool->InstantiateToPool(cowPrefab, scene, pool.get(), vec2(0, 0));
+
+	for (const SpawnGroup& s : groups) // For weighted spawn system
 	{
 		totalWeight += s.weight;
 	}
+
+	// Initial cow spawn
+	int spawnAmount = initialGroupCount + utils::random_range(initialGroupRange);
+	Spawn(spawnAmount);
+
+	spawnOnScreen = false;
 }
 
 
 void CowManager::Tick()
 {
-
-
-
-
+	count -= Central::dts;
+	if (count > 0) return;
+	
+	int spawnAmount = groupCount + utils::random_range(groupRange);
+	Spawn(spawnAmount);
 }
-
-
 
 
 void CowManager::SetGroupSize()
@@ -33,7 +48,7 @@ void CowManager::SetGroupSize()
 	float rWeight = Rand(totalWeight);
 	float cumWeight = 0;
 
-	for (SpawnGroup s : groups)
+	for (const SpawnGroup& s : groups)
 	{
 		cumWeight += s.weight;
 		if (cumWeight >= rWeight)
@@ -44,26 +59,72 @@ void CowManager::SetGroupSize()
 	}
 }
 
-//void CowManager::Spawn(int group, int groupRange, float groupDistance, float groupDistanceRange)
-//{
-//
-//	for (int i = 0; i < group + utils::random_range(groupRange); i++)
-//	{
-//
-//		spawnCentre = SetSpawnCentre();
-//
-//	}
-//
-//}
 
-//vec2 CowManager::SetSpawnCentre()
-//{
-//
-//
-//
-//}
-//
-//vec2 CowManager::SetSpawnPos()
-//{
-//
-//}
+void CowManager::Spawn(int groupCount)
+{
+	for (int i = 0; i < groupCount; i++)
+	{
+		// Set size and centre for each group
+		SetGroupSize();
+		spawnCentre = SetSpawnCentre();
+
+		// Spawn cows for each group
+		for (int j = 0; j < currentGroup.size + utils::random_range(currentGroup.sizeRange); j++)
+		{
+			auto* go = pool->SpawnFromPool();
+			if (go == nullptr) return;
+			go->pos = SetSpawnPos();
+		}
+	}
+	count = spawnDelay;
+}
+
+
+vec2 CowManager::SetSpawnCentre()
+{
+	float y = 0;
+	float x = 0;
+
+	int screenWidth = Central::screenWidth;
+	int screenHeight = Central::screenHeight;
+
+
+	if (spawnOnScreen)
+	{
+		x = utils::random_range(screenWidth);
+		y = utils::random_range(screenHeight);
+	}
+
+	else // Reuse code from missile spawner
+	{
+
+		if (utils::flip()) // Spawn in Y direction - top or bottom of screen
+		{
+			x = utils::random_range(screenWidth / 2 + spawnMargin);
+
+			y = utils::rand_sign() * (screenHeight / 2 + spawnMargin);
+		}
+
+		else // Spawn in X direction - left or right of screen
+		{
+			x = utils::rand_sign() * (screenWidth / 2 + spawnMargin);
+
+			y = utils::random_range(screenHeight / 2 + spawnMargin);
+		}
+	}
+
+	return player->pos + vec2(x, y);
+}
+
+
+vec2 CowManager::SetSpawnPos()
+{
+	// Random spawnDir
+	vec2 spawnDir = vec2::normalize(
+		vec2(utils::random_range(1), utils::random_range(1))
+	);
+
+	float spawnDistance = currentGroup.distance + utils::random_range(currentGroup.distanceRange);
+
+	return spawnCentre + spawnDir * spawnDistance;
+}

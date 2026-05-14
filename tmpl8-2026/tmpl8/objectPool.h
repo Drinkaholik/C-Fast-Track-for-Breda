@@ -19,8 +19,10 @@ public:
 
 	// If this works first try I'm an actual goat
 	// I'm an actual goat!!!!!
+	// This works with and without the &&, so do I actually need it?
+	// I think it ensures the passed parameter is cv-unqualified? but idc about that i think
 	template <typename First, typename... Args> 
-	void InstantiateToPool(First prefab, Scene* scene, Args&&... args)
+	void InstantiateToPool(First prefab, Scene* scene, Args... args)
 	{
 		for (int i = 0; i < poolSize; i++)
 		{

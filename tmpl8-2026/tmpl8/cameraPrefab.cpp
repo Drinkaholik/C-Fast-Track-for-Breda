@@ -2,6 +2,7 @@
 
 #include "gameObject.h"
 #include "baseComponents.h"
+#include "camera.h"
 
 #include "surface.h"
 #include "scene.h"
@@ -15,6 +16,8 @@ GameObject* CameraPrefab::Load(Scene* scene, vec2 pos)
 {
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
-	go->AddComponent<Camera>(nullptr);
+	auto& cam = go->AddComponent<Camera>();
+	cam.SetTarget(scene->GetPlayer());
+
 	return scene->AddObject(ref);
 }

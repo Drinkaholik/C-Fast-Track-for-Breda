@@ -23,7 +23,8 @@ void SceneManager::LoadScene(int sceneID, bool debug)
 		currentScene->UnloadScene();
 	}
 	currentScene = sceneList[sceneID].get();
-	currentScene->LoadScene(debug);
+	currentScene->LoadScene();
+	currentScene->SetDebug(debug);
 }
 
 Scene* SceneManager::GetScene()

@@ -9,9 +9,10 @@ using namespace std;
 
 GameObject* ObjectPool::SpawnFromPool()
 {
-	auto& go = pool.front();
+	if (pool.empty()) return nullptr;
+	auto go = pool.front();
 	pool.pop();
-	go->active = true;
+	go->active = true; // Very rarely I get an access violation error here...
 	return go;
 }
 

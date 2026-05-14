@@ -5,7 +5,7 @@
 //
 //void ParticleEmitter::DrawParticles()
 //{
-//	for (Particle p : particles)
+//	for (Particle& p : particles)
 //	{
 //		//GameObject::surface->Plot(p.x, p.y, p.colour);
 //	}

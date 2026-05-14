@@ -38,20 +38,25 @@ void PlayerMove::UpdateInputs()
 
     vec2 rawVector = vec2(xInput, yInput);
     inputVector = vec2::normalize(rawVector);
+
+   /* cout << "inputvector - " << "x: " << to_string(inputVector.x) << " , "
+        << "y: " << to_string(inputVector.y) << endl;*/
 }
 
 
 
 void PlayerMove::Move()
 {
+    float& dt = Central::dts;
+
     // X-axis movement //
     if (inputVector.x != 0) // accel
     {
-        vel.x += accel * inputVector.x;
+        vel.x += accel * inputVector.x * dt;
     }
     else // decel
     {
-        vel.x -= decel * utils::sign(vel.x);
+        vel.x -= decel * utils::sign(vel.x) * dt;
 
         if (std::abs(vel.x) < 0.01f) // prevent overshoot
             vel.x = 0;
@@ -60,11 +65,11 @@ void PlayerMove::Move()
     // Y-axis movement //
     if (inputVector.y != 0) // accel
     {
-        vel.y += accel * inputVector.y;
+        vel.y += accel * inputVector.y * dt;
     }
     else // decel
     {
-        vel.y -= decel * utils::sign(vel.y);
+        vel.y -= decel * utils::sign(vel.y) * dt;
 
         if (std::abs(vel.y) < 0.01f) // prevent overshoot
             vel.y = 0;
@@ -72,20 +77,18 @@ void PlayerMove::Move()
 
     // Clamp velocity
 
-    float xNormMaxSpeed = abs(maxSpeed * inputVector.x); // Prevents diagonals from being faster
-    float yNormMaxSpeed = abs(maxSpeed * inputVector.y);
+    //float xNormMaxSpeed = abs(maxSpeed * inputVector.x); // Prevents diagonals from being faster
+    //float yNormMaxSpeed = abs(maxSpeed * inputVector.y);
 
-    vel.x = std::clamp(vel.x, -xNormMaxSpeed, xNormMaxSpeed);
-    vel.y = std::clamp(vel.y, -yNormMaxSpeed, yNormMaxSpeed);
-
-    float& dt = Central::dts;
+    //vel.x = std::clamp(vel.x, -xNormMaxSpeed, xNormMaxSpeed);
+    //vel.y = std::clamp(vel.y, -yNormMaxSpeed, yNormMaxSpeed);
 
     // Update position
     gameObject->pos += vel * dt;
 
 
-   /* cout << "xVel: " << to_string(normVel.x) << " , "
-        << "yVel: " << to_string(normVel.y) << endl;*/
+    cout << "xVel: " << to_string(vel.x) << " , "
+        << "yVel: " << to_string(vel.y) << endl;
 
     // Not gonna use MoveAndCollide() since UFO shouldn't bump into anything
     // using vec::normalize completely ruins movement, idk why

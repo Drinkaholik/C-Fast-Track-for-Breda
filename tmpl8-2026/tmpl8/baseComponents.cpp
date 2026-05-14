@@ -179,6 +179,8 @@ SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
 	size.x = sprite->GetWidth();
 	size.y = sprite->GetHeight();
 	screen = Central::surface;
+
+	frameCount = sprite->Frames();
 };
 
 void SpriteRenderer::Draw(vec2 pos)

@@ -4,16 +4,18 @@ Dont forget!!!! ->->->->->->->->->
 When handing in assignments based on this template, please run
 clean.bat prior to zipping the folder. This deletes any intermediate
 files created during compilation.
-->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->->
+<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<->->->->->->->->->->->->->->->->->->->->->->->->->->->-
 
 #######   For teachers   #######
 
 
 ##  Game Instructions  ##
 
-You are Mr.CowLover34, a notorious Zordian shitposter-cum-activist with a penchant for Earthly bovines. 
-You have made it your life goal to bring as many cows as possible to your personal sanctuary using 
-your saucer-drones' onboard Teleportinators™. 
+You are Mr.CowLover34, a notorious Zordian shitposter-cum-activist with a penchant for Earthly bovines
+and a distate for modern agricultural practices. 
+You have made it your life goal to rescue as many cows as possible from Earth, using your saucer-drones' 
+onboard Teleportinators™ to bring them to your off-world sanctuary. 
+. 
 Hoover up as many cows as you can before those pesky human air defenses take you down. 
 
 Controls:
@@ -40,7 +42,7 @@ AddComponent() in gameObject.h
 
 
 
-
+<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<->->->->->->->->->->->->->->->->->->->->->->->->->->->-
 
 ######   For me   ######
 

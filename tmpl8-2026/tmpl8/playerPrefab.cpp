@@ -16,7 +16,7 @@ GameObject* PlayerPrefab::Load(Scene* scene, vec2 pos, int maxHP)
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
 
-	auto* spr = SpriteList::sprites["tank"];
+	auto* spr = SpriteList::sprites["UFO_3hp"];
 	go->AddComponent<SpriteRenderer>(spr);
 
 	auto& col = go->AddComponent<Collider>(spr);

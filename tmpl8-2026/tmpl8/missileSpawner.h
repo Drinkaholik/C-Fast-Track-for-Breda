@@ -5,6 +5,8 @@
 #include "template.h"
 #include <memory>
 
+class Scene;
+
 
 class MissileSpawner : public Component
 {
@@ -13,7 +15,10 @@ public:
 	void Start() override;
 	void Tick() override;
 
-	MissileSpawner(Scene* scene, GameObject* player) : scene(scene), player(player) {};
+	void SetPlayer(GameObject* go) { player = go; };
+
+	// Structors
+	MissileSpawner(Scene* scene);
 
 private:
 
@@ -53,7 +58,7 @@ private:
 
 	// Pointers
 	Scene* scene;
-	GameObject* player;
+	GameObject* player = nullptr;
 
 
 	// Owns the missile pool

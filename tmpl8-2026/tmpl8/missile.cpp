@@ -16,12 +16,13 @@ void Missile::Spawn(vec2 pos)
 	gameObject->pos = pos;
 	SetSpeed();
 	SetDirection();
+	count = lifetime;
 }
 
 void Missile::Tick()
 {
 	Move();
-	Respawn();
+	Despawn();
 }
 
 void Missile::Move()
@@ -49,10 +50,10 @@ void Missile::SetDirection()
 
 }
 
-void Missile::Respawn()
+void Missile::Despawn()
 {
-	lifetime -= Central::dts;
-	if (lifetime <= 0)
+	count -= Central::dts;
+	if (count <= 0)
 	{
 		pool->ReturnToPool(this->gameObject);
 	}

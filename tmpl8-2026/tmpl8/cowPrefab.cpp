@@ -1,6 +1,5 @@
 #include "cowPrefab.h"
 
-
 #include "surface.h"
 #include "gameObject.h"
 #include "cow.h"
@@ -11,18 +10,19 @@ using namespace std;
 using namespace Tmpl8;
 
 
-GameObject* CowPrefab::Load(Scene* scene, vec2 pos)
+GameObject* CowPrefab::Load(Scene* scene, ObjectPool* pool, vec2 pos)
 {
+	// Make gameObject
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
 
-	auto* spr = SpriteList::sprites["tank"];
+	// Add components
+	auto* spr = SpriteList::sprites["cow"];
 	go->AddComponent<SpriteRenderer>(spr);
 
 	auto& col = go->AddComponent<Collider>(spr);
+	go->AddComponent<Cow>(pool);
 
-	go->AddComponent<Cow>();
-
-	return scene->AddObject(ref);
+	return scene->AddObject(ref); // Add to scenObjects and return raw ptr
 
 }

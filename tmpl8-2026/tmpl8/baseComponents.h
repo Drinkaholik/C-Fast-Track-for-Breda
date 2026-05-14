@@ -74,10 +74,27 @@ public:
 		sprite = spr;
 	}
 
+	void SetFrame(int frame)
+	{
+		frame = Tmpl8::Clamp(frame, 0, frameCount);
+		currentFrame = frame;
+
+		sprite->SetFrame(currentFrame);
+	}
+
+	void IncrementFrame(int amount)
+	{
+		int newFrame = currentFrame += amount;
+		newFrame = Tmpl8::Clamp(newFrame, 0, frameCount);
+	}
+
 	//Structors
 	SpriteRenderer(Sprite* spr);
 
 private:
+
+	int frameCount;
+	int currentFrame = 0;
 
 	Surface* screen; // Caches Central::surface - does that actually provide performance benefits? both are pointers. Apparently yes (cache misses?)
 	Sprite* sprite;

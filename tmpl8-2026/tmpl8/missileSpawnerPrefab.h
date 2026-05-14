@@ -7,6 +7,6 @@ class Camera;
 class MissileSpawnerPrefab
 {
 public:
-	GameObject* Load(Scene* scene, GameObject* player);
+	GameObject* Load(Scene* scene);
 };
 

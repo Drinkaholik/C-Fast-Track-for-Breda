@@ -4,10 +4,12 @@
 
 class GameObject;
 class Scene;
+class ObjectPool;
 
-struct CowPrefab
+class CowPrefab
 {
-	GameObject* Load(Scene* scene, Tmpl8::vec2 pos);
+public:
+	GameObject* Load(Scene* scene, ObjectPool* pool, Tmpl8::vec2 pos);
 };
 
 

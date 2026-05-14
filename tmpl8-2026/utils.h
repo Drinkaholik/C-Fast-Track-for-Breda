@@ -40,6 +40,17 @@ namespace utils
 		return r;
 	}
 
+	inline bool flip() // Randomly return true or false
+	{
+		return (int)round(Rand(1)); // rounds to either 1 or 0
+	}
+
+	inline int rand_sign() // Randomly returns +1 or -1
+	{
+		return sign(
+			Rand(1) - 0.5f); // Returns a number between -0.5 and 0.5
+	}
+
 
 
 

@@ -3,7 +3,6 @@
 
 using namespace std;
 
-Camera::Camera(GameObject* target) : target(target) {};
 
 void Camera::Start()
 {
@@ -18,13 +17,10 @@ void Camera::Tick()
 void Camera::SetTarget(GameObject* go)
 {
 	target = go;
-
 }
 
 void Camera::FollowTarget()
 {
-
 	gameObject->pos.x = target->pos.x - Central::screenWidth / 2;
 	gameObject->pos.y = target->pos.y - Central::screenHeight / 2;
-
 }

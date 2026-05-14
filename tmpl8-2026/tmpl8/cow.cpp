@@ -4,6 +4,20 @@
 #include "central.h"
 #include "utils.h"
 
+#include <iostream>
+#include <string>
+
+using namespace Tmpl8;
+using namespace std;
+
+void Cow::Start()
+{
+	SetDir();
+	SetSpeed(walkSpeed * (1 + utils::random_range(walkSpeedRange)));
+
+	/*cout << "dir - " << "x: " << to_string(moveDir.x) << " , " << "y: " << to_string(moveDir.y) << " , " << endl
+		<< "speed: " << to_string(speed) << endl;*/
+}
 
 void Cow::Tick()
 {
@@ -13,45 +27,87 @@ void Cow::Tick()
 
 void Cow::HandleState()
 {
-
 	switch (cowState)
-	{ 
-		case CowState::Idle :
+	{
+	case CowState::Idle:
+		
+		counter -= Central::dts;
+		if (counter <= 0) SetWalking();
 
-			Mooooove();
+		break;
 
-			break;
 
-		case CowState::Scared :
+	case CowState::Walking:
+		
+		Mooooove();
 
-			Mooooove();
-			counter -= Central::dts;
+		counter -= Central::dts;
+		if (counter <= 0)
+		{
+			if (utils::flip()) SetIdle();
+			else SetWalking(); // Randomizes moveDir and speed
+		}
+		
+		break;
 
-			// Transition to idle state
-			if (1 == 2)
-			{
-				cowState = CowState::Idle;
-				SetSpeed(idleSpeed * speedRange);
-			}
 
-			break;
+	case CowState::Scared:
+
+		Mooooove();
+
+		counter -= Central::dts;
+		if (counter <= 0)
+		{
+			if (utils::flip()) SetIdle();
+			else SetWalking();
+		}
+
+		break;
 	}
 }
+
+void Cow::SetIdle()
+{
+	cowState = CowState::Idle;
+	counter = idleDuration * (1 + utils::random_range(idleDurationRange));
+}
+
+void Cow::SetWalking()
+{
+	cowState = CowState::Walking;
+	counter = walkDuration * (1 + utils::random_range(walkDurationRange));
+
+	SetDir();
+	SetSpeed(walkSpeed * (1 + utils::random_range(walkSpeedRange)));
+}
+
+void Cow::SetScared(float amount)
+{
+	amount = Clamp(amount, minScare, maxScare);
+
+	cowState = CowState::Scared;
+	counter = scaredDuration * amount;
+
+	SetDir();
+	SetSpeed(scaredSpeed * amount);
+}
+
+
 
 
 void Cow::Mooooove()
 {
-	gameObject->pos += direction * speed;
+	gameObject->pos += moveDir * speed * Central::dts;
+}
+
+void Cow::SetDir()
+{
+	moveDir = vec2::normalize(
+		vec2(utils::random_range(1), utils::random_range(1))
+	);
 }
 
 void Cow::SetSpeed(float spd)
 {
 	speed = spd;
-}
-
-void Cow::SetScared()
-{
-	cowState = CowState::Scared;
-	SetSpeed(scaredSpeed * (1 + speedRange));
-	counter = scaredTime * (1 + utils::random_range(scaredTimeRange));
 }

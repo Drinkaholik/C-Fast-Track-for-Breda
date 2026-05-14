@@ -12,58 +12,62 @@ class CowManager : public Component
 
 public:
 
+	void Start() override;
 	void Tick() override;
-
 
 private:
 
-	enum GroupSize
+
+	float spawnDelay; // Time between spawns
+
+
+#pragma region Groups
+	struct SpawnGroup
 	{
-		Small,
-		Medium,
-		Large
-	} groupSize;
+		int groupSize; // Number of cows
+		int sizeRange; // Randomized
 
-	// Small group
-	int sGroup = 2; // Number of cows
-	int sGroupRange = 1;
+		float distance; // Distance from spawn centre
+		float distanceRange; // Randomized
 
-	float sGroupDistance = 100.0f; // Distance from spawn centre
-	float sGroupDistanceRange = 75.0f;
+		float weight; // Spawn weight
+	};
 
-	float sGroupWeight = 0.3f; // Spawn weight
+	static inline SpawnGroup smallGroup
+	{
+		2, 1,
+		100.0f, 75.0f,
+		0.3f
+	};
 
-	// Medium group
-	int mGroup = 6;
-	int mGroupRange = 3;
+	static inline SpawnGroup mediumGroup
+	{
+		6, 3,
+		150.0f, 125.0f,
+		0.6f
+	};
 
-	float mGroupDistance = 150.0f;
-	float mGroupDistanceRange = 125.0f;
+	static inline SpawnGroup largeGroup
+	{
+		13, 4,
+		200.0f, 175.0f,
+		0.3f
+	};
 
-	float mGroupWeight = 0.6f;
+	static inline SpawnGroup groups[] =
+	{
+		smallGroup, mediumGroup, largeGroup
+	};
 
+	SpawnGroup currentGroup;
+#pragma endregion
 
-	// Large group
-	int lGroup = 13;
-	int lGroupRange = 4;
-
-	float lGroupDistance = 200.0f;
-	float lGroupDistanceRange = 175.0f;
-
-	float lGroupWeight = 0.3f;
-
-
-	int group;
-	int groupRange;
-
-	float groupDistance;
-	float groupDistanceRange;
-
+	float totalWeight;
 
 	Tmpl8::vec2 spawnCentre;
 	Cow* cows;
 
-	void Spawn(int group, int groupRange, float groupDistance, float groupDistanceRange);
+	void Spawn();
 
 	void SetGroupSize();
 

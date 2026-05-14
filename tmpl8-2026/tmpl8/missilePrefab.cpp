@@ -10,7 +10,7 @@ using namespace std;
 using namespace Tmpl8;
 
 
-GameObject* MissilePrefab::Load(Scene* scene, MissilePool* pool, vec2 pos, GameObject* player)
+GameObject* MissilePrefab::Load(Scene* scene, ObjectPool* pool, vec2 pos, GameObject* player)
 {
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;

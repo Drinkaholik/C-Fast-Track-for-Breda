@@ -144,6 +144,7 @@
     <ClCompile Include="missileSpawnerPrefab.cpp" />
     <ClCompile Include="moveState.cpp" />
     <ClCompile Include="missilePool.cpp" />
+    <ClCompile Include="objectPool.cpp" />
     <ClCompile Include="particleEmitter.cpp" />
     <ClCompile Include="playerContext.cpp" />
     <ClCompile Include="playerPrefab.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="missileSpawnerPrefab.h" />
     <ClInclude Include="moveState.h" />
     <ClInclude Include="missilePool.h" />
+    <ClInclude Include="objectPool.h" />
     <ClInclude Include="particleEmitter.h" />
     <ClInclude Include="playerContext.h" />
     <ClInclude Include="playerHP.h" />

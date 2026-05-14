@@ -2,6 +2,19 @@
 
 #include "utils.h"
 
+using namespace Tmpl8;
+using namespace std;
+
+
+
+void CowManager::Start()
+{
+	for (SpawnGroup s : groups)
+	{
+		totalWeight += s.weight;
+	}
+}
+
 
 void CowManager::Tick()
 {
@@ -12,33 +25,23 @@ void CowManager::Tick()
 }
 
 
+
+
 void CowManager::SetGroupSize()
 {
+	// Uses weighted spawn
+	float rWeight = Rand(totalWeight);
+	float cumWeight = 0;
 
-
-
-	switch (groupSize)
+	for (SpawnGroup s : groups)
 	{
-
-	case GroupSize::Small:
-
-		break;
-
-
-	case GroupSize::Medium:
-
-
-		break;
-
-
-	case GroupSize::Large:
-
-
-
-		break;
-	};
-
-
+		cumWeight += s.weight;
+		if (cumWeight >= rWeight)
+		{
+			currentGroup = s;
+			break;
+		}
+	}
 }
 
 //void CowManager::Spawn(int group, int groupRange, float groupDistance, float groupDistanceRange)

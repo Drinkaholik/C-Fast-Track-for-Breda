@@ -2,26 +2,32 @@
 
 #include "camera.h"
 #include "utils.h"
+#include "missilePrefab.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 using namespace Tmpl8;
 
+MissilePrefab missilePrefab;
+
 void MissileSpawner::Start()
 {
-	
+	pool->InstantiateToPool(missilePrefab, scene, pool.get(), vec2(0, 0), player);
 }
 
 void MissileSpawner::Tick()
 {
-	if (!poolFilled)
-	{
-		// DO NOT put in start()!!!!!!!! - resizing the sceneObjects vector 
-		// while its still being iterated over causes dangling references
-		pool->InstantiateToPool(scene, player); 
-		poolFilled = true;
-	}
+	//if (!poolFilled)
+	//{
+	//	// DO NOT put in start()!!!!!!!! - resizing the sceneObjects vector 
+	//	// while its still being iterated over causes dangling references
+	//	pool->InstantiateToPool(scene, player); 
+	//	poolFilled = true;
+	//}
+
+	// Ok yeah idk whats going on
+	// I mean we iterate in Tick() too so obviously that cant be the main issue
 	
 	delayCounter -= Central::dts; // Count down till next spawn
 	if (delayCounter <= 0) SpawnSingle();
@@ -79,7 +85,7 @@ void MissileSpawner::SpawnSingle()
 
 	// Spawn object
 	auto* m = pool->SpawnFromPool();
-	m->Spawn(realSpawn);
+	m->GetComponent<Missile>()->Spawn(realSpawn); // kinda expensive to do a GetComponent() call every time I spawn a missile
 
 	
 }

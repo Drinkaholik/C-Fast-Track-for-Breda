@@ -1,11 +1,10 @@
 #pragma once
 #include "baseComponents.h"
-#include "missilePool.h"
+#include "objectPool.h"
 #include "missile.h"
 #include "template.h"
 #include <memory>
 
-class Camera;
 
 class MissileSpawner : public Component
 {
@@ -51,13 +50,14 @@ private:
 
 	float margin = 20; // How far offscreen to spawn missiles
 
+
 	// Pointers
 	Scene* scene;
 	GameObject* player;
 
 
 	// Owns the missile pool
-	std::unique_ptr<MissilePool> pool = std::make_unique<MissilePool>(100);
+	std::unique_ptr<ObjectPool> pool = std::make_unique<ObjectPool>(100);
 
 	bool poolFilled = false;
 };

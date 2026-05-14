@@ -100,6 +100,9 @@
     <ClCompile Include="cowManagerPrefab.cpp">
       <Filter>GameObjects\Cow</Filter>
     </ClCompile>
+    <ClCompile Include="objectPool.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -209,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="cowManagerPrefab.h">
       <Filter>GameObjects\Cow</Filter>
+    </ClInclude>
+    <ClInclude Include="objectPool.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

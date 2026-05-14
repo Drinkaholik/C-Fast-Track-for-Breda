@@ -1,7 +1,7 @@
 #include "missile.h"
 
 #include "gameObject.h"
-#include "missilePool.h"
+#include "objectPool.h"
 #include "utils.h"
 #include "central.h"
 
@@ -54,6 +54,6 @@ void Missile::Respawn()
 	lifetime -= Central::dts;
 	if (lifetime <= 0)
 	{
-		pool->ReturnToPool(this);
+		pool->ReturnToPool(this->gameObject);
 	}
 }

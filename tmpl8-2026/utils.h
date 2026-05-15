@@ -22,7 +22,7 @@ namespace utils
 		float xDistance = abs(p1.x - p2.x);
 		float yDistance = abs(p1.y - p2.y);
 
-		return abs(sqrt((xDistance * xDistance) + (yDistance * yDistance))); // Finding hypotenuse
+		return (float)abs(sqrt((xDistance * xDistance) + (yDistance * yDistance))); // Finding hypotenuse
 	}
 
 

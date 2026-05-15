@@ -36,7 +36,7 @@ void PlayerMove::UpdateInputs()
     int xInput = rightMove - leftMove;
     int yInput = downMove - upMove;
 
-    vec2 rawVector = vec2(xInput, yInput);
+    vec2 rawVector = vec2((float)xInput, (float)yInput);
     inputVector = vec2::normalize(rawVector);
 
    /* cout << "inputvector - " << "x: " << to_string(inputVector.x) << " , "
@@ -50,7 +50,7 @@ void PlayerMove::Move()
     float& dt = Central::dts;
 
     // X-axis movement //
-    if (inputVector.x != 0) // accel
+    if (abs(inputVector.x) > 0.01f) // accel
     {
         vel.x += accel * inputVector.x * dt;
     }
@@ -63,7 +63,7 @@ void PlayerMove::Move()
     }
 
     // Y-axis movement //
-    if (inputVector.y != 0) // accel
+    if (abs(inputVector.y) > 0.01f) // accel
     {
         vel.y += accel * inputVector.y * dt;
     }

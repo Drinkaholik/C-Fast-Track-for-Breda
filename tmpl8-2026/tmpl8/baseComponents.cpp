@@ -261,5 +261,7 @@ void SpriteRenderer::Tick()
 void Image::Draw(vec2 pos)
 {
 
-	sprite->Draw(screen, pos.x, pos.y);
+	sprite->Draw(screen, 
+		(int)round(pos.x), 
+		(int)round(pos.y));
 }

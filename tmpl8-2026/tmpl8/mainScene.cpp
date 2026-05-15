@@ -1,7 +1,7 @@
 #include "mainScene.h"
 
 #include "template.h"
-#include "spriteList.h"
+#include "spriteFactory.h"
 #include "gameObject.h"
 #include "camera.h"
 #include "playerPrefab.h"

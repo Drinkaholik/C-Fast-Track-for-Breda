@@ -3,6 +3,7 @@
 #include "template.h"
 #include <span>
 #include <string>
+#include <memory>
 
 class GameObject; // Forward declaration to prevent circular dependancy
 class CollisionSystem;
@@ -93,16 +94,9 @@ public:
 	virtual void Tick(); 
 
 
-	void ChangeSprite(Tmpl8::Sprite* spr)
-	{
-		sprite = spr;
-	}
-
 	void SetFrame(int frame)
 	{
-		frame = Tmpl8::Clamp(frame, 0, frameCount);
-		currentFrame = frame;
-
+		currentFrame = Tmpl8::Clamp(frame, 0, frameCount - 1);
 		sprite->SetFrame(currentFrame);
 	}
 
@@ -112,8 +106,15 @@ public:
 		newFrame = Tmpl8::Clamp(newFrame, 0, frameCount);
 	}
 
+	int GetFrame() { return currentFrame; };
+
+	int GetFrameCount() { return frameCount; };
+
+	Tmpl8::Sprite* GetSprite() { return sprite.get(); };
+
 	//Structors
-	SpriteRenderer(Tmpl8::Sprite* spr);
+	SpriteRenderer(std::string spriteName);
+	SpriteRenderer(std::string spriteName, int frame);
 
 protected:
 
@@ -122,11 +123,12 @@ protected:
 
 	Tmpl8::Surface* screen;
 	GameObject* camera;
-	Tmpl8::Sprite* sprite;
+	std::unique_ptr<Tmpl8::Sprite> sprite;
 
 	Tmpl8::vec2 size;
 
 	virtual void Draw(Tmpl8::vec2 pos);
+	void SetSprite(std::string spriteName);
 };
 
 
@@ -139,13 +141,9 @@ public:
 
 	void Tick() override;
 
-	void ChangeImage(Tmpl8::Sprite* spr)
-	{
-		sprite = spr;
-	}
 
 	// Structors
-	Image(Tmpl8::Sprite* spr) : SpriteRenderer(spr) {};
+	//Image(std::string spriteName) : SpriteRenderer::SpriteRenderer(std::string spriteName);
 
 private:
 

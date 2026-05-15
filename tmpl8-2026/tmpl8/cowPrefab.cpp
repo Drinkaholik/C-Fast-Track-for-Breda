@@ -3,7 +3,7 @@
 #include "surface.h"
 #include "gameObject.h"
 #include "cow.h"
-#include "spriteList.h"
+#include "spriteFactory.h"
 #include "scene.h"
 
 using namespace std;
@@ -17,10 +17,9 @@ GameObject* CowPrefab::Load(Scene* scene, ObjectPool* pool, vec2 pos, bool runSt
 	auto& ref = go;
 
 	// Add components
-	auto spr = SpriteList::sprites["cow"];
-	auto rend = &go->AddComponent<SpriteRenderer>(spr);
+	auto rend = &go->AddComponent<SpriteRenderer>("cow");
 
-	auto& col = go->AddComponent<Collider>(scene, "cow", spr);
+	auto& col = go->AddComponent<Collider>(scene, "cow", rend->GetSprite());
 	go->AddComponent<Cow>(pool);
 
 	scene->GetRenderSystem()->Register(1, rend);

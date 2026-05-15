@@ -22,10 +22,21 @@ public:
 
 private:
 
+	// Time variables - measured in seconds
+	float waitTime = 1; // how long to wait at start of level, and between waves
+	float spawnDelay = 0.2; // Time before spawning next missile
+	float delayCounter = spawnDelay;
+
+	float warningTime = 1.0f; // Time between warning flashing and missile spawning
+
+
+	float margin = 20; // How far offscreen to spawn missiles
+
+
 	void SpawnMissiles();
 
 	void SpawnSingle();
-	void SpawnMultiGroup();
+	void SpawnMultiGroup(); // dont think i'll have time to implement the rest
 	void SpawnMultiSpread();
 	void SpawnSeriesGroup();
 	void SpawnSeriesSpread();
@@ -45,15 +56,7 @@ private:
 		Series_Spread
 	} attackType = AttackType::Single;
 
-	// Time variables - measured in seconds
-	float waitTime = 1; // how long to wait at start of level, and between waves
-	float spawnDelay = 1; // Time before spawning next missile
-	float delayCounter = spawnDelay;
 
-	float warningTime = 1.0f; // Time between warning flashing and missile spawning
-
-
-	float margin = 20; // How far offscreen to spawn missiles
 
 
 	// Pointers

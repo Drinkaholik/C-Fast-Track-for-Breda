@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "collisionSystem.h"
 #include "scene.h"
+#include "spriteFactory.h"
 
 #include <math.h>
 #include <iostream>
@@ -256,8 +257,9 @@ void Collider::DrawCollider()
 // SpriteRenderer //
 #pragma region SpriteRenderer
 
-SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
+SpriteRenderer::SpriteRenderer(string spriteName)
 {
+	SetSprite(spriteName);
 	size.x = (float)sprite->GetWidth();
 	size.y = (float)sprite->GetHeight();
 	screen = Central::surface;
@@ -265,6 +267,25 @@ SpriteRenderer::SpriteRenderer(Sprite* spr) : sprite(spr)
 
 	frameCount = sprite->Frames();
 };
+
+SpriteRenderer::SpriteRenderer(string spriteName, int frame) : currentFrame(frame)
+{
+	SetSprite(spriteName);
+	size.x = (float)sprite->GetWidth();
+	size.y = (float)sprite->GetHeight();
+	screen = Central::surface;
+	camera = Central::camera;
+
+	frameCount = sprite->Frames();
+	sprite->SetFrame(currentFrame);
+}
+
+
+void SpriteRenderer::SetSprite(string spriteName)
+{
+	sprite = move(SpriteFactory::BuildSprite(spriteName));
+}
+
 
 void SpriteRenderer::Draw(vec2 pos)
 {

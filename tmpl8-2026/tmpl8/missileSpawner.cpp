@@ -75,7 +75,7 @@ void MissileSpawner::SpawnSingle()
 
 	vec2 playerPos = player->pos;
 
-	vec2 realSpawn = playerPos - relSpawn;
+	vec2 spawnPos = playerPos - relSpawn;
 
 	/*cout << "relativeSpawn - " << "x: " << to_string(relSpawn.x) << " , " << "y: " << to_string(relSpawn.y) << endl
 		<< "cameraPosition - " << "x: " << to_string(playerPos.x) << " , " << "y: " << to_string(playerPos.y) << endl
@@ -84,7 +84,7 @@ void MissileSpawner::SpawnSingle()
 	// Spawn object
 	auto go = pool->SpawnFromPool();
 	if (go == nullptr) return;
-	go->GetComponent<Missile>()->Spawn(realSpawn); // kinda expensive to do a GetComponent() call every time I spawn a missile
+	go->GetComponent<Missile>()->Spawn(spawnPos); // kinda expensive to do a GetComponent() call every time I spawn a missile
 
 	
 }
@@ -95,20 +95,19 @@ Two cases:
 
 - This means:
 - - Y = +- (screenHeight / 2) + margin
-- - X = randomRange(-screenWidth/2, screenWidth/2)
+- - X = randomRange(-screenWidth / 2, screenWidth / 2)
 
 
 2. It spawns from the left or right of the screen
 
 - This means:
-- - Y = randomRange(screenHeight/2, screenHeight/2)
-- - X = +- (screenWidth / 2) + margi´n
+- - Y = randomRange(screenHeight / 2, screenHeight / 2)
+- - X = +- (screenWidth / 2) + margin
 */
 
 // Sets the relative spawn pos from camera - aka distance to camera, not position
 vec2 MissileSpawner::SetSpawnPos()
 {
-
 	float y = 0;
 	float x = 0;
 

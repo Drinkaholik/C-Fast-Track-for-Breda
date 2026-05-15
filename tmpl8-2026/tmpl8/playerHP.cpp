@@ -1,7 +1,7 @@
 #include "playerHP.h"
 
 #include "scene.h"
-#include "spriteList.h"
+#include "spriteFactory.h"
 
 
 using namespace Tmpl8;
@@ -31,15 +31,10 @@ void PlayerHP::TakeDamage()
 {
 	hp--;
 
-	if (hp == 2) // Bit hacky
-	{
-		spriteRenderer->ChangeSprite(SpriteList::sprites["ufo_2hp"]);
-	}
-	else if (hp == 1)
-	{
-		spriteRenderer->ChangeSprite(SpriteList::sprites["ufo_1hp"]);
-	}
+	if (hp < 1) return;
+	spriteRenderer->SetFrame(hp - 1);
 }
+
 
 
 int PlayerHP::GetHP() 

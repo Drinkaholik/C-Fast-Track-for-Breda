@@ -3,7 +3,7 @@
 #include "surface.h"
 #include "gameObject.h"
 #include "cowManager.h"
-#include "spriteList.h"
+#include "spriteFactory.h"
 #include "scene.h"
 
 using namespace std;

@@ -23,7 +23,7 @@ private:
 
 	
 	// Idle state
-	float idleDuration = 5.0f;
+	float idleDuration = 2.0f;
 	float idleDurationRange = 0.75f;
 
 

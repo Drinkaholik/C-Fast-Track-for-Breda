@@ -2,7 +2,7 @@
 
 #include "gameObject.h"
 #include "surface.h"
-#include "spriteList.h"
+#include "spriteFactory.h"
 #include "scene.h"
 
 using namespace Tmpl8;
@@ -13,8 +13,7 @@ GameObject* HousePrefab::Load(Scene* scene, vec2 pos, bool runStart)
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
 
-	auto spr = SpriteList::sprites["house"];
-	go->AddComponent<SpriteRenderer>(spr);
+	go->AddComponent<SpriteRenderer>("house");
 
 	//auto& col = go->AddComponent<Collider>(scene, spr);
 

@@ -2,7 +2,7 @@
 
 #include "surface.h"
 #include "gameObject.h"
-#include "spriteList.h"
+#include "spriteFactory.h"
 #include "missile.h"
 #include "scene.h"
 
@@ -15,10 +15,9 @@ GameObject* MissilePrefab::Load(Scene* scene, ObjectPool* pool, vec2 pos, GameOb
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
 
-	auto spr = SpriteList::sprites["tank"];
-	auto rend = &go->AddComponent<SpriteRenderer>(spr);
+	auto rend = &go->AddComponent<SpriteRenderer>("missile");
 
-	auto& col = go->AddComponent<Collider>(scene, "missile", spr);
+	auto& col = go->AddComponent<Collider>(scene, "missile", rend->GetSprite());
 	go->AddComponent<Missile>(pool, player);
 
 	scene->GetRenderSystem()->Register(3, rend);

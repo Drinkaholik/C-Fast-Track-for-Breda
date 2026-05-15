@@ -151,7 +151,7 @@
     <ClCompile Include="renderSystem.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="sceneManager.cpp" />
-    <ClCompile Include="spriteList.cpp" />
+    <ClCompile Include="spriteFactory.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
@@ -191,7 +191,7 @@
     <ClInclude Include="renderSystem.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="sceneManager.h" />
-    <ClInclude Include="spriteList.h" />
+    <ClInclude Include="spriteFactory.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="context.h" />
     <ClInclude Include="surface.h" />

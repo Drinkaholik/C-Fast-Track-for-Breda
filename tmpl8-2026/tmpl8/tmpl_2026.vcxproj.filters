@@ -25,9 +25,6 @@
     <ClCompile Include="sceneManager.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="spriteList.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="..\game.cpp">
       <Filter>Template</Filter>
     </ClCompile>
@@ -112,6 +109,9 @@
     <ClCompile Include="collisionSystem.cpp">
       <Filter>Systems</Filter>
     </ClCompile>
+    <ClCompile Include="spriteFactory.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="surface.h">
@@ -140,9 +140,6 @@
     </ClInclude>
     <ClInclude Include="sceneManager.h">
       <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="spriteList.h">
-      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="..\game.h">
       <Filter>Template</Filter>
@@ -229,6 +226,9 @@
       <Filter>GameObjects\Player\Components</Filter>
     </ClInclude>
     <ClInclude Include="renderSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="spriteFactory.h">
       <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>

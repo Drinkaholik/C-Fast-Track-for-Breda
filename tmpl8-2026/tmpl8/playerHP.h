@@ -10,11 +10,12 @@ public:
 
 	void Start() override;
 
-	void SetHP(int value);
-
 	void TakeDamage();
 
+	void SetHP(int value);
 	int GetHP();
+
+	
 
 	PlayerHP(Scene* scene, int maxHP);
 

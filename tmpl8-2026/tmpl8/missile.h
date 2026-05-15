@@ -28,7 +28,7 @@ private:
 	float lifetime = 5.0f;
 	float count;
 
-	Tmpl8::vec2 direction; // Working with vector directions is soooooo nice
+	Tmpl8::vec2 dir; // Working with vector directions is soooooo nice
 
 	GameObject* player; // Needed for targeting
 	ObjectPool* pool; // Needed to return self to pool, injected via MissileSpawner
@@ -39,6 +39,8 @@ private:
 	void Move();
 
 	void Despawn();
+
+	void SetFrame();
 
 
 

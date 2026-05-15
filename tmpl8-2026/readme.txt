@@ -1,9 +1,3 @@
-
-
-Dont forget!!!! ->->->->->->->->->
-When handing in assignments based on this template, please run
-clean.bat prior to zipping the folder. This deletes any intermediate
-files created during compilation.
 <-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<-<->->->->->->->->->->->->->->->->->->->->->->->->->->->-
 
 #######   For teachers   #######
@@ -46,8 +40,14 @@ Deregister() in collisionSystem.h
 AddComponent() in gameObject.h
 - written by AI
 
-PrintScaled() surface.h
+PrintScaled() in surface.h
 - written by Stas on the 3DGEP Discord: https://discord.com/channels/515453022097244160/764945773988806694/1472877918891020323
+
+
+
+
+
+
 
 
 
@@ -69,15 +69,6 @@ Favour forward declaration over header inclusion in header files to prevent circ
 
 
 
-##  My notes  ##
-
-Order of operations for gameObjects:
-1. Constructor runs
-2. Start() runs
-3. Tick() runs
-
-
-
 ##  Modifications to template  ## 
 
 - Changed vec2::normalized to prevent divide by 0 error
@@ -88,6 +79,4 @@ Order of operations for gameObjects:
 ## Biggest issues with the code ##
 - So many components need a scene pointer to get all their own pointers / refs
 which I think makes for a pretty poor design
-- The scene has pointers to useful objects so I can link them more easily
 - For sceneObjects I reserve more space than I need because resizing would cause issues
-- Objects are rendered in the order they're pushed to sceneObjects - need a layering system

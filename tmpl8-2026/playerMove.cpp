@@ -16,7 +16,6 @@ void PlayerMove::Tick()
 {
     UpdateInputs();
     Move();
-    Dash();
 };
 
 void PlayerMove::UpdateInputs()
@@ -30,8 +29,6 @@ void PlayerMove::UpdateInputs()
     int downMove = (game.GetKey(SDL_SCANCODE_S)) ? 1 : 0;
     int leftMove = (game.GetKey(SDL_SCANCODE_A)) ? 1 : 0;
     int rightMove = (game.GetKey(SDL_SCANCODE_D)) ? 1 : 0;
-
-    bool tryDash = (game.GetKey(SDL_SCANCODE_LSHIFT)) ? 1 : 0;
 
     int xInput = rightMove - leftMove;
     int yInput = downMove - upMove;
@@ -103,12 +100,11 @@ void PlayerMove::Move()
 };
 
 
-void PlayerMove::Dash()
+void PlayerMove::SetStats(float newAccel, float newDecel, float newMaxSpeed)
 {
-    if (!tryDash) return;
-
-    vel += inputVector * dashSpeed;
-
+    accel = newAccel;
+    decel = newDecel;
+    maxSpeed = newMaxSpeed;
 }
 
 

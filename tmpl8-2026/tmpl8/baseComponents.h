@@ -111,6 +111,7 @@ public:
 	int GetFrameCount() { return frameCount; };
 
 	Tmpl8::Sprite* GetSprite() { return sprite.get(); };
+	void SetSprite(std::string spriteName);
 
 	//Structors
 	SpriteRenderer(std::string spriteName);
@@ -121,14 +122,14 @@ protected:
 	int frameCount;
 	int currentFrame = 0;
 
-	Tmpl8::Surface* screen;
+	Tmpl8::Surface* surface;
 	GameObject* camera;
 	std::unique_ptr<Tmpl8::Sprite> sprite;
 
 	Tmpl8::vec2 size;
 
 	virtual void Draw(Tmpl8::vec2 pos);
-	void SetSprite(std::string spriteName);
+	
 };
 
 

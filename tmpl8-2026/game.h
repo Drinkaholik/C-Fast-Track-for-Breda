@@ -31,7 +31,6 @@ public:
 
 
 private:
-	void ShowFPS(int xPos, int yPos);
 
 	std::bitset<SDL_NUM_SCANCODES> keys; // store key states here
 	std::bitset<SDL_NUM_SCANCODES> held; // store key states from the previous tick here

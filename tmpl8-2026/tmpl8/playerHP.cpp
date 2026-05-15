@@ -8,7 +8,7 @@ using namespace Tmpl8;
 using namespace std;
 
 // Structors
-PlayerHP::PlayerHP(Scene* scene, int maxHP) : maxHP(maxHP), hp(maxHP)
+PlayerHP::PlayerHP(Scene* scene, int maxHP) : scene(scene), maxHP(maxHP), hp(maxHP)
 {
 	scene->GetDamageSystem()->SetPlayerHP(this);
 };
@@ -31,7 +31,11 @@ void PlayerHP::TakeDamage()
 {
 	hp--;
 
-	if (hp < 1) return;
+	if (hp < 1)
+	{
+		Die();
+		return;
+	}
 	spriteRenderer->SetFrame(hp - 1);
 }
 
@@ -40,4 +44,11 @@ void PlayerHP::TakeDamage()
 int PlayerHP::GetHP() 
 { 
 	return hp; 
+}
+
+
+void PlayerHP::Die()
+{
+	scene->setReload = true;
+
 }

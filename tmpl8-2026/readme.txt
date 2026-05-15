@@ -22,13 +22,13 @@ Hoover up as many cows as you can before those pesky human air defenses take you
 Controls:
 WASD to move
 Space to transform
-Shift to:
- - dash (in evasive form)
- - shield (in defensive form)
+
 
 Instructions:
 1. Hover over cows to abduct them. Each cow is worth 1 point. 
 2. Avoid the incoming missiles. You only have 3 lives!
+3. Press space to transform between your evasion mode and abduction mode. 
+You move much faster in your evasive mode, but you cannot abduct any cows. 
 
 
 
@@ -45,6 +45,9 @@ Deregister() in collisionSystem.h
 
 AddComponent() in gameObject.h
 - written by AI
+
+PrintScaled() surface.h
+- written by Stas on the 3DGEP Discord: https://discord.com/channels/515453022097244160/764945773988806694/1472877918891020323
 
 
 

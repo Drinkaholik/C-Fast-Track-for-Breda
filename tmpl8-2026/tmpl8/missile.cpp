@@ -108,13 +108,13 @@ void Missile::SetFrame()
 	float angle = radians * (180.0f / (float)M_PI); // Trig stuff
 
 	if (angle < 0.0f) angle += 360.0f; // Atan returns -180 to 180 so gotta correct
-	angle += 22.5f; // Better aligns snapping
+	angle += 22.5f; // Aligns for snapping
 
 	int frame = (int)(angle / 45.0f);
 	frame = (frame + 2) % 8; // Rotate clockwise by 90° and wrap if necessary
 
-	cout << "angle: " << to_string(angle) << " , "
-		<< "frame: " << to_string(frame) << endl;
+	/*cout << "angle: " << to_string(angle) << " , "
+		<< "frame: " << to_string(frame) << endl;*/
 
 	spr->SetFrame(frame);
 }

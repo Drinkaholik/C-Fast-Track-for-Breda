@@ -25,12 +25,14 @@ void Abductor::Tick()
 
 void Abductor::Abduct()
 {
+	if (!canAbduct) return;
+
 	vec2 myPos = gameObject->pos;
 
 	// Check against every cow in list
-	if (auto cow = col->CollideWith(myPos, "cow")) 
-	{
-		cowManager->Abduct(cow->gameObject->GetComponent<Cow>());
-	}
-		
+	auto cow = col->CollideWith(myPos, "cow");
+	if (cow == nullptr) return;
+	
+	cowManager->Abduct(cow->gameObject->GetComponent<Cow>());
+	
 }

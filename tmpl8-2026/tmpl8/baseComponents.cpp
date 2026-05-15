@@ -77,6 +77,7 @@ bool CheckCollisionAxis(float aMin, float aMax, float bMin, float bMax)
 
 bool Collider::CollideAt(const vec2 pos, Collider* col)
 {
+	if (!col->active) return false;
 	// Cache pos
 	vec2 originalPos = gameObject->pos;
 
@@ -104,6 +105,7 @@ bool Collider::CollideAt(Tmpl8::vec2 pos, std::string layer)
 
 	for (auto& col : collisionSystem->GetLayer(layer))
 	{
+		if (!col->active) continue;
 		// Move rect to check position
 		UpdateRect(pos);
 
@@ -130,6 +132,7 @@ bool Collider::CollideAt(Tmpl8::vec2 pos, std::string layer)
 
 Collider* Collider::CollideWith(const vec2 pos, Collider* col)
 {
+	if (!col->active) return nullptr;
 	// Cache pos
 	vec2 originalPos = gameObject->pos;
 
@@ -153,11 +156,13 @@ Collider* Collider::CollideWith(const vec2 pos, Collider* col)
 
 Collider* Collider::CollideWith(Tmpl8::vec2 pos, std::string layer)
 {
+	
 	// Cache pos
 	vec2 originalPos = gameObject->pos;
 
 	for (auto& col : collisionSystem->GetLayer(layer))
 	{
+		if (!col->active) continue;
 		// Move rect to check position
 		UpdateRect(pos);
 
@@ -262,7 +267,7 @@ SpriteRenderer::SpriteRenderer(string spriteName)
 	SetSprite(spriteName);
 	size.x = (float)sprite->GetWidth();
 	size.y = (float)sprite->GetHeight();
-	screen = Central::surface;
+	surface = Central::surface;
 	camera = Central::camera;
 
 	frameCount = sprite->Frames();
@@ -273,7 +278,7 @@ SpriteRenderer::SpriteRenderer(string spriteName, int frame) : currentFrame(fram
 	SetSprite(spriteName);
 	size.x = (float)sprite->GetWidth();
 	size.y = (float)sprite->GetHeight();
-	screen = Central::surface;
+	surface = Central::surface;
 	camera = Central::camera;
 
 	frameCount = sprite->Frames();
@@ -301,7 +306,7 @@ void SpriteRenderer::Draw(vec2 pos)
 
 
 	// Draw from centre rather than top left
-	sprite->Draw(screen,
+	sprite->Draw(surface,
 		(int)round(screenPos.x),
 		(int)round(screenPos.y)
 	);
@@ -323,7 +328,7 @@ void SpriteRenderer::Tick()
 void Image::Draw(vec2 pos)
 {
 
-	sprite->Draw(screen, 
+	sprite->Draw(surface, 
 		(int)round(pos.x), 
 		(int)round(pos.y));
 }

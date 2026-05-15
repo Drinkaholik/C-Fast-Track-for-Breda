@@ -30,7 +30,7 @@
 //	void DrawParticles();
 //
 //public:
-//	ParticleEmitter(Surface* screen, Sprite* spr, float xPos, float yPos)
+//	ParticleEmitter(Surface* surface, Sprite* spr, float xPos, float yPos)
 //		
 //	{
 //

@@ -24,7 +24,7 @@ namespace Tmpl8
     // -----------------------------------------------------------
     void Game::Init()
     {
-        sceneManager->LoadScene(0, true); // Load main menu
+        sceneManager->LoadScene(0, false); // Load main menu
   
     }
 
@@ -44,19 +44,16 @@ namespace Tmpl8
 
         sceneManager->GetScene()->Tick(); // Drive gameObject update loop
 
-        
-        ShowFPS(10, 10);
-
-        screen->Bar(100, 100, 300, 120, 0xFFFFFF);
-
-        screen->Plot(300, 300, 0xFF0000);
 
         UpdateKeys();
 
         if (GetKey(SDL_SCANCODE_R))
         {
-            sceneManager->LoadScene(0, true); // Load main menu
+            sceneManager->LoadScene(0, false); // Load main menu
         }
+
+        if (sceneManager->GetScene()->setReload)
+            sceneManager->LoadScene(0, false);
    
 
     }
@@ -70,28 +67,6 @@ namespace Tmpl8
     };
 
 
-
-
-    // FPS counter //
-    float smoothedFPS = 1;
-    float smoothing = 100; // Higher means smoother FPS, but less precise
-
-    void Game::ShowFPS(int xPos, int yPos)
-    {
-
-        // Why mult by 1000 specifically? Measured in milliseconds?
-        // Idk but it matches what i can see with sprite movement
-        float realFPS = (1 / Central::deltaTime) * 1000; 
-
-        // Higher value as the gap between realFPS and smoothedFPS increases,
-        // stops it from taking ages to catch up
-        float dynamicSmoothing = (abs(1 - realFPS / smoothedFPS)) / smoothing;
-
-        smoothedFPS = lerp(smoothedFPS, realFPS, dynamicSmoothing);
-
-
-        screen->Print(to_string(smoothedFPS).c_str(), xPos, yPos, 0xFFFFFF);
-    }
 
 };
 

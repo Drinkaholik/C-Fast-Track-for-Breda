@@ -28,6 +28,17 @@ void MissileSpawner::Start()
 
 void MissileSpawner::Tick()
 {
+	// Initial timer before missiles start spawning
+	if (waitCounter >= 0)
+	{
+		waitCounter -= Central::dts;
+		return;
+	}
+
+	// Make missiles spawn quicker over time
+	if (spawnDelay > minSpawnDelay)
+		spawnDelay -= delayDecreaseRate * Central::dts;
+
 	delayCounter -= Central::dts; // Count down till next spawn
 	if (delayCounter <= 0) SpawnSingle();
 }

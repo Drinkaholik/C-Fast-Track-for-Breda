@@ -20,34 +20,19 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="scene.cpp">
-      <Filter>Systems\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="sceneManager.cpp">
-      <Filter>Systems\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="..\game.cpp">
       <Filter>Template</Filter>
-    </ClCompile>
-    <ClCompile Include="context.cpp">
-      <Filter>State Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="state.cpp">
-      <Filter>State Pattern</Filter>
     </ClCompile>
     <ClCompile Include="cursor.cpp">
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
       <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="defenseState.cpp">
-      <Filter>GameObjects\Player\States</Filter>
-    </ClCompile>
-    <ClCompile Include="moveState.cpp">
-      <Filter>GameObjects\Player\States</Filter>
-    </ClCompile>
-    <ClCompile Include="playerContext.cpp">
-      <Filter>GameObjects\Player\Components</Filter>
     </ClCompile>
     <ClCompile Include="..\playerMove.cpp">
       <Filter>GameObjects\Player\Components</Filter>
@@ -64,7 +49,7 @@
     <ClCompile Include="camera.cpp">
       <Filter>GameObjects\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="housePrefab.cpp">
+    <ClCompile Include="treePrefab.cpp">
       <Filter>Environment</Filter>
     </ClCompile>
     <ClCompile Include="cow.cpp">
@@ -95,25 +80,40 @@
       <Filter>GameObjects\Player\Components</Filter>
     </ClCompile>
     <ClCompile Include="sceneFactory.cpp">
-      <Filter>Systems\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="collisionSystem.cpp">
-      <Filter>Systems\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="damageSystem.cpp">
-      <Filter>Systems\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="objectPool.cpp">
-      <Filter>Systems\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="renderSystem.cpp">
-      <Filter>Systems\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="spriteFactory.cpp">
-      <Filter>Systems\Other</Filter>
+      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="mainSceneData.cpp">
-      <Filter>Systems\Scenes\Data</Filter>
+      <Filter>Scenes\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="fpsCounter.cpp">
+      <Filter>GameObjects\UI\FPSCounter\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="fpsCounterPrefab.cpp">
+      <Filter>GameObjects\UI\FPSCounter\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="damageSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="objectPool.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="renderSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="spriteFactory.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="playerManager.cpp">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="scoreCounterPrefab.cpp">
+      <Filter>GameObjects\UI\ScoreCounter\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="scoreCounter.cpp">
+      <Filter>GameObjects\UI\ScoreCounter\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,34 +139,19 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="scene.h">
-      <Filter>Systems\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="sceneManager.h">
-      <Filter>Systems\Scenes</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="..\game.h">
       <Filter>Template</Filter>
-    </ClInclude>
-    <ClInclude Include="context.h">
-      <Filter>State Pattern</Filter>
-    </ClInclude>
-    <ClInclude Include="state.h">
-      <Filter>State Pattern</Filter>
     </ClInclude>
     <ClInclude Include="cursor.h">
       <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
       <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="moveState.h">
-      <Filter>GameObjects\Player\States</Filter>
-    </ClInclude>
-    <ClInclude Include="defenseState.h">
-      <Filter>GameObjects\Player\States</Filter>
-    </ClInclude>
-    <ClInclude Include="playerContext.h">
-      <Filter>GameObjects\Player\Components</Filter>
     </ClInclude>
     <ClInclude Include="playerHP.h">
       <Filter>GameObjects\Player\Components</Filter>
@@ -186,7 +171,7 @@
     <ClInclude Include="camera.h">
       <Filter>GameObjects\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="housePrefab.h">
+    <ClInclude Include="treePrefab.h">
       <Filter>Environment</Filter>
     </ClInclude>
     <ClInclude Include="cowManager.h">
@@ -214,28 +199,46 @@
       <Filter>GameObjects\Player\Components</Filter>
     </ClInclude>
     <ClInclude Include="sceneFactory.h">
-      <Filter>Systems\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="collisionSystem.h">
-      <Filter>Systems\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="damageSystem.h">
-      <Filter>Systems\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="objectPool.h">
-      <Filter>Systems\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="renderSystem.h">
-      <Filter>Systems\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="spriteFactory.h">
-      <Filter>Systems\Other</Filter>
+      <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="mainSceneData.h">
-      <Filter>Systems\Scenes\Data</Filter>
+      <Filter>Scenes\Data</Filter>
     </ClInclude>
     <ClInclude Include="sceneData.h">
-      <Filter>Systems\Scenes\Data</Filter>
+      <Filter>Scenes\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="fpsCounter.h">
+      <Filter>GameObjects\UI\FPSCounter\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="collisionSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="damageSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="objectPool.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="renderSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="scoreSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="spriteFactory.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="fpsCounterPrefab.h">
+      <Filter>GameObjects\UI\FPSCounter\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="playerManager.h">
+      <Filter>GameObjects\Player\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="scoreCounterPrefab.h">
+      <Filter>GameObjects\UI\ScoreCounter\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="scoreCounter.h">
+      <Filter>GameObjects\UI\ScoreCounter\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -257,9 +260,6 @@
     <Filter Include="Systems">
       <UniqueIdentifier>{60f357c2-83fc-4fd3-935e-fae2969fd25d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="State Pattern">
-      <UniqueIdentifier>{56367da7-6192-4238-b30c-e78890efc248}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObjects\Missiles">
       <UniqueIdentifier>{57d9f72e-84c4-49e6-a8f5-0638b58d0a51}</UniqueIdentifier>
     </Filter>
@@ -268,9 +268,6 @@
     </Filter>
     <Filter Include="GameObjects\Player">
       <UniqueIdentifier>{5c6bfd29-164f-4faf-a673-b0cd022ee9da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObjects\Player\States">
-      <UniqueIdentifier>{94f32910-fcf2-4763-8787-23b873981a22}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObjects\Player\Components">
       <UniqueIdentifier>{977d6a5e-1e4f-4df8-a66f-0ea531d4cc9d}</UniqueIdentifier>
@@ -296,14 +293,32 @@
     <Filter Include="GameObjects\Player\Prefabs">
       <UniqueIdentifier>{41857843-d322-4dd6-bd77-235d41112397}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\Scenes">
+    <Filter Include="Scenes">
       <UniqueIdentifier>{239c4e18-c259-44a0-89fa-862c291bd81b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\Other">
-      <UniqueIdentifier>{f5dddea7-a02f-4620-af06-8bd995615a38}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Systems\Scenes\Data">
+    <Filter Include="Scenes\Data">
       <UniqueIdentifier>{c0be00b3-3a37-4b3e-aca1-7271576635b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\UI">
+      <UniqueIdentifier>{ac04a7ba-134a-4824-ad21-1d8067717f1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\UI\FPSCounter">
+      <UniqueIdentifier>{1b946dd0-40f3-4635-9d70-27accf12b072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\UI\FPSCounter\Prefabs">
+      <UniqueIdentifier>{e8dc3ce4-1d7b-42d1-a3d6-7691a8c7eec4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\UI\FPSCounter\Components">
+      <UniqueIdentifier>{50858967-07cd-4717-b89a-69aacfe62e39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\UI\ScoreCounter">
+      <UniqueIdentifier>{011a7143-1b49-4758-8d14-6fc5982fd91d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\UI\ScoreCounter\Components">
+      <UniqueIdentifier>{a2e93192-8529-4c23-b83d-038549817a18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects\UI\ScoreCounter\Prefabs">
+      <UniqueIdentifier>{459a3952-c125-41b3-8564-b4c71e6be110}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

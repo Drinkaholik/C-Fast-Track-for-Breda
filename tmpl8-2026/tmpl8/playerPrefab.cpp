@@ -5,6 +5,7 @@
 #include "spriteFactory.h"
 #include "scene.h"
 
+#include "playerManager.h"
 #include "playerMove.h"
 #include "playerHP.h"
 #include "abductor.h"
@@ -18,7 +19,9 @@ GameObject* PlayerPrefab::Load(Scene* scene, vec2 pos, int maxHP, bool runStart)
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
 
-	auto rend = &go->AddComponent<SpriteRenderer>("ufo", 2);
+	go->AddComponent<PlayerManager>();
+
+	auto rend = &go->AddComponent<SpriteRenderer>("ufo_green", 2);
 
 	auto& col = go->AddComponent<Collider>(scene, "player", rend->GetSprite());
 	

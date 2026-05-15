@@ -1,8 +1,7 @@
 #pragma once
 #include "baseComponents.h"
 
-//#include "scene.h"
-
+class Scene;
 
 class PlayerHP : public Component
 {
@@ -24,7 +23,10 @@ private:
 	int hp;
 	int maxHP;
 
+	void Die();
+
 	SpriteRenderer* spriteRenderer;
+	Scene* scene;
 	
 };
 

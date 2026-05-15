@@ -4,7 +4,7 @@
 
 using namespace std;
 
-RenderSystem::RenderSystem(int layerCount)
+RenderSystem::RenderSystem(int layerCount) : layerCount(layerCount)
 {
 	layers.reserve(layerCount);
 	for (int i = 0; i < layerCount; i++)
@@ -24,7 +24,7 @@ void RenderSystem::Render()
 	{
 		for (auto rend : *layer)
 		{
-			if (!rend->active) return
+			if (!rend->active) continue;
 			rend->Tick();
 		}
 	}

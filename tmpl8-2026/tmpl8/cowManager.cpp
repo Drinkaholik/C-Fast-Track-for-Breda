@@ -4,6 +4,7 @@
 #include "cowPrefab.h"
 #include "central.h"
 #include "cow.h"
+#include "scene.h"
 
 using namespace Tmpl8;
 using namespace std;
@@ -34,8 +35,9 @@ void CowManager::Tick()
 {
 	count -= Central::dts;
 	if (count > 0) return;
-	
+
 	int spawnAmount = groupCount + (int)round(utils::random_range((float)groupRange));
+
 	Spawn(spawnAmount);
 	RangeDespawn();
 }
@@ -57,6 +59,7 @@ void CowManager::Abduct(Cow* cow) // Return cow to pool, scare nearby cows
 	}
 
 	Despawn(cow);
+	scene->GetScoreSystem()->IncrementScore();
 }
 
 

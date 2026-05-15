@@ -23,15 +23,18 @@ public:
 private:
 
 	// Time variables - measured in seconds
-	float waitTime = 1; // how long to wait at start of level, and between waves
-	float spawnDelay = 0.2; // Time before spawning next missile
-	float delayCounter = spawnDelay;
-
+	float waitTime = 10.0f; // how long to wait at start of level, and between waves
+	float spawnDelay = 2.0f; // Time before spawning next missile
+	float minSpawnDelay = 0.2f;
+	float delayDecreaseRate = 0.02f; // Makes missiles spawn quicker over time
+	
 	float warningTime = 1.0f; // Time between warning flashing and missile spawning
 
+	float margin = 20.0f; // How far offscreen to spawn missiles
 
-	float margin = 20; // How far offscreen to spawn missiles
-
+	float waitCounter = waitTime;
+	float delayCounter = spawnDelay;
+	
 
 	void SpawnMissiles();
 

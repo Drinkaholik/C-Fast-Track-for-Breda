@@ -24,6 +24,7 @@ private:
 	// This looks insane
 	std::vector<std::unique_ptr<std::unordered_set<SpriteRenderer*>>> layers;
 
+	int layerCount;
 
 };
 

@@ -25,12 +25,14 @@ void Scene::LoadScene()
 
 void Scene::Tick() // Runs tick logic on all scene objects
 {
+	
+
 	for (auto& obj: sceneObjects)
 	{
 		obj->Tick();
 	}
-
 	renderSystem->Render();
+	
 }
 
 void Scene::UnloadScene() {}; // Not sure what to put in here yet. savedata maybe but im not doing that

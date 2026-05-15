@@ -1,4 +1,4 @@
-#include "housePrefab.h"
+#include "treePrefab.h"
 
 #include "gameObject.h"
 #include "surface.h"
@@ -8,14 +8,14 @@
 using namespace Tmpl8;
 using namespace std;
 
-GameObject* HousePrefab::Load(Scene* scene, vec2 pos, bool runStart)
+GameObject* TreePrefab::Load(Scene* scene, vec2 pos, bool runStart)
 {
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
 
-	go->AddComponent<SpriteRenderer>("house");
+	auto rend = &go->AddComponent<SpriteRenderer>("tree");
 
-	//auto& col = go->AddComponent<Collider>(scene, spr);
+	scene->GetRenderSystem()->Register(2, rend);
 
 	return scene->AddObject(ref, runStart);
 }

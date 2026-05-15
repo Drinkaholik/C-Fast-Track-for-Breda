@@ -67,6 +67,13 @@ void Collider::UpdateRect(vec2 pos)
 	p2.y = round(pos.y + size.y / 2);
 }
 
+
+
+bool CheckCollisionAxis(float aMin, float aMax, float bMin, float bMax)
+{
+	return aMin < bMax && aMax > bMin;
+}
+
 bool Collider::CollideAt(const vec2 pos, Collider* col)
 {
 	// Cache pos
@@ -79,14 +86,8 @@ bool Collider::CollideAt(const vec2 pos, Collider* col)
 	const vec2 colP2 = col->GetP2(); // Pass by pointer would cause more cache misses ??
 
 	// AABB logic
-	bool x1Collision = (p1.x > colP1.x && p1.x < colP2.x);
-	bool x2Collision = (p2.x > colP1.x && p2.x < colP2.x);
-
-	bool y1Collision = (p1.y > colP1.y && p1.y < colP2.y);
-	bool y2Collision = (p2.y > colP1.y && p2.y < colP2.y);
-
-	bool xCollision = x1Collision || x2Collision;
-	bool yCollision = y1Collision || y2Collision;
+	bool xCollision = CheckCollisionAxis(p1.x, p2.x, colP1.x, colP2.x);
+	bool yCollision = CheckCollisionAxis(p1.y, p2.y, colP1.y, colP2.y);
 
 	// Move rect back
 	UpdateRect(originalPos);
@@ -109,14 +110,8 @@ bool Collider::CollideAt(Tmpl8::vec2 pos, std::string layer)
 		const vec2 colP2 = col->GetP2(); // Pass by pointer would cause more cache misses ??
 
 		// AABB logic
-		bool x1Collision = (p1.x > colP1.x && p1.x < colP2.x);
-		bool x2Collision = (p2.x > colP1.x && p2.x < colP2.x);
-
-		bool y1Collision = (p1.y > colP1.y && p1.y < colP2.y);
-		bool y2Collision = (p2.y > colP1.y && p2.y < colP2.y);
-
-		bool xCollision = x1Collision || x2Collision;
-		bool yCollision = y1Collision || y2Collision;
+		bool xCollision = CheckCollisionAxis(p1.x, p2.x, colP1.x, colP2.x);
+		bool yCollision = CheckCollisionAxis(p1.y, p2.y, colP1.y, colP2.y);
 
 		// Move rect back
 		UpdateRect(originalPos);
@@ -144,14 +139,8 @@ Collider* Collider::CollideWith(const vec2 pos, Collider* col)
 	const vec2 colP2 = col->GetP2(); // Pass by pointer would cause more cache misses ??
 
 	// AABB logic
-	bool x1Collision = (p1.x > colP1.x && p1.x < colP2.x);
-	bool x2Collision = (p2.x > colP1.x && p2.x < colP2.x);
-
-	bool y1Collision = (p1.y > colP1.y && p1.y < colP2.y);
-	bool y2Collision = (p2.y > colP1.y && p2.y < colP2.y);
-
-	bool xCollision = x1Collision || x2Collision;
-	bool yCollision = y1Collision || y2Collision;
+	bool xCollision = CheckCollisionAxis(p1.x, p2.x, colP1.x, colP2.x);
+	bool yCollision = CheckCollisionAxis(p1.y, p2.y, colP1.y, colP2.y);
 
 	// Move rect back
 	UpdateRect(originalPos);
@@ -175,14 +164,8 @@ Collider* Collider::CollideWith(Tmpl8::vec2 pos, std::string layer)
 		const vec2 colP2 = col->GetP2(); // Pass by pointer would cause more cache misses ??
 
 		// AABB logic
-		bool x1Collision = (p1.x > colP1.x && p1.x < colP2.x);
-		bool x2Collision = (p2.x > colP1.x && p2.x < colP2.x);
-
-		bool y1Collision = (p1.y > colP1.y && p1.y < colP2.y);
-		bool y2Collision = (p2.y > colP1.y && p2.y < colP2.y);
-
-		bool xCollision = x1Collision || x2Collision;
-		bool yCollision = y1Collision || y2Collision;
+		bool xCollision = CheckCollisionAxis(p1.x, p2.x, colP1.x, colP2.x);
+		bool yCollision = CheckCollisionAxis(p1.y, p2.y, colP1.y, colP2.y);
 
 		// Move rect back
 		UpdateRect(originalPos);

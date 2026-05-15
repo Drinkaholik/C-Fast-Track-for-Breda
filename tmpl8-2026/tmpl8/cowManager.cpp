@@ -99,11 +99,7 @@ void CowManager::Spawn(int groupCount)
 }
 
 
-void CowManager::Despawn(Cow* cow)
-{
-	pool->ReturnToPool(cow->gameObject);
-	activeCows.erase(cow);
-}
+
 
 float c = 1.0f;
 void CowManager::RangeDespawn() // Despawn cow if they get too far from player
@@ -112,17 +108,26 @@ void CowManager::RangeDespawn() // Despawn cow if they get too far from player
 	c -= Central::dts;
 	if (c > 0) return;
 	c = 1.0f;
-	
-	for (auto cow : activeCows)
+
+	auto it = activeCows.begin();
+	while (it != activeCows.end())
 	{
+		auto cow = *it;
 		float distance = utils::distance(cow->gameObject->pos, player->pos);
 		if (distance >= despawnRange)
 		{
-			Despawn(cow);
-		}	
+			pool->ReturnToPool(cow->gameObject);
+			it = activeCows.erase(it);
+		}
+		else it++;
 	}
 }
 
+void CowManager::Despawn(Cow* cow)
+{
+	pool->ReturnToPool(cow->gameObject);
+	activeCows.erase(cow);
+}
 
 
 

@@ -82,7 +82,7 @@ void MissileSpawner::SpawnSingle()
 		<< "realSpawn - " << "x: " << to_string(realSpawn.x) << " , " << "y: " << to_string(realSpawn.y) << endl << endl;*/
 
 	// Spawn object
-	auto* go = pool->SpawnFromPool();
+	auto go = pool->SpawnFromPool();
 	if (go == nullptr) return;
 	go->GetComponent<Missile>()->Spawn(realSpawn); // kinda expensive to do a GetComponent() call every time I spawn a missile
 

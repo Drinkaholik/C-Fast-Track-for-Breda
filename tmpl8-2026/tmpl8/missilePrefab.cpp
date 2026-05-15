@@ -15,8 +15,8 @@ GameObject* MissilePrefab::Load(Scene* scene, ObjectPool* pool, vec2 pos, GameOb
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
 
-	auto* spr = SpriteList::sprites["tank"];
-	auto* rend = &go->AddComponent<SpriteRenderer>(spr);
+	auto spr = SpriteList::sprites["tank"];
+	auto rend = &go->AddComponent<SpriteRenderer>(spr);
 
 	auto& col = go->AddComponent<Collider>(scene, "missile", spr);
 	go->AddComponent<Missile>(pool, player);

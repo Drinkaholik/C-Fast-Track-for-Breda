@@ -17,8 +17,8 @@ GameObject* CowPrefab::Load(Scene* scene, ObjectPool* pool, vec2 pos, bool runSt
 	auto& ref = go;
 
 	// Add components
-	auto* spr = SpriteList::sprites["cow"];
-	auto* rend = &go->AddComponent<SpriteRenderer>(spr);
+	auto spr = SpriteList::sprites["cow"];
+	auto rend = &go->AddComponent<SpriteRenderer>(spr);
 
 	auto& col = go->AddComponent<Collider>(scene, "cow", spr);
 	go->AddComponent<Cow>(pool);

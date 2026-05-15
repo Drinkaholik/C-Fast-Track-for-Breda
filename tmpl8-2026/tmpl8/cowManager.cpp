@@ -23,7 +23,7 @@ void CowManager::Start()
 	}
 
 	// Initial cow spawn
-	int spawnAmount = initialGroupCount + (int)round(utils::random_range(initialGroupRange));
+	int spawnAmount = initialGroupCount + (int)round(utils::random_range((float)initialGroupRange));
 	Spawn(spawnAmount);
 
 	spawnOnScreen = false;
@@ -35,7 +35,7 @@ void CowManager::Tick()
 	count -= Central::dts;
 	if (count > 0) return;
 	
-	int spawnAmount = groupCount + (int)round(utils::random_range(groupRange));
+	int spawnAmount = groupCount + (int)round(utils::random_range((float)groupRange));
 	Spawn(spawnAmount);
 	RangeDespawn();
 }
@@ -46,7 +46,7 @@ void CowManager::Abduct(Cow* cow) // Return cow to pool, scare nearby cows
 {
 	vec2 pos = cow->gameObject->pos;
 
-	for (auto* c : activeCows)
+	for (auto c : activeCows)
 	{
 		float radius = cow->GetRadius();
 		float distance = utils::distance(c->gameObject->pos, pos);
@@ -87,9 +87,9 @@ void CowManager::Spawn(int groupCount)
 		spawnCentre = SetSpawnCentre();
 
 		// Spawn cows for each group
-		for (int j = 0; j < currentGroup.size + (int)round(utils::random_range(currentGroup.sizeRange)); j++)
+		for (int j = 0; j < currentGroup.size + (int)round(utils::random_range((float)currentGroup.sizeRange)); j++)
 		{
-			auto* go = pool->SpawnFromPool();
+			auto go = pool->SpawnFromPool();
 			if (go == nullptr) return;
 			go->pos = SetSpawnPos();
 			activeCows.insert(go->GetComponent<Cow>());
@@ -113,7 +113,7 @@ void CowManager::RangeDespawn() // Despawn cow if they get too far from player
 	if (c > 0) return;
 	c = 1.0f;
 	
-	for (auto* cow : activeCows)
+	for (auto cow : activeCows)
 	{
 		float distance = utils::distance(cow->gameObject->pos, player->pos);
 		if (distance >= despawnRange)

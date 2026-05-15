@@ -22,7 +22,7 @@ void RenderSystem::Render()
 {
 	for (auto& layer : layers)
 	{
-		for (auto* rend : *layer)
+		for (auto rend : *layer)
 		{
 			if (!rend->active) return
 			rend->Tick();

@@ -13,7 +13,7 @@ GameObject* HousePrefab::Load(Scene* scene, vec2 pos, bool runStart)
 	auto go = make_unique<GameObject>(pos);
 	auto& ref = go;
 
-	auto* spr = SpriteList::sprites["house"];
+	auto spr = SpriteList::sprites["house"];
 	go->AddComponent<SpriteRenderer>(spr);
 
 	//auto& col = go->AddComponent<Collider>(scene, spr);

@@ -18,7 +18,7 @@ GameObject* MissilePrefab::Load(Scene* scene, ObjectPool* pool, vec2 pos, GameOb
 	auto rend = &go->AddComponent<SpriteRenderer>("missile");
 
 	auto& col = go->AddComponent<Collider>(scene, "missile", rend->GetSprite());
-	go->AddComponent<Missile>(pool, player);
+	go->AddComponent<Missile>(scene, pool, player);
 
 	scene->GetRenderSystem()->Register(3, rend);
 	return scene->AddObject(ref, runStart);

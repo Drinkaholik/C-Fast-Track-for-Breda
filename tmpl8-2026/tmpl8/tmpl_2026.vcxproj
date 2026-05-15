@@ -125,6 +125,8 @@
     <ClCompile Include="abductor.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="cameraPrefab.cpp" />
+    <ClCompile Include="mainSceneData.cpp" />
+    <ClCompile Include="sceneFactory.cpp" />
     <ClCompile Include="central.cpp" />
     <ClCompile Include="baseComponents.cpp" />
     <ClCompile Include="collisionSystem.cpp" />
@@ -137,7 +139,6 @@
     <ClCompile Include="damageSystem.cpp" />
     <ClCompile Include="defenseState.cpp" />
     <ClCompile Include="housePrefab.cpp" />
-    <ClCompile Include="mainScene.cpp" />
     <ClCompile Include="missile.cpp" />
     <ClCompile Include="missilePrefab.cpp" />
     <ClCompile Include="missileSpawner.cpp" />
@@ -176,7 +177,7 @@
     <ClInclude Include="damageSystem.h" />
     <ClInclude Include="defenseState.h" />
     <ClInclude Include="housePrefab.h" />
-    <ClInclude Include="mainScene.h" />
+    <ClInclude Include="mainSceneData.h" />
     <ClInclude Include="missile.h" />
     <ClInclude Include="missilePrefab.h" />
     <ClInclude Include="missileSpawner.h" />
@@ -187,9 +188,10 @@
     <ClInclude Include="playerContext.h" />
     <ClInclude Include="playerHP.h" />
     <ClInclude Include="playerPrefab.h" />
-    <ClInclude Include="prefab.h" />
     <ClInclude Include="renderSystem.h" />
     <ClInclude Include="scene.h" />
+    <ClInclude Include="sceneData.h" />
+    <ClInclude Include="sceneFactory.h" />
     <ClInclude Include="sceneManager.h" />
     <ClInclude Include="spriteFactory.h" />
     <ClInclude Include="state.h" />

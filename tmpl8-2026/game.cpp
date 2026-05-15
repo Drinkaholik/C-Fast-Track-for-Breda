@@ -24,7 +24,7 @@ namespace Tmpl8
     // -----------------------------------------------------------
     void Game::Init()
     {
-        sceneManager->LoadScene(0, false); // Load main menu
+        sceneManager->LoadScene(0, true); // Load main menu
   
     }
 
@@ -51,7 +51,12 @@ namespace Tmpl8
 
         screen->Plot(300, 300, 0xFF0000);
 
+        UpdateKeys();
 
+        if (GetKey(SDL_SCANCODE_R))
+        {
+            sceneManager->LoadScene(0, true); // Load main menu
+        }
    
 
     }

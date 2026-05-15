@@ -18,14 +18,7 @@ unordered_map<string, SpriteFactory::SpriteInfo*> SpriteFactory::sprites =
 	{ "missile", &missile },
 	{ "cow", &cow },
 	{ "house", &house },
-	
-	
-	
 };
-
-Sprite sprite = Sprite(new Surface("assets/house.png"), 1);
-
-
 
 
 unique_ptr<Sprite> SpriteFactory::BuildSprite(string spriteName)

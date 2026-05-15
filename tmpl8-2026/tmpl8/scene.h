@@ -10,6 +10,7 @@
 #include "damageSystem.h"
 #include "collisionSystem.h"
 #include "renderSystem.h"
+#include "sceneData.h"
 
 #include <memory>
 
@@ -22,12 +23,22 @@ class Scene
 {
 public:
 
-	virtual void LoadScene() = 0;  // Calls Start() on all scene objects
+	Scene(SceneData* data);
+
+	virtual void LoadScene();  // Calls Start() on all scene objects
 	virtual void UnloadScene(); // The vector of smart ptrs is destroyed when this scene is, so theres no need for manual mem management right?
+
+	void Tick(); // Runs per-frame logic for all scene objects
+
 
 	GameObject* AddObject(std::unique_ptr<GameObject>& go, bool runStart); // Used by spawners to push to sceneObjects and run Start()
 	
-	void Tick(); // Runs per-frame logic for all scene objects
+	void SetPlayer(GameObject* player) { oPlayer = player; };
+	void SetCamera(GameObject* camera) { oCamera = camera; };
+
+
+	// Getters
+	std::vector<std::unique_ptr<GameObject>>* GetSceneObjects() { return &sceneObjects; };
 
 	GameObject* GetPlayer() { return oPlayer; };
 	GameObject* GetCamera() { return oCamera; };
@@ -66,6 +77,8 @@ protected:
 	std::unique_ptr<RenderSystem> renderSystem = std::make_unique<RenderSystem>(10);
 	std::unique_ptr<CollisionSystem> collisionSystem = std::make_unique<CollisionSystem>();
 	std::unique_ptr<DamageSystem> damageSystem = std::make_unique<DamageSystem>();
+
+	SceneData* sceneData; // Owned by sceneFactory
 	
 
 	std::vector<std::unique_ptr<GameObject>> sceneObjects; // Objects spawned into the scene

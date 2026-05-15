@@ -20,16 +20,13 @@
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="scene.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>Systems\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="sceneManager.cpp">
-      <Filter>Scenes</Filter>
+      <Filter>Systems\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="..\game.cpp">
       <Filter>Template</Filter>
-    </ClCompile>
-    <ClCompile Include="mainScene.cpp">
-      <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="context.cpp">
       <Filter>State Pattern</Filter>
@@ -70,9 +67,6 @@
     <ClCompile Include="housePrefab.cpp">
       <Filter>Environment</Filter>
     </ClCompile>
-    <ClCompile Include="objectPool.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="cow.cpp">
       <Filter>GameObjects\Cow\Components</Filter>
     </ClCompile>
@@ -94,23 +88,32 @@
     <ClCompile Include="playerPrefab.cpp">
       <Filter>GameObjects\Player\Prefabs</Filter>
     </ClCompile>
-    <ClCompile Include="damageSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="abductor.cpp">
       <Filter>GameObjects\Player\Components</Filter>
     </ClCompile>
     <ClCompile Include="playerHP.cpp">
       <Filter>GameObjects\Player\Components</Filter>
     </ClCompile>
-    <ClCompile Include="renderSystem.cpp">
-      <Filter>Systems</Filter>
+    <ClCompile Include="sceneFactory.cpp">
+      <Filter>Systems\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="collisionSystem.cpp">
-      <Filter>Systems</Filter>
+      <Filter>Systems\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="damageSystem.cpp">
+      <Filter>Systems\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="objectPool.cpp">
+      <Filter>Systems\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="renderSystem.cpp">
+      <Filter>Systems\Other</Filter>
     </ClCompile>
     <ClCompile Include="spriteFactory.cpp">
-      <Filter>Systems</Filter>
+      <Filter>Systems\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="mainSceneData.cpp">
+      <Filter>Systems\Scenes\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -136,19 +139,13 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="scene.h">
-      <Filter>Scenes</Filter>
+      <Filter>Systems\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="sceneManager.h">
-      <Filter>Scenes</Filter>
+      <Filter>Systems\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="..\game.h">
       <Filter>Template</Filter>
-    </ClInclude>
-    <ClInclude Include="mainScene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="collisionSystem.h">
-      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="context.h">
       <Filter>State Pattern</Filter>
@@ -192,12 +189,6 @@
     <ClInclude Include="housePrefab.h">
       <Filter>Environment</Filter>
     </ClInclude>
-    <ClInclude Include="objectPool.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="prefab.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="cowManager.h">
       <Filter>GameObjects\Cow\Components</Filter>
     </ClInclude>
@@ -219,17 +210,32 @@
     <ClInclude Include="playerPrefab.h">
       <Filter>GameObjects\Player\Prefabs</Filter>
     </ClInclude>
-    <ClInclude Include="damageSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="abductor.h">
       <Filter>GameObjects\Player\Components</Filter>
     </ClInclude>
+    <ClInclude Include="sceneFactory.h">
+      <Filter>Systems\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="collisionSystem.h">
+      <Filter>Systems\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="damageSystem.h">
+      <Filter>Systems\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="objectPool.h">
+      <Filter>Systems\Other</Filter>
+    </ClInclude>
     <ClInclude Include="renderSystem.h">
-      <Filter>Systems</Filter>
+      <Filter>Systems\Other</Filter>
     </ClInclude>
     <ClInclude Include="spriteFactory.h">
-      <Filter>Systems</Filter>
+      <Filter>Systems\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="mainSceneData.h">
+      <Filter>Systems\Scenes\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="sceneData.h">
+      <Filter>Systems\Scenes\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -247,9 +253,6 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{98188f55-34f6-4efc-9a7b-b0172670dd24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes">
-      <UniqueIdentifier>{239c4e18-c259-44a0-89fa-862c291bd81b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Systems">
       <UniqueIdentifier>{60f357c2-83fc-4fd3-935e-fae2969fd25d}</UniqueIdentifier>
@@ -292,6 +295,15 @@
     </Filter>
     <Filter Include="GameObjects\Player\Prefabs">
       <UniqueIdentifier>{41857843-d322-4dd6-bd77-235d41112397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Scenes">
+      <UniqueIdentifier>{239c4e18-c259-44a0-89fa-862c291bd81b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Other">
+      <UniqueIdentifier>{f5dddea7-a02f-4620-af06-8bd995615a38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\Scenes\Data">
+      <UniqueIdentifier>{c0be00b3-3a37-4b3e-aca1-7271576635b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,22 @@
 #include "scene.h"
+
 #include "baseComponents.h"
 #include "collisionSystem.h"
+#include "sceneData.h"
+#include "mainSceneData.h"
+#include "sceneFactory.h"
 
 using namespace std;
 
+
+Scene::Scene(SceneData* data) : sceneData(data) {};
+
+
 void Scene::LoadScene()
 {
+
+	sceneData->LoadScene(this);
+
 	for (auto& go : sceneObjects)
 	{
 		go->Start();

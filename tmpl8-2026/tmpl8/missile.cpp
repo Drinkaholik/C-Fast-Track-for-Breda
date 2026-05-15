@@ -4,6 +4,7 @@
 #include "objectPool.h"
 #include "utils.h"
 #include "central.h"
+#include "scene.h"
 
 #include <random>
 #include <cmath>
@@ -14,6 +15,27 @@ using namespace Tmpl8;
 using namespace std;
 
 
+
+Missile::Missile(Scene* scene, ObjectPool* pool, GameObject* player) : pool(pool), player(player) 
+{
+	system = scene->GetDamageSystem();
+	
+};
+
+
+void Missile::Start()
+{
+	col = gameObject->GetComponent<Collider>();
+}
+
+void Missile::Tick()
+{
+	Move();
+	CheckLifetime();
+	Damage();
+}
+
+
 void Missile::Spawn(vec2 pos)
 {
 	gameObject->pos = pos;
@@ -21,19 +43,23 @@ void Missile::Spawn(vec2 pos)
 	SetDirection();
 	SetFrame();
 	count = lifetime;
-	
-}
 
-void Missile::Tick()
-{
-	Move();
-	Despawn();
 }
 
 void Missile::Move()
 {
 	gameObject->pos += dir * speed * Central::dts;
 }
+
+
+void Missile::Damage()
+{
+	if (!col->CollideAt(gameObject->pos, "player")) return;
+
+	system->DealDamage();
+	Despawn();
+}
+
 
 // Randomizes speed
 void Missile::SetSpeed()
@@ -55,13 +81,21 @@ void Missile::SetDirection()
 
 }
 
-void Missile::Despawn()
+
+void Missile::CheckLifetime()
 {
 	count -= Central::dts;
 	if (count <= 0)
 	{
 		pool->ReturnToPool(this->gameObject);
 	}
+}
+
+void Missile::Despawn()
+{
+	
+	pool->ReturnToPool(this->gameObject);
+	
 }
 
 // Changes missile sprite to match direction

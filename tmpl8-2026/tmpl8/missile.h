@@ -4,18 +4,20 @@
 
 class GameObject;
 class ObjectPool;
+class DamageSystem;
 
 class Missile : public Component
 {
 public:
 
+	void Start() override;
 	void Tick() override;
 
 	void Spawn(Tmpl8::vec2 pos); // Sets angle and speed when exiting pool
 
 
 	// Structors
-	Missile(ObjectPool* pool, GameObject* player) : pool(pool), player(player) {};
+	Missile(Scene*, ObjectPool* pool, GameObject* player);
 
 
 
@@ -32,15 +34,22 @@ private:
 
 	GameObject* player; // Needed for targeting
 	ObjectPool* pool; // Needed to return self to pool, injected via MissileSpawner
+	DamageSystem* system; // Needed to deal damage to player
+	Collider* col; // Cache
+
+
+	void Move();
+	void Damage();
 
 	void SetSpeed();
 	void SetDirection();
+	void SetFrame();
 
-	void Move();
-
+	
+	void CheckLifetime();
 	void Despawn();
 
-	void SetFrame();
+	
 
 
 

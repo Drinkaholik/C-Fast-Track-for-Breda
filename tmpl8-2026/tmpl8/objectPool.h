@@ -27,7 +27,7 @@ public:
 		for (int i = 0; i < poolSize; i++)
 		{
 			auto go = prefab.Load(scene, std::forward<Args>(args)...);
-			go->active = false;
+			go->SetActive(false);
 			pool.push(go);
 		}
 	}

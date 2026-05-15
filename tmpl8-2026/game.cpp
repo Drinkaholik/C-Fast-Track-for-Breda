@@ -88,10 +88,6 @@ namespace Tmpl8
         screen->Print(to_string(smoothedFPS).c_str(), xPos, yPos, 0xFFFFFF);
     }
 
-    
-
-
-
 };
 
 

@@ -12,12 +12,12 @@ GameObject* ObjectPool::SpawnFromPool()
 	if (pool.empty()) return nullptr;
 	auto go = pool.front();
 	pool.pop();
-	go->active = true; // Very rarely I get an access violation error here...
+	go->SetActive(true); // Very rarely I get an access violation error here...
 	return go;
 }
 
 void ObjectPool::ReturnToPool(GameObject* go)
 {
 	pool.push(go);
-	go->active = false;
+	go->SetActive(false);
 }

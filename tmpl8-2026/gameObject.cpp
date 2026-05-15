@@ -37,6 +37,15 @@ vector<unique_ptr<Component>>& GameObject::GetComponents()
 }
 
 
+void GameObject::SetActive(bool isActive)
+{
+	active = isActive;
+
+	for (auto& c : components)
+	{
+		c->active = active;
+	}
+}
 
 
 

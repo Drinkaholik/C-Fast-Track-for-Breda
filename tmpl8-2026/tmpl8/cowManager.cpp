@@ -23,7 +23,7 @@ void CowManager::Start()
 	}
 
 	// Initial cow spawn
-	int spawnAmount = initialGroupCount + utils::random_range(initialGroupRange);
+	int spawnAmount = initialGroupCount + (int)round(utils::random_range(initialGroupRange));
 	Spawn(spawnAmount);
 
 	spawnOnScreen = false;
@@ -35,7 +35,7 @@ void CowManager::Tick()
 	count -= Central::dts;
 	if (count > 0) return;
 	
-	int spawnAmount = groupCount + utils::random_range(groupRange);
+	int spawnAmount = groupCount + (int)round(utils::random_range(groupRange));
 	Spawn(spawnAmount);
 	RangeDespawn();
 }
@@ -87,7 +87,7 @@ void CowManager::Spawn(int groupCount)
 		spawnCentre = SetSpawnCentre();
 
 		// Spawn cows for each group
-		for (int j = 0; j < currentGroup.size + utils::random_range(currentGroup.sizeRange); j++)
+		for (int j = 0; j < currentGroup.size + (int)round(utils::random_range(currentGroup.sizeRange)); j++)
 		{
 			auto* go = pool->SpawnFromPool();
 			if (go == nullptr) return;
@@ -137,8 +137,8 @@ vec2 CowManager::SetSpawnCentre()
 
 	if (spawnOnScreen)
 	{
-		x = utils::random_range(screenWidth);
-		y = utils::random_range(screenHeight);
+		x = utils::random_range((float)screenWidth);
+		y = utils::random_range((float)screenHeight);
 	}
 
 	else // Reuse code from missile spawner

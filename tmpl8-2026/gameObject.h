@@ -24,7 +24,7 @@ public:
 	Tmpl8::vec2 pos;
 
 	bool debug = false; // Whether to draw origin, collider rect, etc
-	bool active = true; // Whether to run Tick() logic
+	
 
 	// Turns out that template functions need to always be defined in the header??
 	template <typename T, typename... Args>
@@ -80,6 +80,7 @@ public:
 
 	std::vector<std::unique_ptr<Component>>& GetComponents();
 
+	void SetActive(bool isActive);
 
 
 	// Constructors //
@@ -92,7 +93,7 @@ public:
 private:
 
 	std::vector<std::unique_ptr<Component>> components;
-
+	bool active = true; // Whether to run Tick() logic
 
 	void DrawOrigin(); // To test whether origin is correctly at centre of sprite, instead of top-left
 

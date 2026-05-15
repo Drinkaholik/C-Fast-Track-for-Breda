@@ -13,6 +13,7 @@ class Component // Abstract struct
 public:
 
 	GameObject* gameObject; // Pointer instead of ref so I don't need to pass go in constructor, would add extra boilerplate
+	bool active = true;
 
 	virtual void Start();
 	virtual void Tick();
@@ -36,8 +37,8 @@ public:
 	bool CollideAt(Tmpl8::vec2 pos, std::string layer); // Check against system's collider array
 
 	// Same as CollideAt, but returns collision instance
-	GameObject CollideWith(Tmpl8::vec2 pos, Collider* go);
-	GameObject CollideWith(Tmpl8::vec2 pos);
+	Collider* CollideWith(Tmpl8::vec2 pos, Collider* go);
+	Collider* CollideWith(Tmpl8::vec2 pos, std::string layer);
 
 	// Move gameObject by nDistance, if it would not collide
 	void MoveAndCollide(std::string layer, Tmpl8::vec2 distance);

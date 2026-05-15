@@ -27,13 +27,10 @@ void Abductor::Abduct()
 {
 	vec2 myPos = gameObject->pos;
 
-	for (auto& cow: cowManager->GetCows())
+	// Check against every cow in list
+	if (auto* cow = col->CollideWith(myPos, "cow")) 
 	{
-		// Check against every cow in list
-		if (col->CollideAt(myPos, "cow")) 
-		{
-			cowManager->Abduct(cow);
-		}
-		
+		cowManager->Abduct(cow->gameObject->GetComponent<Cow>());
 	}
+		
 }

@@ -122,25 +122,83 @@ bool Collider::CollideAt(Tmpl8::vec2 pos, std::string layer)
 		UpdateRect(originalPos);
 
 		
-
 		if (xCollision && yCollision)
 		{
-			cout << "I'm colliding!!!" << endl;
+			//cout << "I'm colliding!!!" << endl;
 			return true;
 		}
-		
-		
 	}
 	return false;
 }
 
 
-// More efficient (probably) way:
-// If the distance is lower than collider width / height, check it directly
-// If its higher, sweep toward there in increments equal to the width / height
-// If there is a collision, sweep backwards by half width/height
-// Then sweep either forward or backwards by a quarter, and from there go 1 pixel at a time until 0 px from the collider
-// No clue how to implement without creating a mess of if-else trees tho
+Collider* Collider::CollideWith(const vec2 pos, Collider* col)
+{
+	// Cache pos
+	vec2 originalPos = gameObject->pos;
+
+	// Move rect to check position
+	UpdateRect(pos);
+
+	const vec2 colP1 = col->GetP1(); // Vec2 and pointer are both 8 bytes, so does it matter whther I pass by value or ptr / ref?
+	const vec2 colP2 = col->GetP2(); // Pass by pointer would cause more cache misses ??
+
+	// AABB logic
+	bool x1Collision = (p1.x > colP1.x && p1.x < colP2.x);
+	bool x2Collision = (p2.x > colP1.x && p2.x < colP2.x);
+
+	bool y1Collision = (p1.y > colP1.y && p1.y < colP2.y);
+	bool y2Collision = (p2.y > colP1.y && p2.y < colP2.y);
+
+	bool xCollision = x1Collision || x2Collision;
+	bool yCollision = y1Collision || y2Collision;
+
+	// Move rect back
+	UpdateRect(originalPos);
+
+	if (xCollision && yCollision) return col;
+	else return nullptr;
+};
+
+
+Collider* Collider::CollideWith(Tmpl8::vec2 pos, std::string layer)
+{
+	// Cache pos
+	vec2 originalPos = gameObject->pos;
+
+	for (auto& col : collisionSystem->GetLayer(layer))
+	{
+		// Move rect to check position
+		UpdateRect(pos);
+
+		const vec2 colP1 = col->GetP1(); // Vec2 and pointer are both 8 bytes, so does it matter whther I pass by value or ptr / ref?
+		const vec2 colP2 = col->GetP2(); // Pass by pointer would cause more cache misses ??
+
+		// AABB logic
+		bool x1Collision = (p1.x > colP1.x && p1.x < colP2.x);
+		bool x2Collision = (p2.x > colP1.x && p2.x < colP2.x);
+
+		bool y1Collision = (p1.y > colP1.y && p1.y < colP2.y);
+		bool y2Collision = (p2.y > colP1.y && p2.y < colP2.y);
+
+		bool xCollision = x1Collision || x2Collision;
+		bool yCollision = y1Collision || y2Collision;
+
+		// Move rect back
+		UpdateRect(originalPos);
+
+
+		if (xCollision && yCollision)
+		{
+			//cout << "I'm colliding!!!" << endl;
+			return col;
+		}
+	}
+	return nullptr;
+}
+
+
+
 
 void Collider::MoveAndCollide(string layer, vec2 distance)
 {

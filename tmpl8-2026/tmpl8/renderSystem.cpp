@@ -24,6 +24,7 @@ void RenderSystem::Render()
 	{
 		for (auto* rend : *layer)
 		{
+			if (!rend->active) return
 			rend->Tick();
 		}
 	}

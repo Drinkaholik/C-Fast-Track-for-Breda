@@ -8,7 +8,7 @@ class PlayerMove : public Component
 {
 public:
 
-	void Tick() override; 
+    void Tick() override;
 
     void SetStats(float accel, float decel, float maxSpeed);
 
@@ -35,7 +35,7 @@ private:
     void Move();
 
 
-
+};
 
 
 

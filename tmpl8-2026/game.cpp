@@ -31,21 +31,22 @@ namespace Tmpl8
         screen->Clear(0);
         // draw a grid
         Pixel* buffer = screen->GetBuffer();
+        int bufferSize = 512 * 800;
 
         int gridSize = 8;
-        int colour = 50000;
-        int colour2 = 50000000;
+        int colour = 0xFF00FF;
+        int colour2 = 0xFFFF00;
 
-        for (int x = 0; x < 512 * 800; x += gridSize)
+        for (int x = 0; x < bufferSize; x += gridSize)
         {
             buffer[x] = colour;
-
-            for (int y = 0; y < (800 * 512); y++)
-
-                buffer[y] = colour2;
-        
         }
-        
 
+        for (int y = 0; y < bufferSize - gridSize * 800; y++)
+        {
+            buffer[y] = colour2;
+            if (y % 800 == 0)
+                y += 800 * gridSize;
+        }
     }
 };

@@ -14,6 +14,7 @@ namespace Tmpl8
 
     void Game::Init()
     {
+        particleSystem->Start();
     }
 
     void Game::Shutdown()
@@ -28,16 +29,11 @@ namespace Tmpl8
 
     void Game::Tick(float deltaTime)
     {
-        // Update key states
-        pressed = keys & ~held; // keys that are currently down but were not down in the previous tick
-        released = ~keys & held; // keys that were down in the previous tick but are not down now
-        held = keys; // update prevKeys for the next tick
-
-        // clear the graphics window
         screen->Clear(0);
      
+        particleSystem->DrawParticles();
 
-       Pixel* buffer = screen->GetBuffer();
+    
 
     }
 

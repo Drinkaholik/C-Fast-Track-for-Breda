@@ -16,14 +16,17 @@ public:
 	ParticleSystem()
 	{
 		particles.reserve(1024);
+	}
+
+	void Start()
+	{
 		buffer = Central::surface->GetBuffer();
 	}
 
 
-
 	void AddParticle(int xPos, int yPos)
 	{
-		particles.push_back(new Particle(xPos, yPos));
+		particles.push_back(Particle(xPos, yPos));
 	}
 
 
@@ -31,7 +34,7 @@ public:
 	{
 		for (auto p : particles)
 		{
-			if (!p->canMove) continue;
+			if (!p.canMove) continue;
 
 			for (auto& dir : directions)
 			{
@@ -46,7 +49,7 @@ public:
 	{
 		for (auto p : particles)
 		{
-			buffer[PointToBuffer(p->x, p->y)] = 0xFF00FF;
+			buffer[PointToBuffer(p.x, p.y)] = 0xFF00FF;
 		}
 	}
 
@@ -90,7 +93,7 @@ private:
 		return x + y * Central::surface->GetPitch();
 	};
 
-	std::vector<Particle*> particles;
+	std::vector<Particle> particles;
 	Tmpl8::Pixel* buffer;
 
 };

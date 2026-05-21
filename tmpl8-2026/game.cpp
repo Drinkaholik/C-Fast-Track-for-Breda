@@ -1,31 +1,31 @@
 #include "game.h"
+
 #include "surface.h"
+#include "particleSystem.h"
 
 #include <cstdio> //printf
 #include <iostream>
 
+
 namespace Tmpl8
 {
-    // -----------------------------------------------------------
-    // Initialize the application
-    // -----------------------------------------------------------
+
+    ParticleSystem* particleSystem = new ParticleSystem();
+
     void Game::Init()
     {
     }
 
-    // -----------------------------------------------------------
-    // Close down application
-    // -----------------------------------------------------------
     void Game::Shutdown()
     {
     }
 
-    static Sprite rotatingGun(new Surface("assets/aagun.tga"), 36);
-    static int frame = 0;
 
-    // -----------------------------------------------------------
-    // Main application tick function
-    // -----------------------------------------------------------
+
+
+    
+
+
     void Game::Tick(float deltaTime)
     {
         // Update key states
@@ -33,33 +33,25 @@ namespace Tmpl8
         released = ~keys & held; // keys that were down in the previous tick but are not down now
         held = keys; // update prevKeys for the next tick
 
-        // Handle input.
-        if (GetKey(SDL_SCANCODE_W))
-        {
-            std::cout << "W" << std::endl;
-        }
-        if (GetKey(SDL_SCANCODE_A))
-        {
-            std::cout << "A" << std::endl;
-        }
-        if (GetKey(SDL_SCANCODE_S))
-        {
-            std::cout << "S" << std::endl;
-        }
-        if (GetKey(SDL_SCANCODE_D))
-        {
-            std::cout << "D" << std::endl;
-        }
-
         // clear the graphics window
         screen->Clear(0);
-        // print something in the graphics window
-        screen->Print("hello world", 2, 2, 0xffffff);
-        // print something to the text window
-        // printf("this goes to the console window.\n");
-        // draw a sprite
-        rotatingGun.SetFrame(frame);
-        rotatingGun.Draw(screen, 100, 100);
-        if (++frame == 36) frame = 0;
+     
+
+       Pixel* buffer = screen->GetBuffer();
+
     }
+
+
+    void Game::MouseDown(int button)
+    {
+        particleSystem->AddParticle(mousePos.x, mousePos.y);
+    }
+
+    void Game::MouseMove(int x, int y)
+    {
+        mousePos.x = x;
+        mousePos.y = y;
+    }
+
+
 };

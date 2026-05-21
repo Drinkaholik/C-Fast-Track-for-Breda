@@ -5,7 +5,9 @@
 
 #include <cstdio> //printf
 #include <iostream>
+#include <string>
 
+using namespace std;
 
 namespace Tmpl8
 {
@@ -31,7 +33,11 @@ namespace Tmpl8
     {
         screen->Clear(0);
      
+
         particleSystem->DrawParticles();
+
+        cout << "xPos: " << to_string(mousePos.x) << " , "
+            << "yPos: " << to_string(mousePos.y) << endl;
 
     
 

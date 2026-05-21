@@ -49,7 +49,8 @@ public:
 	{
 		for (auto p : particles)
 		{
-			buffer[PointToBuffer(p.x, p.y)] = 0xFF00FF;
+			Central::surface->Plot(p.x, p.y, 0xFFFFFF);
+			//buffer[PointToBuffer(p.x, p.y)] = 0xFFFFFF;
 		}
 	}
 
@@ -90,6 +91,12 @@ private:
 
 	int PointToBuffer(int x, int y)
 	{
+		auto width = Central::surface->GetWidth();
+		auto height = Central::surface->GetHeight();
+		if (x < 0) x = 0;
+		if (y < 0) y = 0;
+		if (x > width) x = width;
+		if (y > height) y = height;
 		return x + y * Central::surface->GetPitch();
 	};
 
